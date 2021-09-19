@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-09-19T05:16:44.239Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52" etag="n9nBosE0fGS-3xwnU4RQ" version="15.2.9" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-19T05:28:09.013Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52" etag="swJHzWkwGE1eZrfoNm3u" version="15.2.9" type="github">
   <diagram id="sjADTmljwn4Sy3IFEtPZ" name="Page-1">
-    <mxGraphModel dx="1483" dy="1996" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1221" dy="1850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -35,7 +35,25 @@
           <mxGeometry x="570" y="-1030" width="160" height="80" as="geometry" />
         </mxCell>
         <mxCell id="B-85oY1meeU1Ws7_Kz0d-16" value="Create categories and tags" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="490" y="-850" width="120" height="80" as="geometry" />
+          <mxGeometry x="750" y="-960" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-85oY1meeU1Ws7_Kz0d-17" value="Login" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="-870" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-85oY1meeU1Ws7_Kz0d-18" value="Create new post" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="-950" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-85oY1meeU1Ws7_Kz0d-20" value="Manage post" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="413" y="-840" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-85oY1meeU1Ws7_Kz0d-21" value="Vote on the post" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="533" y="-930" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-85oY1meeU1Ws7_Kz0d-22" value="View post about subject and field" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="630" y="-830" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="B-85oY1meeU1Ws7_Kz0d-23" value="Comment on the post" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="-730" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
