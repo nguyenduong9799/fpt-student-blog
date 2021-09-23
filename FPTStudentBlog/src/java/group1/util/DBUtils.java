@@ -5,7 +5,6 @@
  */
 package group1.util;
 
-import com.sun.xml.ws.security.opt.impl.util.SOAPUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
