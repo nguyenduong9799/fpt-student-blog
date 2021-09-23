@@ -33,7 +33,7 @@ public class PostDTO {
         this.vote = vote;
     }
 
-    public int getPostID() {
+       public int getPostID() {
         return postID;
     }
 

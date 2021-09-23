@@ -5,6 +5,8 @@
  */
 package group1.controller;
 
+import group1.dao.PostDAO;
+import group1.dto.PostDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +29,13 @@ public class showDetailPostController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String postID = request.getParameter("postID");
-            
+            int postID = Integer.parseInt(request.getParameter("postID"));
+            PostDAO dao = new PostDAO();
+            PostDTO post = dao.getPostByID(postID);
+            if (post != null) {
+                request.setAttribute("POST_DETAIL", post);
+                url = SUCCESS;
+            }
         } catch (Exception e) {
             log("Error at showDetailPostController: " + e.toString());
         } finally {

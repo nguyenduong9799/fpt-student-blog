@@ -41,9 +41,9 @@
                     <td><%=post.getStatus()%></td>
                     <td><%=post.getDate()%></td>
                     <td><%=post.getCategory()%></td>   
-                    <td><input type="submit" name="action" value="Show details"</td>
+                    <td><input type="submit" name="action" value="Show details"></td>
                 </tr>
-                <input type="hidden" name="postID" value="<%=post.getPostID()%>"
+                <input type="hidden" name="postID" value="<%=post.getPostID()%>">
             </form>
             <%                            }
                     }
