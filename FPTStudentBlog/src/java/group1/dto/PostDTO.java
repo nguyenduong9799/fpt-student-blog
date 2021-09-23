@@ -16,7 +16,7 @@ public class PostDTO {
     private String category;
     private String title;
     private String postContent;
-    private String  date;
+    private String date;
     private int vote;
 
     public PostDTO() {

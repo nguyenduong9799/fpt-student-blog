@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="com.quangnt.dto.PostDTO"%>
-<%@page import="com.quangnt.dao.PostDAO"%>
+<%@page import="group1.dto.PostDTO"%>
+<%@page import="group1.dao.PostDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,7 +32,6 @@
                     if (list != null) {
                         if (!list.isEmpty()) {
                             for (PostDTO post : list) {
-
                 %>
             <form action="MainController">
                 <tr>
@@ -41,9 +40,9 @@
                     <td><%=post.getStatus()%></td>
                     <td><%=post.getDate()%></td>
                     <td><%=post.getCategory()%></td>   
-                    <td><input type="submit" name="action" value="Show details"</td>
+                    <td><input type="submit" name="action" value="Show details"></td>
                 </tr>
-                <input type="hidden" name="postID" value="<%=post.getPostID()%>"
+                <input type="hidden" name="postID" value="<%=post.getPostID()%>">
             </form>
             <%                            }
                     }
