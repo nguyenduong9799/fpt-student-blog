@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package group1.dto;
+package group1.dao;
 
 /**
  *
  * @author Admin
  */
-public class DTO {
+public class TagDAO {
     
 }
