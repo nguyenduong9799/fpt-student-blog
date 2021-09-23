@@ -4,6 +4,7 @@
     Author     : ACER
 --%>
 
+<%@page import="group1.dto.PostDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,18 @@
         <title>Detail Post Page</title>
     </head>
     <body>
-        
+        <%
+            PostDTO post = (PostDTO) request.getAttribute("POST_DETAIL");
+        %>
+        <form action="MainController">
+            Post Tile: <%=post.getTitle()%><br>
+            Post Author:<%=post.getUserID()%><br>
+            Post Category:<%=post.getCategory()%><br>
+            Create date:<%=post.getDate()%><br>
+            Post Content:<%=post.getPostContent()%><br>
+            <input type="text" name="approveContent" placeholder="Approve comment">
+            <input type="submit" name="action" value="Approve">
+            <input type="submit" name="action" value="Deny">
+        </form>
     </body>
 </html>
