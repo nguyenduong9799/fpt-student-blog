@@ -20,4 +20,11 @@ public class DBUtils {
         Connection conn= DriverManager.getConnection(url, "sa", "123456789");
         return conn;
     }
+<<<<<<< Updated upstream
+=======
+//    String url = "jdbc:sqlserver://localhost:1433;databaseName=FPTStudentBlog";
+//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+//          System.out.println(new DBUtils().getConnection());
+//    }
+>>>>>>> Stashed changes
 }
