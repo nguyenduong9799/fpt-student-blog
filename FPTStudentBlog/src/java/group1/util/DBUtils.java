@@ -5,10 +5,21 @@
  */
 package group1.util;
 
-/**
- *
- * @author Admin
- */
+import com.sun.xml.ws.security.opt.impl.util.SOAPUtil;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
 public class DBUtils {
-    
+     public static Connection getConnection() throws ClassNotFoundException, SQLException{
+        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        String url="jdbc:sqlserver://LAPTOP-ADMKH3M5\\ENDY:1433;databaseName= FPTStudentBlog";
+        Connection conn= DriverManager.getConnection(url, "sa", "sa123456");
+        return conn;
+    }
+   //  public static void main(String[] args) throws ClassNotFoundException, SQLException {
+   //      System.out.println(new DBUtils().getConnection());
+  //  }
+             
 }
