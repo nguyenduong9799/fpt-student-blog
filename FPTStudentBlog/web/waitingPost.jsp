@@ -5,8 +5,8 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="com.quangnt.dto.PostDTO"%>
-<%@page import="com.quangnt.dao.PostDAO"%>
+<%@page import="group1.dto.PostDTO"%>
+<%@page import="group1.dao.PostDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
