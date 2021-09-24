@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SHOW_WAITING_POST = "waitingPost.jsp";
     private static final String SHOW_DETAIL_POST = "showDetailPostController";
     private static final String APPROVE_DENY_POST = "ApproveDenyPostController";
 
@@ -30,9 +29,7 @@ public class MainController extends HttpServlet {
          String url = ERROR;
         try {
             String action = request.getParameter("action");
-            if ("ShowWaitingPost".equals(action)) {
-                url = SHOW_WAITING_POST;
-            }else if ("Show details".equals(action)) {
+            if ("Show details".equals(action)) {
                 url=SHOW_DETAIL_POST;
             }else if ("Approve".equals(action)) {
                 url=APPROVE_DENY_POST;
