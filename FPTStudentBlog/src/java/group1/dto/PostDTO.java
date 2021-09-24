@@ -5,10 +5,7 @@
  */
 package group1.dto;
 
-/**
- *
- * @author Admin
- */
+
 public class PostDTO {
     private int postID;
     private String userID;
