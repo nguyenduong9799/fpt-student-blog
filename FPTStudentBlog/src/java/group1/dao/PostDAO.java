@@ -20,6 +20,7 @@ import java.util.List;
  */
 public class PostDAO {
 
+    
     public List<PostDTO> getAllPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -33,9 +34,9 @@ public class PostDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int postID = rs.getInt("postID");
-                    String userID = rs.getString("userID");
+                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
                     String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
-                    String category = rs.getString("categoryID");
+                    String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
                     String title = rs.getString("title");
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
@@ -72,9 +73,9 @@ public class PostDAO {
                 stm.setInt(1, postID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String userID = rs.getString("userID");
-                    String status = rs.getString("statusPID");
-                    String category = rs.getString("categoryID");
+                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
+                    String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
+                    String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
                     String title = rs.getString("title");
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
