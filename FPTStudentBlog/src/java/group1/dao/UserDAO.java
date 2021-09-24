@@ -61,7 +61,7 @@ public class UserDAO {
     }
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
-        UserDTO user = dao.checkLogin("admin", "12345678");
+        UserDTO user = dao.checkLogin("admin", "");
         System.out.println(user);
     }
 }
