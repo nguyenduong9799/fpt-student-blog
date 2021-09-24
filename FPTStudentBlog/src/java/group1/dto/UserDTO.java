@@ -9,7 +9,7 @@ import java.sql.Date;
 
 
 public class UserDTO {
-    private String userID;
+     private String userID;
     private String roleID;
     private String statusUID;
     private String userName;
@@ -120,4 +120,5 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" + "userID=" + userID + ", roleID=" + roleID + ", statusUID=" + statusUID + ", userName=" + userName + ", password=" + password + ", email=" + email + ", phone=" + phone + ", totalVote=" + totalVote + ", rankID=" + rankID + ", date=" + date + '}';
     }
+    
 }

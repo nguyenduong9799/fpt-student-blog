@@ -32,6 +32,7 @@
                     if (list != null) {
                         if (!list.isEmpty()) {
                             for (PostDTO post : list) {
+
                 %>
             <form action="MainController">
                 <tr>

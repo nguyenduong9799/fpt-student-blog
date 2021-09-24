@@ -1,9 +1,4 @@
-<%-- 
-    Document   : home
-    Created on : Sep 22, 2021, 7:16:43 PM
-    Author     : Admin
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +7,7 @@
         <title>Home Page</title>
     </head>
     <body>
-        
+        <h1>Hello World!</h1>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/U8mB2NomYGc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </body>
 </html>
