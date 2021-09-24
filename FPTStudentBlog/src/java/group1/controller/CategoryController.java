@@ -5,37 +5,57 @@
  */
 package group1.controller;
 
+import group1.dao.PostDAO;
+import group1.dto.PostDTO;
+import group1.dto.UserDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author buili
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
-
-    private static final String ERROR = "error.jsp";
-    private static final String SHOW_WAITING_POST = "waitingPost.jsp";
-    private static final String SHOW_DETAIL_POST = "showDetailPostController";
-
+@WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
+public class CategoryController extends HttpServlet {
+    public static final String HOME_PAGE = "home.jsp";
+    public static final String MANAGER_PAGE = "manager.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
+        String url = "login.jsp";
         try {
-            String action = request.getParameter("action");
-            if ("ShowWaitingPost".equals(action)) {
-                url = SHOW_WAITING_POST;
-            }else if ("Show details".equals(action)) {
-                url=SHOW_DETAIL_POST;
+            HttpSession session = request.getSession();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            int categoryID = Integer.parseInt(request.getParameter("txtCategoryID"));
+            ArrayList<PostDTO> listPost = null;
+            if(user.getRoleID().equals("AD")){
+                listPost = PostDAO.getAllPostByCategory(categoryID);
+                url = MANAGER_PAGE;
+            }else{
+                listPost = PostDAO.getAvailablePostByCategory(categoryID);
+                url = HOME_PAGE;
             }
+            if(listPost == null) listPost = new ArrayList<>();
+            
+            session.setAttribute("LIST_POST", listPost);
+                
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+           
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

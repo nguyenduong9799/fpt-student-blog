@@ -5,39 +5,52 @@
  */
 package group1.controller;
 
+import group1.dao.CategoryDAO;
+import group1.dao.PostDAO;
+import group1.dto.CategoryDTO;
+import group1.dto.PostDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author buili
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+@WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
+public class HomeController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String SHOW_WAITING_POST = "waitingPost.jsp";
-    private static final String SHOW_DETAIL_POST = "showDetailPostController";
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if ("ShowWaitingPost".equals(action)) {
-                url = SHOW_WAITING_POST;
-            }else if ("Show details".equals(action)) {
-                url=SHOW_DETAIL_POST;
+            ArrayList<PostDTO> listPost = PostDAO.getAvailablePost();
+            ArrayList<CategoryDTO> listCategory = CategoryDAO.getAllCategory();
+            
+            if(listPost != null){
+                HttpSession session = request.getSession();
+                
+                session.setAttribute("LIST_CATEGORY", listCategory);
+                session.setAttribute("LIST_POST", listPost);
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }
 
