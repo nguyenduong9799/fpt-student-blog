@@ -5,7 +5,9 @@
  */
 package group1.controller;
 
+import group1.dao.PostDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,33 +16,38 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author ACER
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+@WebServlet(name = "ApproveDenyPostController", urlPatterns = {"/ApproveDenyPostController"})
+public class ApproveDenyPostController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SHOW_WAITING_POST = "waitingPost.jsp";
-    private static final String SHOW_DETAIL_POST = "showDetailPostController";
-    private static final String APPROVE_DENY_POST = "ApproveDenyPostController";
+    private static final String SUCCESS_APPROVE = "waitingPost.jsp";
+    private static final String SUCCESS_DENY = "waitingPost.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
+        String url = ERROR;
         try {
             String action = request.getParameter("action");
-            if ("ShowWaitingPost".equals(action)) {
-                url = SHOW_WAITING_POST;
-            }else if ("Show details".equals(action)) {
-                url=SHOW_DETAIL_POST;
-            }else if ("Approve".equals(action)) {
-                url=APPROVE_DENY_POST;
-            }else if ("Deny".equals(action)) {
-                url=APPROVE_DENY_POST;
+            int postID = Integer.parseInt(request.getParameter("postID"));
+            String approveComment = request.getParameter("approveContent");
+            PostDAO dao = new PostDAO();
+            boolean check;
+            if ("Approve".equals(action)) {
+                check = dao.approvePost(postID, approveComment);
+                if (check) {
+                    url = SUCCESS_APPROVE;
+                }
+            } else if ("Deny".equals(action)) {
+                check = dao.denyPost(postID, approveComment);
+                if (check) {
+                    url = SUCCESS_DENY;
+                }
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at ApproveDenyPostController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

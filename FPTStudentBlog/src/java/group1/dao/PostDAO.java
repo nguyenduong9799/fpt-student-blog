@@ -98,6 +98,61 @@ public class PostDAO {
         }
         return post;
     }
+    
+     public boolean approvePost(int postID, String approveComment) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Update tblPosts set statusPID=1, approveComment=? where postID=? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, approveComment);
+                stm.setInt(2, postID);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean denyPost(int postID, String approveComment) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Update tblPosts set statusPID=0, approveComment=? "
+                        + "where postID=? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, approveComment);
+                stm.setInt(2, postID);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
     public static ArrayList<PostDTO> getAvailablePost() throws SQLException {
         ArrayList<PostDTO> list = null;
