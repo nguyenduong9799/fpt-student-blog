@@ -15,6 +15,12 @@
         <title>Waiting Post Page</title>
     </head>
     <body>
+         <%
+            PostDAO dao = new PostDAO();
+            List<PostDTO> list = dao.getWaitingPost();
+            if (list != null) {
+                if (!list.isEmpty()) {
+        %>
         <table border="1">
             <thead>
                 <tr>
@@ -27,12 +33,7 @@
             </thead>
             <tbody>
                 <%
-                    PostDAO dao = new PostDAO();
-                    List<PostDTO> list = dao.getAllPost();
-                    if (list != null) {
-                        if (!list.isEmpty()) {
-                            for (PostDTO post : list) {
-
+                    for (PostDTO post : list) {
                 %>
             <form action="MainController">
                 <tr>
@@ -45,12 +46,15 @@
                 </tr>
                 <input type="hidden" name="postID" value="<%=post.getPostID()%>">
             </form>
-            <%                            }
-                    }
-                }
-            %>
         </tbody>
     </table>
-
+    <%                            }
+    } else {
+    %>
+    <h1>No information</h1>
+    <%
+            }
+        }
+    %>
 </body>
 </html>

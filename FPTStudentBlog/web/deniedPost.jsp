@@ -1,6 +1,6 @@
 <%-- 
-    Document   : waitingPost.jsp
-    Created on : Sep 22, 2021, 6:51:53 PM
+    Document   : deniedPost
+    Created on : Sep 24, 2021, 9:23:39 PM
     Author     : ACER
 --%>
 
@@ -12,12 +12,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Waiting Post Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
-         <%
+       <%
             PostDAO dao = new PostDAO();
-            List<PostDTO> list = dao.getWaitingPost();
+            List<PostDTO> list = dao.getDeniedPost();
             if (list != null) {
                 if (!list.isEmpty()) {
         %>
