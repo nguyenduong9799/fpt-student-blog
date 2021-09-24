@@ -34,7 +34,7 @@ public class PostDAO {
                 while (rs.next()) {
                     int postID = rs.getInt("postID");
                     String userID = rs.getString("userID");
-                    String status = rs.getString("statusPID");
+                    String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
                     String category = rs.getString("categoryID");
                     String title = rs.getString("title");
                     String postContent = rs.getString("postContent");
