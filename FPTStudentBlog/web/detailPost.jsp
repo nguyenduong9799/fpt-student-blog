@@ -23,6 +23,7 @@
             Create date:<%=post.getDate()%><br>
             Post Content:<%=post.getPostContent()%><br>
             <input type="text" name="approveContent" placeholder="Approve comment">
+            <input type="hidden" name="postID" value="<%=post.getPostID()%>">
             <input type="submit" name="action" value="Approve">
             <input type="submit" name="action" value="Deny">
         </form>
