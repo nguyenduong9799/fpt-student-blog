@@ -22,29 +22,28 @@
                 <div class="search-btn">
 
                 </div>
-                <div id="content">
-
-                </div>
-                <div id="footer">
-
-                </div>
-
+                <%
+                    UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                    if (loginUser != null) {
+                %>
+                <a>Welcome: <%= loginUser.getUserName()%></a>
+                <a href="MainController?action=Logout">Logout</a>                              
+                <%
+                    }
+                    if (loginUser == null) {
+                %>
+                <a href="login.jsp">Login</a>
+                <a href="#">Sign Up</a>
+                <%
+                    }
+                %>
             </div>
-            <%
-                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                if (loginUser != null) {
-            %>
-            <a>Welcome: <%= loginUser.getUserName()%></a>
-            <a href="MainController?action=Logout">Logout</a>                              
-            <%
-                }
-                if (loginUser == null) {
-            %>
-            <a href="login.jsp">Login</a>
-            <a href="#">Sign Up</a>
-            <%
-                }
-            %>
+        </div>
+        <div id="content">
 
+        </div>
+        <div id="footer">
+
+        </div>
     </body>
 </html>
