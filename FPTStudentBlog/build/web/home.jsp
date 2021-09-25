@@ -1,17 +1,31 @@
-<%-- 
-    Document   : home
-    Created on : Sep 22, 2021, 7:16:43 PM
-    Author     : Admin
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home Page</title>
+        <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div id="main">
+            <div id="header">
+              <ul id="nav">
+                  <li><a href="FPT STudent Blog"></a></li>
+                  <li><a href="Profile"></a></li>
+                  <li><a href="Notification"></a></li>
+                  
+              </ul> 
+            </div>
+            <div id="content">
+
+            </div>
+            <div id="footer">
+
+            </div>
+
+        </div>
+        <a href="login.jsp"></a>
+
     </body>
 </html>

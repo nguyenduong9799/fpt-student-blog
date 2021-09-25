@@ -5,9 +5,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
+        <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/U8mB2NomYGc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id="main">
+            <div id="header">
+              <ul id="nav">
+                  <li><a href="FPT STudent Blog"></a></li>
+                  <li><a href="Profile"></a></li>
+                  <li><a href="Notification"></a></li>
+                  
+              </ul> 
+            </div>
+            <div id="content">
+
+            </div>
+            <div id="footer">
+
+            </div>
+
+        </div>
+        <a href="login.jsp"></a>
+
     </body>
 </html>

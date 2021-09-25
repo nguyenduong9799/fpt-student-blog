@@ -5,10 +5,33 @@
  */
 package group1.dto;
 
-/**
- *
- * @author Admin
- */
+
 public class StatusDTO {
-    
+     private String statusID;
+    private String statusName;
+
+    public StatusDTO() {
+    }
+
+    public StatusDTO(String statusID, String statusName) {
+        this.statusID = statusID;
+        this.statusName = statusName;
+    }
+
+    public String getStatusID() {
+        return statusID;
+    }
+
+    public void setStatusID(String statusID) {
+        this.statusID = statusID;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
 }

@@ -24,8 +24,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
 public class CategoryController extends HttpServlet {
-    public static final String HOME_PAGE = "home.jsp";
-    public static final String MANAGER_PAGE = "manager.jsp";
+    public static final String USER = "home.jsp";
+    public static final String ADMIN = "admin.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -45,10 +45,10 @@ public class CategoryController extends HttpServlet {
             ArrayList<PostDTO> listPost = null;
             if(user.getRoleID().equals("AD")){
                 listPost = PostDAO.getAllPostByCategory(categoryID);
-                url = MANAGER_PAGE;
+                url = ADMIN;
             }else{
                 listPost = PostDAO.getAvailablePostByCategory(categoryID);
-                url = HOME_PAGE;
+                url = USER;
             }
             if(listPost == null) listPost = new ArrayList<>();
             
