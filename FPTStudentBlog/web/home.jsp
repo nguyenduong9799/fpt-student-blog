@@ -25,6 +25,7 @@
             </div>
 
         </div>
+        <a href="login.jsp"></a>
 
     </body>
 </html>
