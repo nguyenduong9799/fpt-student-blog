@@ -1,4 +1,5 @@
 
+<%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@
                 </ul>
 
                 <div class="search-btn">
-                    
+
                 </div>
                 <div id="content">
 
@@ -29,7 +30,21 @@
                 </div>
 
             </div>
-            <a href="login.jsp"></a>
+            <%
+                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                if (loginUser != null) {
+            %>
+            <a>Welcome: <%= loginUser.getUserName()%></a>
+            <a href="MainController?action=Logout">Logout</a>                              
+            <%
+                }
+                if (loginUser == null) {
+            %>
+            <a href="login.jsp">Login</a>
+            <a href="#">Sign Up</a>
+            <%
+                }
+            %>
 
     </body>
 </html>

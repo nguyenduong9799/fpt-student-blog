@@ -23,10 +23,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
+    private static final String ERROR = "login.jsp";
     private static final String ADMIN = "admin.jsp";
     private static final String USER = "home.jsp";
-    private static final String MENTOR = "mentor.jsp";
+    private static final String MENTOR = "home.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
