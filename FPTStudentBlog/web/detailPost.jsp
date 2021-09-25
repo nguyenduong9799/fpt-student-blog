@@ -20,12 +20,20 @@
             Post Tile: <%=post.getTitle()%><br>
             Post Author:<%=post.getUserID()%><br>
             Post Category:<%=post.getCategory()%><br>
+            Post Status:<%=post.getStatus()%><br>
             Create date:<%=post.getDate()%><br>
             Post Content:<%=post.getPostContent()%><br>
-            <input type="text" name="approveContent" placeholder="Approve comment">
             <input type="hidden" name="postID" value="<%=post.getPostID()%>">
+            <%
+                if ("Waiting".equals(post.getStatus())) {
+            %>
+            <input type="text" name="approveContent" placeholder="Approve comment">
             <input type="submit" name="action" value="Approve">
             <input type="submit" name="action" value="Deny">
+            <%
+                }
+            %>
+
         </form>
     </body>
 </html>
