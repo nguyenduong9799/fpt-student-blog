@@ -9,7 +9,7 @@ import java.sql.Date;
 
 
 public class UserDTO {
-     private String userID;
+    private String userID;
     private String roleID;
     private String statusUID;
     private String userName;

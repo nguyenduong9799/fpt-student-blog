@@ -13,7 +13,7 @@
             <form action="LoginController" method="POST">
                 <input type="text" placeholder="user ID" name="userID"/><br/>
                 <input type="password" placeholder="password" name="password"/><br/>
-                <button type="submit" name="Login" value="Login">Login</button><br/>
+                <button type="submit" name="action" value="Login">Login</button><br/>
                 <button type="reset" value="Reset"/>Reset</button><br/>
                 <a href="createAccount.jsp">Sign Up</a><br/>
             </form>
