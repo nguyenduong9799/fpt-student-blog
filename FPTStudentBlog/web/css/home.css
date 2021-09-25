@@ -1,0 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: Helvetica,Arial,sans-serif;
+}
+#main{
+    background: rgba(205, 202, 202, 0.6);
+}
+#header{
+height: 50px;
+background-color:#000;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+}
+
+#nav{
+    display: inline-block;
+}
+#nav li{
+    display: inline-block;  
+}
+#nav li a{
+    color: #fff;
+    text-decoration: none ;
+    line-height: 50px;
+    padding: 0 24px;    
+}
+#nav li:hover a{
+    color: #000;
+    background-color:#ccc; 
+    display: inline-block;
+}
+
+#content{  
+}
+#footer{
+    
+}
