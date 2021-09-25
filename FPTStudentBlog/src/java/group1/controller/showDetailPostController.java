@@ -6,8 +6,11 @@
 package group1.controller;
 
 import group1.dao.PostDAO;
+import group1.dao.TagDAO;
 import group1.dto.PostDTO;
+import group1.dto.TagDTO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +34,12 @@ public class showDetailPostController extends HttpServlet {
         try {
             int postID = Integer.parseInt(request.getParameter("postID"));
             PostDAO dao = new PostDAO();
+            TagDAO tagDao = new TagDAO();
             PostDTO post = dao.getPostByID(postID);
-            if (post != null) {
+            List<TagDTO> listTag = tagDao.getListTagByPostID(postID);
+            if (post != null && listTag != null) {
                 request.setAttribute("POST_DETAIL", post);
+                request.setAttribute("POST_TAGS", listTag);
                 url = SUCCESS;
             }
         } catch (Exception e) {
