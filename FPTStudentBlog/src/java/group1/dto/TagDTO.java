@@ -8,4 +8,41 @@ package group1.dto;
 
 public class TagDTO {
     
+    private int tagID;
+    private String tagName;
+    private String createDate;
+
+    public TagDTO() {
+    }
+
+    public TagDTO(int tagID, String tagName, String createDate) {
+        this.tagID = tagID;
+        this.tagName = tagName;
+        this.createDate = createDate;
+    }
+
+    public int getTagID() {
+        return tagID;
+    }
+
+    public void setTagID(int tagID) {
+        this.tagID = tagID;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
 }
