@@ -55,13 +55,14 @@
                 %>
             </ul>
         </div>
-        <%
-            PostDAO dao = new PostDAO();
-            List<PostDTO> list = dao.getDeniedPost();
-            if (list != null) {
-                if (!list.isEmpty()) {
-        %>
-        <div id="content">       
+
+        <div id="content">
+            <%
+                PostDAO dao = new PostDAO();
+                List<PostDTO> list = dao.getDeniedPost();
+                if (list != null) {
+                    if (!list.isEmpty()) {
+            %>
             <table border="1">
                 <thead>
                     <tr>
