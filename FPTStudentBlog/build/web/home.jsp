@@ -1,49 +1,55 @@
+<%@page import="group1.dto.UserDTO" %>
+    <%@page contentType="text/html" pageEncoding="UTF-8" %>
+        <!DOCTYPE html>
+        <html>
 
-<%@page import="group1.dto.UserDTO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
-        <link rel="stylesheet" href="./css/home.css">
-        <link rel="stylesheet" href="./css/themify-icons.css">
-    </head>
-    <body>
-        <div id="main">
-            <div id="header">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Home Page</title>
+            <link rel="stylesheet" href="./css/home.css">
 
-                <ul id="nav">
-                    <li><a href="home.jsp">FPT Sudent Blog</a></li>
-                    <li><a href="profile.jsp">Profile</a></li>
-                    <li><a href="notification.jsp">Notification</a></li>  
-                </ul>
+        </head>
 
-                <div class="search-btn">
+        <body>
+            <div class="container">
+                <div id="header">
+                    <ul id="nav">
+                        <li><a href="home.jsp">FPT Sudent Blog</a></li>
 
-                </div>
-                <%
-                    UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                    if (loginUser != null) {
-                %>
-                <a>Welcome: <%= loginUser.getUserName()%></a>
-                <a href="MainController?action=Logout">Logout</a>                              
-                <%
-                    }
-                    if (loginUser == null) {
-                %>
-                <a href="login.jsp">Login</a>
-                <a href="#">Sign Up</a>
-                <%
-                    }
-                %>
+                        <li><a href="notification.jsp">Notification</a></li>
+                    
+
+                        <%
+                        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                        if (loginUser != null) {
+                    %>
+                    <li class="right">
+                        <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
+                    </li>
+                    <li class="right">
+                        <a href="MainController?action=Logout">Logout</a>
+                    </li> 
+                    <%
+                        }
+                        if (loginUser == null) {
+                    %>
+                    <li class="right">
+                        <a href="login.jsp" >Login</a> 
+                    </li>
+                    <li class="right">
+                        <a href="createAccount.jsp" >Sign Up</a>
+                    </li>              
+                    <%
+                        }
+                    %>
+            </ul>
             </div>
-        </div>
-        <div id="content">
+            <div id="content">
 
-        </div>
-        <div id="footer">
+            </div>
+            <div id="footer">
 
-        </div>
-    </body>
-</html>
+            </div>
+        </body>
+
+        </html>
