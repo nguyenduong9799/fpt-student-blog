@@ -1,4 +1,4 @@
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
+        <br>
         <div id="main">
             <div id="header">
               <ul id="nav">
@@ -25,7 +26,8 @@
             </div>
 
         </div>
-        <a href="login.jsp"></a>
+
+        
 
     </body>
 </html>

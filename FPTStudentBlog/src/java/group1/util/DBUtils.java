@@ -17,8 +17,8 @@ public class DBUtils {
         Connection conn = DriverManager.getConnection(url, "sa", "123456");
         return conn;
     }
-//    String url = "jdbc:sqlserver://localhost:1433;databaseName=FPTStudentBlog";
-    //  public static void main(String[] args) throws ClassNotFoundException, SQLException {
-    //      System.out.println(new DBUtils().getConnection());
-    //  }
+    String url = "jdbc:sqlserver://localhost:1433;databaseName=FPTStudentBlog";
+      public static void main(String[] args) throws ClassNotFoundException, SQLException {
+          System.out.println(new DBUtils().getConnection());
+      }
 }

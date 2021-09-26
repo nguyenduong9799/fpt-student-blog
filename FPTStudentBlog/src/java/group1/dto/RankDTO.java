@@ -5,7 +5,10 @@
  */
 package group1.dto;
 
-
+/**
+ *
+ * @author Admin
+ */
 public class RankDTO {
     
 }

@@ -41,18 +41,27 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
-      out.write("    <head>\n");
-      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>Login Page</title>\n");
-      out.write("    </head>\n");
-      out.write("    <body>\n");
-      out.write("        <h1>Hello World!</h1>\n");
-      out.write("    </body>\n");
-      out.write("</html>\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
+      out.write("        <title>Login Page</title>\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"./css/login.css\">\r\n");
+      out.write("    </head>\r\n");
+      out.write("    <body>\r\n");
+      out.write("        <div class=\"login\">\r\n");
+      out.write("            <h2>Please Login To Continue</h2>\r\n");
+      out.write("            <form action=\"LoginController\" method=\"POST\">\r\n");
+      out.write("                <input type=\"text\" placeholder=\"user ID\" name=\"userID\"/><br/>\r\n");
+      out.write("                <input type=\"password\" placeholder=\"password\" name=\"password\"/><br/>\r\n");
+      out.write("                <button type=\"submit\" name=\"action\" value=\"Login\">Login</button><br/>\r\n");
+      out.write("                <button type=\"reset\" value=\"Reset\"/>Reset</button><br/>\r\n");
+      out.write("                <a href=\"createAccount.jsp\">Sign Up</a><br/>\r\n");
+      out.write("            </form>\r\n");
+      out.write("        </div>\r\n");
+      out.write("    </body>\r\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
