@@ -7,55 +7,74 @@ package group1.controller;
 
 import group1.dao.UserDAO;
 import group1.dto.UserDTO;
+import group1.dto.UserError;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author khoala
+ * @author Admin
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+public class CreateAccountController extends HttpServlet {
 
-    private static final String ERROR = "login.jsp";
-    private static final String ADMIN = "admin.jsp";
-    private static final String USER = "home.jsp";
-    private static final String MENTOR = "home.jsp";
+    private static final String ERROR = "createAccount.jsp";
+    private static final String SUCCESS = "home.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
+            String name = request.getParameter("name");
             String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            UserDTO user = dao.checkLogin(userID, password);
-            HttpSession session = request.getSession();
-            if (user != null) {
-                session.setAttribute("LOGIN_USER", user);
-                String roleID = user.getRoleID();
-                if ("AD".equals(roleID)) {
-                    url = ADMIN;
-                } else if ("US".equals(roleID)) {
-                    url = USER;
-                }else if ("MT".equals(roleID)) {
-                    url = MENTOR;
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String confirm = request.getParameter("confirm");
+            boolean check = true;
+            UserError userError = new UserError();
+            if (userID.length() > 20 || userID.length() < 3) {
+                userError.setUserIDError("UserID length must be [3,20]");
+                check = false;
+            }
+            if (name.length() > 50 || name.length() < 5) {
+                userError.setNameError("Full Name must be [5,50]");
+                check = false;
+            }
+            if (!password.equals(confirm)) {
+                userError.setConfirmError("Hai password khong giong nhau");
+                check = false;
+            }
+            if (check) {
+                long millis = System.currentTimeMillis();
+                Date date = new Date(millis);
+                UserDAO dao = new UserDAO();
+                UserDTO user = new UserDTO(userID, "US", "1", name, password, email, phone, 0, 0, date);
+                boolean checkDuplicate = dao.checkDuplicate(userID);
+                if (checkDuplicate) {
+                    userError.setUserIDError("Duplicate User ID " + userID + "!");
+                    request.setAttribute("USER_ERROR", userError);
                 } else {
-                    session.setAttribute("ERROR_MESSAGE", "Your role is not support");
+                    boolean checkInsert = dao.insert(user);
+                    if (checkInsert) {
+                        url = SUCCESS;
+                    } else {
+                        userError.setMessageError("Can not insert, unknow error!");
+                        request.setAttribute("USER_ERROR", userError);
+                    }
                 }
             } else {
-                session.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password");     
+                request.setAttribute("USER_ERROR", userError);
             }
         } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
+            log("Error at CreateController: " + e.toString());
         } finally {
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
