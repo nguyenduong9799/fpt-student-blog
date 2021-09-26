@@ -57,6 +57,17 @@ public final class waitingPost_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>Waiting Post Page</title>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
+      out.write("        ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "search.jsp", out, false);
+      out.write("\r\n");
+      out.write("         ");
+
+            PostDAO dao = new PostDAO();
+            List<PostDTO> list = dao.getWaitingPost();
+            if (list != null) {
+                if (!list.isEmpty()) {
+        
+      out.write("\r\n");
       out.write("        <table border=\"1\">\r\n");
       out.write("            <thead>\r\n");
       out.write("                <tr>\r\n");
@@ -70,12 +81,7 @@ public final class waitingPost_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <tbody>\r\n");
       out.write("                ");
 
-                    PostDAO dao = new PostDAO();
-                    List<PostDTO> list = dao.getAllPost();
-                    if (list != null) {
-                        if (!list.isEmpty()) {
-                            for (PostDTO post : list) {
-
+                    for (PostDTO post : list) {
                 
       out.write("\r\n");
       out.write("            <form action=\"MainController\">\r\n");
@@ -101,17 +107,22 @@ public final class waitingPost_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print(post.getPostID());
       out.write("\">\r\n");
       out.write("            </form>\r\n");
-      out.write("            ");
-                            }
-                    }
-                }
-            
-      out.write("\r\n");
       out.write("        </tbody>\r\n");
       out.write("    </table>\r\n");
+      out.write("    ");
+                            }
+    } else {
+    
+      out.write("\r\n");
+      out.write("    <h1>No information</h1>\r\n");
+      out.write("    ");
+
+            }
+        }
+    
       out.write("\r\n");
       out.write("</body>\r\n");
-      out.write("</html>\r\n");
+      out.write("</html>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

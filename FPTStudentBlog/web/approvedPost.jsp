@@ -15,6 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="search.jsp"/>
         <%
             PostDAO dao = new PostDAO();
             List<PostDTO> list = dao.getApprovedPost();

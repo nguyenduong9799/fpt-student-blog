@@ -58,6 +58,9 @@ public final class approvedPost_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "search.jsp", out, false);
+      out.write("\n");
+      out.write("        ");
 
             PostDAO dao = new PostDAO();
             List<PostDTO> list = dao.getApprovedPost();

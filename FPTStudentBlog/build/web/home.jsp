@@ -9,40 +9,48 @@
         <link rel="stylesheet" href="./css/themify-icons.css">
     </head>
     <body>
-        <div id="main">
-            <div id="header">
+        <br>
+        <br>
+        <jsp:include page="search.jsp"/>
+<div class="container">
+                <div id="header">
+                    <ul id="nav">
+                        <li><a href="home.jsp">FPT Sudent Blog</a></li>
 
-                <ul id="nav">
-                    <li><a href="home.jsp">FPT Sudent Blog</a></li>
-                    <li><a href="profile.jsp">Profile</a></li>
-                    <li><a href="notification.jsp">Notification</a></li>  
-                </ul>
+                        <li><a href="notification.jsp">Notification</a></li>
+                    
 
-                <div class="search-btn">
-
-                </div>
-                <%
-                    UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                    if (loginUser != null) {
-                %>
-                <a>Welcome: <%= loginUser.getUserName()%></a>
-                <a href="MainController?action=Logout">Logout</a>                              
-                <%
-                    }
-                    if (loginUser == null) {
-                %>
-                <a href="login.jsp">Login</a>
-                <a href="#">Sign Up</a>
-                <%
-                    }
-                %>
+                        <%
+                        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                        if (loginUser != null) {
+                    %>
+                    <li class="right">
+                        <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
+                    </li>
+                    <li class="right">
+                        <a href="MainController?action=Logout">Logout</a>
+                    </li> 
+                    <%
+                        }
+                        if (loginUser == null) {
+                    %>
+                    <li class="right">
+                        <a href="login.jsp" >Login</a> 
+                    </li>
+                    <li class="right">
+                        <a href="createAccount.jsp" >Sign Up</a>
+                    </li>              
+                    <%
+                        }
+                    %>
+            </ul>
             </div>
-        </div>
-        <div id="content">
+            <div id="content">
 
-        </div>
-        <div id="footer">
+            </div>
+            <div id="footer">
 
-        </div>
+            </div>
+</div>
     </body>
 </html>

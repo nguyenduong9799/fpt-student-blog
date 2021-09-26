@@ -57,6 +57,9 @@ public final class deniedPost_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>JSP Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
+      out.write("        ");
+      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "search.jsp", out, false);
+      out.write("\n");
       out.write("       ");
 
             PostDAO dao = new PostDAO();

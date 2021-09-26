@@ -35,8 +35,23 @@ right: 0;
     background-color:#ccc; 
     display: inline-block;
 }
+#nav .subnav a{
+    background-color: #FFFFFF;
+    color: #000;
+    box-shadow: 0 0 10px;
 
-#content{  
+}
+#nav .subnav li:hover a{
+    color: #000;
+    background-color:#FFFFFF; 
+    display: inline-block;
+}
+.right {
+    float: right;
+}
+#content{ 
+    background-color: #868787;
+    height: 2000px;
 }
 #footer{
     
