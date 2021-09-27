@@ -1,9 +1,9 @@
-.login{
-    width: 400px;
-    height: 400px;
+.create{
+    width: 630px;
+    height: 650px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
+    margin-top: 50px;
     border-radius: 10px;
     text-align: center;
     background: rgba(229, 229, 229, 0.37);
@@ -41,18 +41,6 @@ button:hover{
     border: none;
     color: whitesmoke;
 
-}
-.login a{
-    color: #868787;
-    font-family: sans-serif;
-    padding-top: 20px;
-    color: white
-}
-
-.login a:hover{
-    font-family: sans-serif;
-    padding-top: 20px;
-    color:blue;
 }
 body{
     background-image: url(../img/background.jpg);

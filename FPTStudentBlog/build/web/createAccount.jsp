@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>CreateAccount Page</title>
+        <link rel="stylesheet" href="./css/create.css">
     </head>
     <body>
          <jsp:useBean id="USER_ERROR" class="group1.dto.UserError">
