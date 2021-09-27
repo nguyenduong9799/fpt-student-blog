@@ -20,7 +20,6 @@
                         <li><a href="home.jsp">FPT Sudent Blog</a></li>
 
                         <li><a href="notification.jsp">Notification</a></li>
-                        <jsp:include page="search.jsp"/>
 
                         <%
                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
