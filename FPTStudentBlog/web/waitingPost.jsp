@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/mentor.css" rel="stylesheet" type="text/css"/>
+        <link href="css/table.css" rel="stylesheet" type="text/css"/>
         <title>Waiting Post Page</title>
     </head>
     <body>
@@ -85,7 +86,7 @@
                             <td><%=post.getStatus()%></td>
                             <td><%=post.getDate()%></td>
                             <td><%=post.getCategory()%></td>   
-                            <td><input type="submit" name="action" value="Show details"></td>
+                            <td><input class="button" type="submit" name="action" value="Show details"></td>
                         </tr>
                         <input type="hidden" name="postID" value="<%=post.getPostID()%>">
                     </form>
@@ -94,7 +95,7 @@
                 <%                            }
                 } else {
                 %>
-                <h1>No information</h1>
+                <h1 id="no-information">No information</h1>
                 <%
                         }
                     }

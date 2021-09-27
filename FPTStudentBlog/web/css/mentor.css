@@ -53,10 +53,13 @@ html{
 }
 #content{ 
     padding-top: 60px;
-    background-color: #868787;
+    background-color: #FFFFFF;
     height: 2000px;
     padding-left: 5px;
     padding-right: 5px;
+}
+#no-information{
+    text-align: center;
 }
 #footer{
 

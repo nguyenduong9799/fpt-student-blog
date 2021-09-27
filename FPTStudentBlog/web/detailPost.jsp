@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/mentor.css" rel="stylesheet" type="text/css"/>
+        <link href="css/table.css" rel="stylesheet" type="text/css"/>
         <title>Detail Post Page</title>
     </head>
     <body>
@@ -69,7 +70,7 @@
                 <%
                     for (TagDTO tag : listTag) {
                 %>
-                <a href=""><%=tag.getTagName()%></a>
+                <a href="" style="font-size: 20px;"><%=tag.getTagName()%></a> 
                 <%
                     }
                 %>
@@ -80,9 +81,9 @@
                 <%
                     if ("Waiting".equals(post.getStatus())) {
                 %>
-                <input type="text" name="approveContent" placeholder="Approve comment">
-                <input type="submit" name="action" value="Approve">
-                <input type="submit" name="action" value="Deny">
+                <textarea type="text" name="approveContent" placeholder="Approve comment"></textarea><br>
+                <input class="button" type="submit" name="action" value="Approve">
+                <input class="button" type="submit" name="action" value="Deny">
                 <%
                     }
                 %>
