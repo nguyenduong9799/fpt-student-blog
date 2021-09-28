@@ -19,7 +19,7 @@ import java.util.List;
  * @author Admin
  */
 public class TagDAO {
-     public List<TagDTO> getListTagByPostID(int postID) throws SQLException {
+      public List<TagDTO> getListTagByPostID(int postID) throws SQLException {
         List<TagDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -27,9 +27,9 @@ public class TagDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select tagID, tagName, date "
-                        + "from tblTags "
-                        + "where postID=? ";
+                String sql = "select t.tagID, tagName, date,postID "
+                        + " from tblTags t join tblTagBlog tb on t.tagID = tb.tagID "
+                        + " where postID=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, postID);
                 rs = stm.executeQuery();

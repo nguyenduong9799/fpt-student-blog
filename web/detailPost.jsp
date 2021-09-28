@@ -85,6 +85,10 @@
                 <input class="button" type="submit" name="action" value="Approve">
                 <input class="button" type="submit" name="action" value="Deny">
                 <%
+                    } else {
+                %>
+                <h3>Mentor comment:</h3><%=post.getApproveComment()%><br>
+                <%
                     }
                 %>
             </form>
