@@ -23,7 +23,6 @@
                         <li><a href="waitingPost.jsp">Show waiting posts</a></li>
                         <li><a href="approvedPost.jsp">Show approved posts</a></li>
                         <li><a href="deniedPost.jsp">Show denied posts</a></li>
-                        <jsp:include page="search.jsp"/>
                     </div>
                     <%
                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
@@ -38,18 +37,6 @@
                         </li>
                         <li>
                             <a href="MainController?action=Logout">Logout</a>
-                        </li>
-                    </div>
-                    <%
-                        }
-                        if (loginUser == null) {
-                    %>
-                    <div class="right">
-                        <li>
-                            <a href="createAccount.jsp" >Sign Up</a>
-                        </li>    
-                        <li>
-                            <a href="login.jsp" >Login</a> 
                         </li>
                     </div>
                     <%

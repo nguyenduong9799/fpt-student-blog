@@ -30,6 +30,7 @@
                         if (loginUser != null) {
                     %>
                     <div class="right">
+                        <li><a href="addPost.jsp">Create New Post</a></li>
                         <li>
                             <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
                         </li>
