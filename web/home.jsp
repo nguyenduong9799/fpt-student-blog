@@ -1,4 +1,5 @@
 
+<%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
