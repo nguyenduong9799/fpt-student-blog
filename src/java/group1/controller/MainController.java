@@ -54,20 +54,20 @@ public class MainController extends HttpServlet {
             request.getRequestDispatcher(url).forward(request, response);
         }
     
-    try {
-            ArrayList<PostDTO> listPost = PostDAO.getAllPost();
-            ArrayList<CategoryDTO> listCategory = CategoryDAO.getAllCategory();
-            
-            if(listPost != null){
-                HttpSession session = request.getSession();
-                session.setAttribute("LIST_POST", listPost);
-                session.setAttribute("LIST_CATEGORY", listCategory);
-            }
-        } catch (Exception e) {
-           
-        } finally {
-            request.getRequestDispatcher(ADMIN).forward(request, response);
-        }
+//    try {
+//            ArrayList<PostDTO> listPost = PostDAO.getAllPost();
+//            ArrayList<CategoryDTO> listCategory = CategoryDAO.getAllCategory();
+//            
+//            if(listPost != null){
+//                HttpSession session = request.getSession();
+//                session.setAttribute("LIST_POST", listPost);
+//                session.setAttribute("LIST_CATEGORY", listCategory);
+//            }
+//        } catch (Exception e) {
+//           
+//        } finally {
+//            request.getRequestDispatcher(ADMIN).forward(request, response);
+//        }
         
     }
 
