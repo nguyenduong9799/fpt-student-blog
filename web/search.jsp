@@ -6,6 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/home.css">
         <title>Search Page</title>
+<<<<<<< Updated upstream
     </head>
     <body>
        <div class="header">
@@ -53,5 +54,23 @@
         <div class="footer">
 
         </div>
+=======
+        <link rel="stylesheet" href="./css/home.css">
+        <script src="https://kit.fontawesome.com/478461b23c.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <c:set var="searchValue" scope="page" value="${param.search}"/>
+        <form action="SearchController">     
+            <div class="header__search">
+                <div class="header__search-wrap">
+                    <input type="text" class="header__search-input" name="search" value="${searchValue}" placeholder="Search...">
+                </div>
+                <button type="submit" class="header__search-btn">
+                    <i class="header__search-btn-icon fas fa-search"></i>
+                </button>
+            </div>
+            
+        </form>
+>>>>>>> Stashed changes
     </body>
 </html>

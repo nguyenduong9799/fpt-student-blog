@@ -9,41 +9,55 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class="header">
-            <ul class="nav">
-                <li><a href="home.jsp">FPT Sudent Blog</a></li>
+        <div class="container">
+            <div id="header">
+                <ul id="nav">
+                    <div class="left">
+                        <li><a href="home.jsp">FPT Sudent Blog</a></li>
+                        <li><a href="notification.jsp">Notification</a></li>
+                        <li><jsp:include page="search.jsp"/></li>
+                    </div>
 
-                <li><a href="notification.jsp">Notification</a></li>
+                    <%
+                        UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                        if (loginUser != null) {
+                    %>
+                    <div class="right">
+                        <li>
+                            <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
+                        </li>
+                        <li >
+                            <a href="MainController?action=Logout">Logout</a>
+                        </li>
+                    </div>
+                    <%
+                        }
+                        if (loginUser == null) {
+                    %>
+                    <div class="right">
+                        <li>
+                            <a href="login.jsp" >Login</a> 
+                        </li>
+                        <li >
+                            <a href="createAccount.jsp" >Sign Up</a>
+                        </li> 
+                    </div>
+                    <%
+                        }
+                    %>
 
-
-                <%
-                    UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                    if (loginUser != null) {
-                %>
-                <li class="right">
-                    <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
-                </li>
-                <li class="right">
-                    <a href="MainController?action=Logout">Logout</a>
-                </li> 
-                <%
-                    }
-                    if (loginUser == null) {
-                %>
-                <li class="right">
-                    <a href="login.jsp" >Login</a> 
-                </li>
-                <li class="right">
-                    <a href="createAccount.jsp" >Sign Up</a>
-                </li>              
-                <%
-                    }
-                %>
-            </ul>
+                </ul>
+            </div>
         </div>
-        <div class="content"> 
+        <div id="content">
+            <div class="column side">
+                <h1>show tat ca category o day</h1>
+            </div>
+            <div class="column middle">
+                <h1>bai viet show o day quang gan vong lap vo day di</h1>
+            </div>
         </div>
-        <div class="footer">
+        <div id="footer">
 
         </div>
     </body>
