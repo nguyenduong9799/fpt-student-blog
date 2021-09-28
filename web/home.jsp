@@ -1,21 +1,4 @@
-<%@page import="group1.dto.UserDTO" %>
-<<<<<<< Updated upstream
-    <%@page contentType="text/html" pageEncoding="UTF-8" %>
-        <!DOCTYPE html>
-        <html>
 
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Home Page</title>
-            <link rel="stylesheet" href="./css/home.css">
-
-        </head>
-
-        <body>
-                <div class="header">
-                    <ul class="nav">
-                        <li><a href="home.jsp">FPT Sudent Blog</a></li>
-=======
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -26,8 +9,6 @@
         <link rel="stylesheet" href="./css/home.css">
 
     </head>
->>>>>>> Stashed changes
-
     <body>
         <div class="container">
 
@@ -36,13 +17,8 @@
                     <div class="left">
                         <li><a href="home.jsp">FPT Sudent Blog</a></li>
                         <li><a href="notification.jsp">Notification</a></li>
-<<<<<<< Updated upstream
-                    
-=======
                         <li><jsp:include page="search.jsp"/></li>
                     </div>
->>>>>>> Stashed changes
-
                     <%
                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
                         if (loginUser != null) {

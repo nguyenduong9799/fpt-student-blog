@@ -91,8 +91,10 @@
                         <input type="hidden" name="postID" value="<%=post.getPostID()%>">
                     </form>
                     </tbody>
+                <%           }
+                %>
                 </table>
-                <%                            }
+                <%
                 } else {
                 %>
                 <h1 id="no-information">No information</h1>

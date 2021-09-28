@@ -32,5 +32,20 @@
         <%
             }
         %>
+        
+        <div class="container">
+            <c:set var="searchValue" scope="page" value="${param.search}"/>
+            <form action="SearchController" >
+
+                <div class="header__search">
+                    <div class="header__search-wrap">
+                        <input type="text" class="header__search-input" name="search" value="${searchValue}" placeholder="Search...">
+                    </div>
+                    <button type="submit" class="header__search-btn">
+                        <i class="header__search-btn-icon fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

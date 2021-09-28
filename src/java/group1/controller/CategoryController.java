@@ -24,8 +24,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
 public class CategoryController extends HttpServlet {
-    public static final String HOME_PAGE = "home.jsp";
-    public static final String MANAGER_PAGE = "manager.jsp";
+    public static final String USER = "home.jsp";
+    public static final String ADMIN = "admin.jsp";
+    public static final String MENTOR = "mentor.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -45,10 +46,15 @@ public class CategoryController extends HttpServlet {
             ArrayList<PostDTO> listPost = null;
             if(user.getRoleID().equals("AD")){
                 listPost = PostDAO.getAllPostByCategory(categoryID);
-                url = MANAGER_PAGE;
-            }else{
+                url = ADMIN;
+            }
+            else if(user.getRoleID().equals("MT")){
+                listPost = PostDAO.getAllPostByCategory(categoryID);
+                url = MENTOR;
+            }
+            else{
                 listPost = PostDAO.getAvailablePostByCategory(categoryID);
-                url = HOME_PAGE;
+                url = USER;
             }
             if(listPost == null) listPost = new ArrayList<>();
             
@@ -60,7 +66,7 @@ public class CategoryController extends HttpServlet {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
