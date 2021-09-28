@@ -1,19 +1,14 @@
-<%-- 
-    Document   : newjprofile
-    Created on : Sep 22, 2021, 7:17:25 PM
-    Author     : Admin
---%>
-
 <%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Page</title>
+        <link rel="stylesheet" href="./css/home.css">
+        <title>Search Page</title>
     </head>
-   <body>
-        <div class="header">
+    <body>
+       <div class="header">
             <ul class="nav">
                 <li><a href="home.jsp">FPT Sudent Blog</a></li>
 
@@ -45,7 +40,15 @@
                 %>
             </ul>
         </div>
-        <div class="content"> 
+        <div class="content">
+            <div class="column side">
+            <h2>category hien o day </h2>
+            
+            </div>
+            <div class="column middle">
+                <h2>Ket qua search o day </h2>
+                 
+            </div>
         </div>
         <div class="footer">
 
