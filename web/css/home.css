@@ -6,42 +6,39 @@
 html{
     font-family: Helvetica,Arial,sans-serif;
 }
-#main{
-    background: rgba(205, 202, 202, 0.6);
-}
-#header{
-height: 50px;
-background-color:#000;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
+.header{
+    height: 50px;
+    background-color:#000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
-#nav{
+.nav{
     display: inline-block;
 }
-#nav li{
+.nav li{
     display: inline-block;  
 }
-#nav li a{
+.nav li a{
     color: #fff;
     text-decoration: none ;
     line-height: 50px;
     padding: 0 24px;    
 }
-#nav li:hover a{
+.nav li:hover a{
     color: #000;
     background-color:#ccc; 
     display: inline-block;
 }
-#nav .subnav a{
+.nav .subnav a{
     background-color: #FFFFFF;
     color: #000;
     box-shadow: 0 0 10px;
 
 }
-#nav .subnav li:hover a{
+.nav .subnav li:hover a{
     color: #000;
     background-color:#FFFFFF; 
     display: inline-block;
@@ -49,10 +46,39 @@ right: 0;
 .right {
     float: right;
 }
-#content{ 
+.content{ 
     background-color: #868787;
     height: 2000px;
 }
-#footer{
+.column {
+    margin-top: 100px;
+    float: left;
+    padding: 10px;
+}
+
+/* Cột bên trái */
+.column.side {
+    width: 20%;
+    background-color: #FFFFFF;
+    color: #000;
+    box-shadow: 0 0 10px;
+    padding-right: 20px;
     
+}
+
+/* Cột chính giữa */
+.column.middle {
+    width: 80%;
+    background-color: #FFFFFF;
+    color: #000;
+    box-shadow: 0 0 10px;
+}
+
+/* Clear float khác sau các cột */
+.content:after {
+    display: table;
+    clear: both;
+}
+.footer{
+
 }

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : newjprofile
-    Created on : Sep 22, 2021, 7:17:25 PM
-    Author     : Admin
---%>
 
 <%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -10,9 +5,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Page</title>
+        <link rel="stylesheet" href="./css/home.css">
+        <title>JSP Page</title>
     </head>
-   <body>
+    <body>
         <div class="header">
             <ul class="nav">
                 <li><a href="home.jsp">FPT Sudent Blog</a></li>
