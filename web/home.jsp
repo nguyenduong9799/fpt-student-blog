@@ -14,9 +14,8 @@
             <br>
             <br>
             <jsp:include page="search.jsp"/>
-            <div class="container">
-                <div id="header">
-                    <ul id="nav">
+                <div class="header">
+                    <ul class="nav">
                         <li><a href="home.jsp">FPT Sudent Blog</a></li>
 
                         <li><a href="notification.jsp">Notification</a></li>
@@ -46,9 +45,14 @@
                     %>
             </ul>
             </div>
-            <div id="content">
-
+           <div class="content">
+            <div class="column side">
+                <h1>show tat ca category o day</h1>
             </div>
+            <div class="column middle">
+                <h1>bai viet show o day quang gan vong lap vo day di</h1>
+            </div>
+        </div>
             <div id="footer">
 
             </div>

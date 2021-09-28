@@ -1,8 +1,4 @@
-<%-- 
-    Document   : search
-    Created on : Sep 24, 2021, 9:29:32 PM
-    Author     : buili
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
