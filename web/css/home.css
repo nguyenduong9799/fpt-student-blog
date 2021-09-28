@@ -70,16 +70,51 @@ html{
     color: #000;
     box-shadow: 0 0 10px;
     padding-right: 20px;
-    
+    margin-top: 10px; 
+    border-radius: 10px;
+    height: auto;
+}
+.column.side ul{
+    list-style-type: none;
+}
+.column.side h1{
+    margin-bottom: 5px;
+}
+#category a{
+    text-decoration: none;
+    color: black;
+}
+#category a:hover{
+    color: brown;
+}
+#category{
+    margin-top: 7px;
+    margin-left: 5px;
 }
 /* Cột chính giữa */
 .column.middle {
-    width: 80%;
+    width: 79%;
     background-color: #FFFFFF;
     color: #000;
     box-shadow: 0 0 10px;
+    float: right;
+    margin-top: 10px; 
+    border-radius: 10px;
 }
-
+.column.middle  a{
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+.column.middle  a:hover{
+    color: brown;
+}
+#author{
+    margin-top:5px; 
+}
+#date{
+    float: right;
+}
 /* Clear float khác sau các cột */
 .content:after {
     display: table;

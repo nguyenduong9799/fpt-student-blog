@@ -1,4 +1,10 @@
 
+<%@page import="group1.dto.CategoryDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="group1.dao.CategoryDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="group1.dto.PostDTO"%>
+<%@page import="group1.dao.PostDAO"%>
 <%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -52,11 +58,40 @@
         </div>
         <div id="content">
             <div class="column side">
-                <h1>show tat ca category o day</h1>
+                <h1>Topic</h1>
+                <ul>
+                    <%
+                        ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
+                        if (listCate != null) {
+                            if (!listCate.isEmpty()) {
+                                for (CategoryDTO cate : listCate) {
+                    %>
+                    <li id="category"><a href="#" ><%=cate.getCategoryName()%></a></li><br>
+                        <%
+                                    }
+                                }
+                            }
+                        %>
+                </ul>
             </div>
+            <%
+                PostDAO dao = new PostDAO();
+                List<PostDTO> list = dao.getApprovedPost();
+                if (list != null) {
+                    if (!list.isEmpty()) {
+                        for (PostDTO post : list) {
+            %>
             <div class="column middle">
-                <h1>bai viet show o day quang gan vong lap vo day di</h1>
+                <a href=""><%=post.getTitle()%></a><br>
+                <p id="author"><%=post.getUserID()%></p>
+                <p id="author"><%=post.getCategory()%></p>
+                <p id="date"><%=post.getDate()%><p>
             </div>
+            <%
+                        }
+                    }
+                }
+            %>
         </div>
         <div id="footer">
 
