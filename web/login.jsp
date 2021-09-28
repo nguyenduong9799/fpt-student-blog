@@ -16,7 +16,7 @@
         %>
         <div class="login">
             <h2>Please Login To Continue</h2>
-            <form action="LoginController" method="POST">
+            <form action="MainController" method="POST">
                 <input type="text" placeholder="user ID" name="userID"/><br/>
                 <p><%= errorMessage%></p>
                 <input type="password" placeholder="password" name="password"/><br/>
