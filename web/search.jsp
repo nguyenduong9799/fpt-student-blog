@@ -1,57 +1,34 @@
-<%@page import="group1.dto.UserDTO"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="./css/home.css">
         <title>Search Page</title>
+        <link rel="stylesheet" href="./css/main.css">
+        <script src="https://kit.fontawesome.com/478461b23c.js" crossorigin="anonymous"></script>
     </head>
     <body>
-       <div class="header">
-            <ul class="nav">
-                <li><a href="home.jsp">FPT Sudent Blog</a></li>
-
-                <li><a href="notification.jsp">Notification</a></li>
-
-
-                <%
-                    UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                    if (loginUser != null) {
-                %>
-                <li class="right">
-                    <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
-                </li>
-                <li class="right">
-                    <a href="MainController?action=Logout">Logout</a>
-                </li> 
-                <%
-                    }
-                    if (loginUser == null) {
-                %>
-                <li class="right">
-                    <a href="login.jsp" >Login</a> 
-                </li>
-                <li class="right">
-                    <a href="createAccount.jsp" >Sign Up</a>
-                </li>              
-                <%
-                    }
-                %>
-            </ul>
-        </div>
-        <div class="content">
-            <div class="column side">
-            <h2>category hien o day </h2>
-            
+        <c:set var="searchValue" scope="page" value="${param.search}"/>
+        <form action="SearchController">
+            <div class="header-with-search">
+                <div class="header_logo">
+                <!--logo search-->
+                <a href="HomeController" class="header__logo-link hr">
+                    <svg class="header__logo-img" viewBox="0 0 192 65">
+                    </svg> 
+                </a>
+                </div>
+            <div class="header__search">
+                <div class="header__search-wrap">
+                    <input type="text" class="header__search-input" name="search" value="${searchValue}" placeholder="Search...">
+                </div>
+                <button type="submit" class="header__search-btn">
+                    <i class="header__search-btn-icon fas fa-search"></i>
+                </button>
             </div>
-            <div class="column middle">
-                <h2>Ket qua search o day </h2>
-                 
             </div>
-        </div>
-        <div class="footer">
-
-        </div>
+        </form>
     </body>
 </html>

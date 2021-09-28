@@ -11,12 +11,14 @@
         </head>
 
         <body>
+            <br>
+            <br>
+            <jsp:include page="search.jsp"/>
                 <div class="header">
                     <ul class="nav">
                         <li><a href="home.jsp">FPT Sudent Blog</a></li>
 
                         <li><a href="notification.jsp">Notification</a></li>
-                    
 
                         <%
                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");

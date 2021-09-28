@@ -5,11 +5,11 @@
  */
 package group1.controller;
 
-import group1.dao.CategoryDAO;
 import group1.dao.PostDAO;
-import group1.dto.CategoryDTO;
 import group1.dto.PostDTO;
+import group1.dto.UserDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,55 +20,61 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author buili
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+@WebServlet(name = "SearchController", urlPatterns = {"/SearchController"})
+public class SearchController extends HttpServlet {
+private static final String FAIL = "LogoutController";
+    private static final String USER = "home.jsp";
     private static final String ADMIN = "admin.jsp";
-    private static final String ERROR = "error.jsp";
-    private static final String SHOW_DETAIL_POST = "showDetailPostController";
-    private static final String APPROVE_DENY_POST = "ApproveDenyPostController";
-    private static final String LOGIN = "LoginController";
-    private static final String LOGOUT="LogoutController";
+    private static final String MENTOR = "mentor.jsp";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
+        String url = FAIL;
         try {
-            String action = request.getParameter("action");
-            if ("Show details".equals(action)) {
-                url=SHOW_DETAIL_POST;
-            }else if ("Approve".equals(action)) {
-                url=APPROVE_DENY_POST;
-            }else if ("Deny".equals(action)) {
-                url=APPROVE_DENY_POST;
+            String title = request.getParameter("search");
+            HttpSession session = request.getSession();
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            
+            if(user != null){
+                ArrayList<PostDTO> listPost = null;
+                if(user.getRoleID().equals("AD")){
+                    listPost = PostDAO.getAllPostByTitle(title);
+                    if(listPost != null){
+                        url = ADMIN;
+                    }
+                }
+                else if(user.getRoleID().equals("MT")){
+                    listPost = PostDAO.getAllPostByTitle(title);
+                    if(listPost != null){
+                        url = MENTOR;
+                    }
+                }
+                else{
+                    listPost = PostDAO.getAvailablePostByTitle(title);
+                    url = USER;
+                    if(listPost != null){
+                        url = ADMIN;
+                    }
+                }
+                if(listPost == null) listPost = new ArrayList<>();
+                session.setAttribute("LIST_POST", listPost);
             }
-            else if ("Login".equals(action)) {
-                url=LOGIN;
-            }else if ("Logout".equals(action)) {
-                url=LOGOUT;
-            }
+            
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-    
-    try {
-            ArrayList<PostDTO> listPost = PostDAO.getAllPost();
-            ArrayList<CategoryDTO> listCategory = CategoryDAO.getAllCategory();
-            
-            if(listPost != null){
-                HttpSession session = request.getSession();
-                session.setAttribute("LIST_POST", listPost);
-                session.setAttribute("LIST_CATEGORY", listCategory);
-            }
-        } catch (Exception e) {
-           
-        } finally {
-            request.getRequestDispatcher(ADMIN).forward(request, response);
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
