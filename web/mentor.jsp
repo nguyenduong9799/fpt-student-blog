@@ -27,7 +27,10 @@
                     </div>
                     <%
                         UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                        if (loginUser != null) {
+                        if (loginUser == null || !"MT".equals(loginUser.getRoleID())) {
+                            response.sendRedirect("LogoutController");
+                            return;
+                        } else {
                     %>
                     <div class="right">
                         <li>
