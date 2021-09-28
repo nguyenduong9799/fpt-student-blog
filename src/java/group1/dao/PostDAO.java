@@ -20,37 +20,44 @@ import java.util.List;
  */
 public class PostDAO {
 
-    
-    public static ArrayList<PostDTO> getAllPost() throws SQLException{
+    public static ArrayList<PostDTO> getAllPost() throws SQLException {
         ArrayList<PostDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
+            if (conn != null) {
                 String sql = "select * from tblPosts ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
-                while(rs.next()){
-                    if(list == null) list = new ArrayList<>();
-                    int postID=rs.getInt("postID");
-                    String userID=rs.getString("userID");
-                    String status=rs.getString("statusPID");
-                    String category=rs.getString("categoryID");
-                    String title=rs.getString("title");
-                    String postContent=rs.getString("postContent");
-                    String date=rs.getString("date");
-                    int vote=rs.getInt("vote");
+                while (rs.next()) {
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    int postID = rs.getInt("postID");
+                    String userID = rs.getString("userID");
+                    String status = rs.getString("statusPID");
+                    String category = rs.getString("categoryID");
+                    String title = rs.getString("title");
+                    String postContent = rs.getString("postContent");
+                    String date = rs.getString("date");
+                    int vote = rs.getInt("vote");
                     list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote));
                 }
             }
-        } catch (Exception e) { 
-            
+        } catch (Exception e) {
+
         } finally {
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return list;
     }
@@ -75,7 +82,8 @@ public class PostDAO {
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
-                    post = new PostDTO(postID, userID, status, category, title, postContent, date, vote);
+                    String approveComment = rs.getString("approveComment");
+                    post = new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment);
                 }
             }
         } catch (Exception e) {
@@ -93,7 +101,8 @@ public class PostDAO {
         }
         return post;
     }
-      public List<PostDTO> getWaitingPost() throws SQLException {
+
+    public List<PostDTO> getWaitingPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -131,7 +140,8 @@ public class PostDAO {
         }
         return list;
     }
-      public List<PostDTO> getApprovedPost() throws SQLException {
+
+    public List<PostDTO> getApprovedPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -169,7 +179,8 @@ public class PostDAO {
         }
         return list;
     }
-       public List<PostDTO> getDeniedPost() throws SQLException {
+
+    public List<PostDTO> getDeniedPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -207,7 +218,8 @@ public class PostDAO {
         }
         return list;
     }
-     public boolean approvePost(int postID, String approveComment) throws SQLException {
+
+    public boolean approvePost(int postID, String approveComment) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -218,6 +230,38 @@ public class PostDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, approveComment);
                 stm.setInt(2, postID);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean insertPost(PostDTO post) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date) "
+                        + " values(?,?,?,?,?,?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, post.getUserID());
+                stm.setString(2, post.getTitle());
+                stm.setInt(3, StatusDAO.getStatusIDByStatusName(post.getStatus()));
+                stm.setInt(4, CategoryDAO.getCategoryIDByName(post.getCategory()));
+                stm.setString(5, post.getPostContent());
+                stm.setString(6, post.getDate());
                 check = stm.executeUpdate() > 0;
             }
         } catch (Exception e) {
@@ -392,22 +436,22 @@ public class PostDAO {
         }
         return list;
     }
-    
-    public static ArrayList<PostDTO> getAvailablePostByTitle(String title) throws SQLException{
+
+    public static ArrayList<PostDTO> getAvailablePostByTitle(String title) throws SQLException {
         ArrayList<PostDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        try{
+        try {
             conn = DBUtils.getConnection();
-            if(conn != null){
-                String sql = "Select postID, userID, status, category, title, postContent, date, vote \n"+
-                             "From tblPosts\n"+
-                             "where title = ? and statusPID = '1'";
+            if (conn != null) {
+                String sql = "Select postID, userID, status, category, title, postContent, date, vote \n"
+                        + "From tblPosts\n"
+                        + "where title = ? and statusPID = '1'";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "%"+ title + "%");
+                stm.setString(1, "%" + title + "%");
                 rs = stm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     list.add(new PostDTO(rs.getInt("postID"),
                             rs.getString("userID"),
                             rs.getString("statusPID"),
@@ -418,32 +462,40 @@ public class PostDAO {
                             rs.getInt("vote")));
                 }
             }
-        }catch(Exception e){
-            
-        }finally{
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return list;
     }
-    
-     public static ArrayList<PostDTO> getAllPostByTitle(String title) throws SQLException{
+
+    public static ArrayList<PostDTO> getAllPostByTitle(String title) throws SQLException {
         ArrayList<PostDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
-                String sql = "Select postID, userID, status, category, title, postContent, date, vote \n"+
-                             "From tblPosts\n"+
-                             "Where title like ?"; 
+            if (conn != null) {
+                String sql = "Select postID, userID, status, category, title, postContent, date, vote \n"
+                        + "From tblPosts\n"
+                        + "Where title like ?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "%"+ title + "%");
+                stm.setString(1, "%" + title + "%");
                 rs = stm.executeQuery();
-                while(rs.next()){
-                    if(list == null) list = new ArrayList<>();
+                while (rs.next()) {
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
                     list.add(new PostDTO(rs.getInt("postID"),
                             rs.getString("userID"),
                             rs.getString("statusPID"),
@@ -456,9 +508,15 @@ public class PostDAO {
             }
         } catch (Exception e) {
         } finally {
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return list;
     }

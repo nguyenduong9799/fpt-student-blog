@@ -20,6 +20,15 @@ public class PostDTO {
     public PostDTO() {
     }
 
+    public PostDTO(String userID, String status, String category, String title, String postContent, String date) {
+        this.userID = userID;
+        this.status = status;
+        this.category = category;
+        this.title = title;
+        this.postContent = postContent;
+        this.date = date;
+    }
+
     public PostDTO(int postID, String userID, String status, String category, String title, String postContent, String date, int vote) {
         this.postID = postID;
         this.userID = userID;

@@ -18,58 +18,106 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class CategoryDAO {
-    public static ArrayList<CategoryDTO> getAllCategory() throws SQLException{
+
+    public static ArrayList<CategoryDTO> getAllCategory() throws SQLException {
         ArrayList<CategoryDTO> list = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
-                String sql = "Select categoryID, categoryName\n" +
-                             "From tblCategories \n";
+            if (conn != null) {
+                String sql = "Select categoryID, categoryName\n"
+                        + "From tblCategories \n";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
-                while(rs.next()){
-                    if(list == null) list = new ArrayList<>();
+                while (rs.next()) {
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
                     list.add(new CategoryDTO(rs.getInt("categoryID"),
                             rs.getString("categoryName")));
                 }
             }
         } catch (Exception e) {
-            
+
         } finally {
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return list;
     }
-    
-     public static String getCategoryNameByID(int categoryID) throws SQLException{
-       String categoryName = null;
+
+    public static String getCategoryNameByID(int categoryID) throws SQLException {
+        String categoryName = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
-                String sql = "Select categoryName " +
-                             "From tblCategories where categoryID=?";
+            if (conn != null) {
+                String sql = "Select categoryName "
+                        + "From tblCategories where categoryID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, categoryID);
                 rs = stm.executeQuery();
-                while(rs.next()){
-                   categoryName=rs.getString("categoryName");
+                while (rs.next()) {
+                    categoryName = rs.getString("categoryName");
                 }
             }
         } catch (Exception e) {
-            
+
         } finally {
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return categoryName;
+    }
+
+    public static int getCategoryIDByName(String categoryName) throws SQLException {
+        int categoryID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select categoryID "
+                        + "From tblCategories where categoryName=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, categoryName);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    categoryID = rs.getInt("categoryID");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return categoryID;
     }
 }
