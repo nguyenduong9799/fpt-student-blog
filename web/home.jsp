@@ -65,7 +65,7 @@
                     </c:if>
                     <ul>
                         <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                            <li>
+                            <li id="category">
                                 <a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a>
                             </li>
                         </c:forEach> 
