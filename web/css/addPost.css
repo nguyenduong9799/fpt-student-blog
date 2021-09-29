@@ -1,0 +1,47 @@
+#title{
+    font-size: 28px; 
+    width: 100%;
+    font-family: sans-serif;
+    padding: 10px;
+
+}
+#editor{
+    width: 100%;
+}
+.select { 
+    font-size: 17px;
+    border-radius: 5px;
+    display:flex;
+    width:auto;
+    height:40px;
+    font-weight: 700;
+    padding: 0px 20px 0 10px;
+    margin-bottom: 30px;
+
+}
+.option {
+    min-height:60px;
+    display:flex;
+    align-items:center;
+    background:white;
+    border-top:#222 solid 1px;
+    position:absolute;
+    width: 100%;
+    pointer-events:none;
+    order:2;
+    z-index:1;
+    transition:background .4s ease-in-out;
+    box-sizing:border-box;
+    overflow:hidden;
+    white-space:nowrap;
+    font-weight: 700;
+}
+.button {
+    line-height: 1;
+    display: inline-block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    color: black;
+    padding: 8px;
+}

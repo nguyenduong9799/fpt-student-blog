@@ -13,8 +13,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/addPost.css" rel="stylesheet" type="text/css"/>
         <link href="css/mentor.css" rel="stylesheet" type="text/css"/>
-        <script src="<%=request.getContextPath()%>/libraries/ckeditor5-build-classic/ckeditor.js" type="text/javascript"></script>
+        <!-- Include the default theme -->
+        <link rel="stylesheet" href="minified/themes/default.min.css" />
+        <!-- Include the editors JS -->
+        <script src="minified/sceditor.min.js"></script>
+        <!-- Include the BBCode or XHTML formats -->
+        <script src="minified/jquery.sceditor.xhtml.min.js" type="text/javascript"></script>
         <title>Create Post Page</title>
     </head>
     <body>
@@ -46,18 +52,17 @@
     </div>
     <div id="content">       
         <form action="MainController">
-            <h2>Title</h2><br>
-            <input type="text" name="title" required=""><br>
-            <!--Category-->
-            <h2>Category</h2>           
-            <select name="category">
+            <textarea id="title" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>
+            <!--Category-->       
+            <select class="select" name="category">
+                <option selected disabled>Choose Category</option>
                 <%
                     ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
                     if (listCate != null) {
                         if (!listCate.isEmpty()) {
                             for (CategoryDTO category : listCate) {
                 %>
-                <option value="<%=category.getCategoryName()%>"><%=category.getCategoryName()%></option>
+                <option class="option"value="<%=category.getCategoryName()%>"><%=category.getCategoryName()%></option>
                 <%
                             }
                         }
@@ -65,18 +70,19 @@
                 %>
             </select>
             <!--Content-->
-            <h2>Content</h2>           
-            <textarea rows="20" cols="20" id="editor" name="postContent"></textarea><br>
+            <h2>Content of the post</h2>           
+            <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
             <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
-            <input type="submit" name="action" value="Submit Post">
+            <input class="button" type="submit" name="action" value="Submit Post">
         </form>
     </div>
     <script>
-        ClassicEditor
-                .create(document.querySelector('#editor'))
-                .catch(error => {
-                    console.error(error);
-                });
+        var textarea = document.getElementById('editor');
+        sceditor.create(textarea, {
+            format: 'xhtml',
+            style: 'minified/themes/content/default.min.css'
+        });
+
     </script>
 </body>
 </html>
