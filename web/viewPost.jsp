@@ -1,17 +1,18 @@
-
+<%@page import="group1.dto.TagDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="group1.dto.PostDTO"%>
+<%@page import="group1.dao.PostDAO"%>
 <%@page import="group1.dto.UserDTO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
         <link rel="stylesheet" href="./css/home.css">
+        <title>ViewPost Page</title>
     </head>
     <body>
         <div class="container">
-
             <div id="header">
                 <ul id="nav">
                     <div class="left">
@@ -24,6 +25,7 @@
                         if (loginUser != null) {
                     %>
                     <div class="right">
+                        <li><a href="addPost.jsp">Create New Post</a></li>
                         <li>
                             <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
                         </li>
@@ -51,52 +53,27 @@
             </div>
         </div>
         <div id="content">
-<<<<<<< Updated upstream
-            <div class="column side">
-                <h1>show tat ca category o day</h1>
-=======
-            <div id="content">
-                <div class="column side">
-                    <h1>Topic</h1>
-                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
-                        <c:redirect url="HomeController"></c:redirect>
-                    </c:if>
-                    <ul>
-                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                            <li>
-                                <a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a>
-                            </li>
-                        </c:forEach> 
-
-                    </ul>
-                </div>
-                <%
-                    PostDAO dao = new PostDAO();
-                    List<PostDTO> list = dao.getApprovedPost();
-                    if (list != null) {
-                        if (!list.isEmpty()) {
-                            for (PostDTO post : list) {
-                %>
-                <div class="column middle">
-                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a><br>
-                    <p id="author"><%=post.getUserID()%></p>
-                    <p id="author"><%=post.getCategory()%></p>
-                    <p id="date"><%=post.getDate()%><p>
-                </div>
-                <%
-                            }
-                        }
-                    }
-                %>
->>>>>>> Stashed changes
+            <%
+                PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
+                List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
+            %>
+            <div class="post">
+                <h2><%=post.getTitle()%></h2><br>
+            </div>   
+            <div class="post-content">
+                <h3>Author: <%=post.getUserID()%></h3><br>
+                <h3>Category: <%=post.getCategory()%></h3><br>
+                <h3>Date: <%=post.getDate()%></h3><br>
+                <h3>Tags:</h3>
+                <p><%=post.getPostContent()%></p>
+                <h3>Voted:<%=post.getVote()%></h3>
             </div>
-            <div class="column middle">
-                <h1>bai viet show o day quang gan vong lap vo day di</h1>
+            <div class="post-comment">
+                
             </div>
         </div>
         <div id="footer">
 
         </div>
     </body>
-
 </html>

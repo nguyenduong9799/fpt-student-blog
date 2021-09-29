@@ -29,7 +29,16 @@ public class MainController extends HttpServlet {
     private static final String SHOW_DETAIL_POST = "showDetailPostController";
     private static final String APPROVE_DENY_POST = "ApproveDenyPostController";
     private static final String LOGIN = "LoginController";
+<<<<<<< Updated upstream
     private static final String LOGOUT="LogoutController";
+=======
+    private static final String LOGOUT = "LogoutController";
+    private static final String SUBMIT_POST = "CreatePostController";
+    private static final String ADD_CATEGORY = "AddCategoryController";
+    private static final String VIEW_POST = "ViewPostController";
+    private static final String CREATE_ACCOUNT = "CreateAcountController";
+    
+>>>>>>> Stashed changes
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,6 +46,7 @@ public class MainController extends HttpServlet {
         try {
             String action = request.getParameter("action");
             if ("Show details".equals(action)) {
+<<<<<<< Updated upstream
                 url=SHOW_DETAIL_POST;
             }else if ("Approve".equals(action)) {
                 url=APPROVE_DENY_POST;
@@ -47,6 +57,25 @@ public class MainController extends HttpServlet {
                 url=LOGIN;
             }else if ("Logout".equals(action)) {
                 url=LOGOUT;
+=======
+                url = SHOW_DETAIL_POST;
+            } else if ("Approve".equals(action)) {
+                url = APPROVE_DENY_POST;
+            } else if ("Deny".equals(action)) {
+                url = APPROVE_DENY_POST;
+            } else if ("Login".equals(action)) {
+                url = LOGIN;
+            } else if ("Submit Post".equals(action)) {
+                url = SUBMIT_POST;
+            } else if ("Logout".equals(action)) {
+                url = LOGOUT;
+            } else if ("Add Category".equals(action)) {
+                url = ADD_CATEGORY;
+            } else if ("ViewPost".equals(action)) {
+                url = VIEW_POST;
+            }else if ("Create".equals(action)) {
+                url = CREATE_ACCOUNT;
+>>>>>>> Stashed changes
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
