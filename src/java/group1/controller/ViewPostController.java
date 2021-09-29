@@ -5,36 +5,42 @@
  */
 package group1.controller;
 
+import group1.dao.CommentDAO;
 import group1.dao.PostDAO;
+import group1.dto.CommentDTO;
 import group1.dto.PostDTO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "ViewPostController", urlPatterns = {"/ViewPostController"})
 public class ViewPostController extends HttpServlet {
 
-     private static final String ERROR = "home.jsp";
+    private static final String ERROR = "home.jsp";
     private static final String SUCCESS = "viewPost.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int postID= Integer.parseInt(request.getParameter("postID"));
-             PostDAO dao = new PostDAO();
-        PostDTO post = dao.getPostByID(postID);
-            if(post!= null){
+            int postID = Integer.parseInt(request.getParameter("postID"));
+            PostDAO dao = new PostDAO();
+            PostDTO post = dao.getPostByID(postID);
+            CommentDAO commentDao= new CommentDAO();
+            List<CommentDTO> comment = commentDao.getListCommentByPostID(postID);
+            if (post != null) {
                 request.setAttribute("POST_VIEW", post);
-                url= SUCCESS;
+                request.setAttribute("LIST_COMMENT", comment);
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at ViewPostController: " + e.toString());
-        }finally{
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
