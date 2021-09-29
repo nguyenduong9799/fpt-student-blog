@@ -1,3 +1,4 @@
+<%@page import="group1.dto.CommentDTO"%>
 <%@page import="group1.dto.TagDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="group1.dto.PostDTO"%>
@@ -9,6 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/home.css">
+        <!-- Include the default theme -->
+        <link rel="stylesheet" href="minified/themes/default.min.css" />
+        <!-- Include the editors JS -->
+        <script src="minified/sceditor.min.js"></script>
+        <!-- Include the BBCode or XHTML formats -->
+        <script src="minified/jquery.sceditor.xhtml.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="./Font-Awesomecss/css/font-awesome.min.css">
         <title>ViewPost Page</title>
     </head>
     <body>
@@ -66,14 +74,50 @@
                 <h3>Date: <%=post.getDate()%></h3><br>
                 <h3>Tags:</h3>
                 <p><%=post.getPostContent()%></p>
-                <h3>Voted:<%=post.getVote()%></h3>
+                <i id="button" class="fa fa-thumbs-up"><%=post.getVote()%></i>
             </div>
             <div class="post-comment">
-                
+                <%
+                    if (loginUser != null) {
+                %>
+                <form action="MainController" method="POST">
+                    <textarea rows="10" cols="200" id="editor" name="commentContent"></textarea><br>
+                    <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>"/>
+                    <input type="hidden" name="postID" value="<%=post.getPostID()%>"/>
+                    <input class="button" type="submit" name="action" value="Comment"><br><br>
+                </form>
+                <%
+                    }
+                %>
             </div>
+            <h5>Comment:</h5><br>
+            <%
+                List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
+                if (listComment != null) {
+                    if (!listComment.isEmpty()) {
+                        for (CommentDTO list : listComment) {
+            %>
+            <div>
+                <p id="userID"><%=list.getUserID()%></p>
+                <p id="date"><%=list.getDate()%></p>
+                <p id="comment"><%=list.getCommentContent()%><p><br>
+            </div>
+            <%
+                        }
+                    }
+                }
+            %>       
         </div>
         <div id="footer">
 
         </div>
+        <script>
+            var textarea = document.getElementById('editor');
+            sceditor.create(textarea, {
+                format: 'xhtml',
+                style: 'minified/themes/content/default.min.css'
+            });
+
+        </script>
     </body>
 </html>
