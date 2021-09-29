@@ -149,7 +149,7 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select * from tblPosts where statusPID=1 ";
+                String sql = "select * from tblPosts where statusPID=1 order by date desc ";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {

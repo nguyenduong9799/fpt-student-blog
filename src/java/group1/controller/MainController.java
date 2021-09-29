@@ -27,7 +27,7 @@ public class MainController extends HttpServlet {
     private static final String SUBMIT_POST = "CreatePostController";
     private static final String ADD_CATEGORY = "AddCategoryController";
     private static final String VIEW_POST = "ViewPostController";
-    private static final String CREATE_ACCOUNT = "CreateAcountController";
+    private static final String CREATE_ACCOUNT = "CreateAccountController";
     private static final String CREATE_COMMENT = "CommentController"; 
   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
