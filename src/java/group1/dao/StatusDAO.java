@@ -19,7 +19,8 @@ import java.util.List;
  * @author Admin
  */
 public class StatusDAO {
-       public List<StatusDTO> getAllPostStatus() throws SQLException {
+
+    public List<StatusDTO> getAllPostStatus() throws SQLException {
         List<StatusDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -117,7 +118,41 @@ public class StatusDAO {
         }
         return statusName;
     }
-     public static String getStatusByStatusID(String statusUID) throws SQLException {
+
+    public static int getStatusIDByStatusName(String statusName) throws SQLException {
+        int statusID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select statusPID from tblStatusPosts "
+                        + "where statusName=? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, statusName);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    statusID = rs.getInt("statusPID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return statusID;
+    }
+
+    public static String getStatusByStatusID(String statusUID) throws SQLException {
         String statusName = null;
         Connection conn = null;
         PreparedStatement stm = null;

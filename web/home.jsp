@@ -1,4 +1,10 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="group1.dto.CategoryDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="group1.dao.CategoryDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="group1.dto.PostDTO"%>
+<%@page import="group1.dao.PostDAO"%>
 <%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -24,6 +30,7 @@
                         if (loginUser != null) {
                     %>
                     <div class="right">
+                        <li><a href="addPost.jsp">Create New Post</a></li>
                         <li>
                             <a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a>
                         </li>
@@ -51,11 +58,6 @@
             </div>
         </div>
         <div id="content">
-<<<<<<< Updated upstream
-            <div class="column side">
-                <h1>show tat ca category o day</h1>
-=======
-            <div id="content">
                 <div class="column side">
                     <h1>Topic</h1>
                     <c:if test="${sessionScope.LIST_CATEGORY == null}">
@@ -88,15 +90,13 @@
                         }
                     }
                 %>
->>>>>>> Stashed changes
             </div>
             <div class="column middle">
                 <h1>bai viet show o day quang gan vong lap vo day di</h1>
             </div>
-        </div>
-        <div id="footer">
+            <div id="footer">
 
-        </div>
+            </div>
     </body>
 
 </html>

@@ -29,8 +29,9 @@
                 <input type="text" placeholder="Phone Number" name="phone" required=""/><br/>          
                 <input type="text" placeholder="Email Address" name="email" required=""/><br/>
                 <button type="submit" name="action" value="Create">Create</button><br/>
-                <button type="reset" value="Reset">Reset</button>
+                <button type="reset" value="Reset">Reset</button><br/>
                 ${requestScope.USER_ERROR.getMessageError()}
+                <a href="login.jsp">Sign In</a><br/>
             </form> 
         </div>
     </body>

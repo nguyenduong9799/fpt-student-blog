@@ -29,7 +29,10 @@
                 </div>
                 <%
                     UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                    if (loginUser != null) {
+                    if (loginUser == null || !"MT".equals(loginUser.getRoleID())) {
+                        response.sendRedirect("LogoutController");
+                        return;
+                    } else {
                 %>
                 <div class="right">
                     <li>
@@ -84,6 +87,10 @@
                 <textarea type="text" name="approveContent" placeholder="Approve comment"></textarea><br>
                 <input class="button" type="submit" name="action" value="Approve">
                 <input class="button" type="submit" name="action" value="Deny">
+                <%
+                } else {
+                %>
+                <h3>Mentor comment:</h3><%=post.getApproveComment()%><br>
                 <%
                     }
                 %>
