@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CategoryDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="group1.dao.CategoryDAO"%>
@@ -58,45 +58,43 @@
             </div>
         </div>
         <div id="content">
-            <div class="column side">
-                <h1>Topic</h1>
-                <ul>
-                    <%
-                        ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
-                        if (listCate != null) {
-                            if (!listCate.isEmpty()) {
-                                for (CategoryDTO cate : listCate) {
-                    %>
-                    <li id="category"><a href="#" ><%=cate.getCategoryName()%></a></li><br>
-                        <%
-                                    }
-                                }
+            <div id="content">
+                <div class="column side">
+                    <h1>Topic</h1>
+                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                        <c:redirect url="HomeController"></c:redirect>
+                    </c:if>
+                    <ul>
+                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                            <li>
+                                <a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a>
+                            </li>
+                        </c:forEach> 
+
+                    </ul>
+                </div>
+                <%
+                    PostDAO dao = new PostDAO();
+                    List<PostDTO> list = dao.getApprovedPost();
+                    if (list != null) {
+                        if (!list.isEmpty()) {
+                            for (PostDTO post : list) {
+                %>
+                <div class="column middle">
+                    <a href=""><%=post.getTitle()%></a><br>
+                    <p id="author"><%=post.getUserID()%></p>
+                    <p id="author"><%=post.getCategory()%></p>
+                    <p id="date"><%=post.getDate()%><p>
+                </div>
+                <%
                             }
-                        %>
-                </ul>
-            </div>
-            <%
-                PostDAO dao = new PostDAO();
-                List<PostDTO> list = dao.getApprovedPost();
-                if (list != null) {
-                    if (!list.isEmpty()) {
-                        for (PostDTO post : list) {
-            %>
-            <div class="column middle">
-                <a href=""><%=post.getTitle()%></a><br>
-                <p id="author"><%=post.getUserID()%></p>
-                <p id="author"><%=post.getCategory()%></p>
-                <p id="date"><%=post.getDate()%><p>
-            </div>
-            <%
                         }
                     }
-                }
-            %>
-        </div>
-        <div id="footer">
+                %>
+            </div>
+            <div id="footer">
 
-        </div>
+            </div>
     </body>
 
 </html>
