@@ -72,4 +72,34 @@ public class CategoryDAO {
         }
         return categoryName;
     }
+     
+     public boolean AddCategory(String categoryName) throws SQLException {
+        boolean valid = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "INSERT INTO tblCategories(categoryName) "
+                        + "VALUES(?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, categoryName);
+                valid = stm.executeUpdate(sql) > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return valid;
+
+    }
 }

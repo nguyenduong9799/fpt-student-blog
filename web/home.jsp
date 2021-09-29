@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -51,6 +51,20 @@
             </div>
         </div>
         <div id="content">
+            <div class="column side">
+                <h1>Topic</h1>
+                <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                    <c:redirect url="HomeController"></c:redirect>
+                </c:if>
+                <ul>
+                    <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                        <li>
+                            <a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a>
+                        </li>
+                    </c:forEach> 
+
+                </ul>
+            </div>
             <div class="column side">
                 <h1>show tat ca category o day</h1>
             </div>
