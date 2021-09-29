@@ -31,7 +31,7 @@ public class CreateAccountController extends HttpServlet {
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
-            String name = request.getParameter("name");
+            String name = new String(request.getParameter("name").getBytes("iso-8859-1"), "UTF-8");
             String password = request.getParameter("password");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
@@ -47,7 +47,7 @@ public class CreateAccountController extends HttpServlet {
                 check = false;
             }
             if (!password.equals(confirm)) {
-                userError.setConfirmError("Hai password khong giong nhau");
+                userError.setConfirmError("Two password are diffirent");
                 check = false;
             }
             if (check) {

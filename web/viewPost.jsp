@@ -69,14 +69,21 @@
                 <h2><%=post.getTitle()%></h2><br>
             </div>   
             <div class="post-content">
-                <h3>Author: <%=post.getUserID()%></h3><br>
-                <h3>Category: <%=post.getCategory()%></h3><br>
-                <h3>Date: <%=post.getDate()%></h3><br>
-                <h3>Tags:</h3>
-                <p><%=post.getPostContent()%></p>
-                <i id="button" class="fa fa-thumbs-up"><%=post.getVote()%></i>
+                <div class="post-content-left">
+                    <h3><%=post.getUserID()%></h3>
+                    <h3>Tags:</h3>
+                </div>
+                <div class="post-content-right">
+                    <h3><%=post.getCategory()%></h3>
+                    <h3><%=post.getDate()%></h3> 
+                    <h3>Voted:<%=post.getVote()%></h3>
+                </div>
+                <div class="post-content-text">
+                   <%=post.getPostContent()%> 
+                </div>
+                
             </div>
-            <div class="post-comment">
+            <div>
                 <%
                     if (loginUser != null) {
                 %>
@@ -97,7 +104,7 @@
                     if (!listComment.isEmpty()) {
                         for (CommentDTO list : listComment) {
             %>
-            <div>
+            <div class="post-comment">
                 <p id="userID"><%=list.getUserID()%></p>
                 <p id="date"><%=list.getDate()%></p>
                 <p id="comment"><%=list.getCommentContent()%><p><br>
@@ -119,5 +126,7 @@
             });
 
         </script>
+        
+        
     </body>
 </html>

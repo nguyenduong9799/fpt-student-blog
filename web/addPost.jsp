@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/addPost.css" rel="stylesheet" type="text/css"/>
         <link href="css/mentor.css" rel="stylesheet" type="text/css"/>
-        <!-- Include the default theme -->
+         <!-- Include the default theme -->
         <link rel="stylesheet" href="minified/themes/default.min.css" />
         <!-- Include the editors JS -->
         <script src="minified/sceditor.min.js"></script>
@@ -23,6 +23,7 @@
         <script src="minified/jquery.sceditor.xhtml.min.js" type="text/javascript"></script>
         <title>Create Post Page</title>
     </head>
+    
     <body>
         <div id="header">
             <ul id="nav">
@@ -84,5 +85,6 @@
         });
 
     </script>
+   
 </body>
 </html>

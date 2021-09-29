@@ -1,10 +1,9 @@
 .create{
     width: 630px;
-    height: 650px;
+    height: 700px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
-    border-radius: 10px;
+    margin-top: 10px;
     text-align: center;
     background: rgba(229, 229, 229, 0.37);
     border-radius: 20px;
@@ -17,14 +16,14 @@ h2{
 }
 input{
     width: 300px;
-    height: 50px;
+    height: 40px;
     margin-bottom: 10px;
     background: #FFFFFF;
     border-radius: 20px;
 }
 button{
     width: 100px;
-    height: 50px;
+    height: 40px;
     margin-bottom: 10px;
     border-radius: 10px;
     background:#0099ff;
@@ -34,7 +33,7 @@ button{
 }
 button:hover{
     width: 100px;
-    height: 50px;
+    height: 40px;
     margin-bottom: 10px;
     border-radius: 10px;
     background: #3300ff;
