@@ -36,6 +36,7 @@ public class CreateAccountController extends HttpServlet {
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String confirm = request.getParameter("confirm");
+            String role = request.getParameter("role");
             boolean check = true;
             UserError userError = new UserError();
             if (userID.length() > 20 || userID.length() < 3) {
@@ -54,7 +55,7 @@ public class CreateAccountController extends HttpServlet {
                 long millis = System.currentTimeMillis();
                 Date date = new Date(millis);
                 UserDAO dao = new UserDAO();
-                UserDTO user = new UserDTO(userID, "US", "1", name, password, email, phone, 0, 0, date);
+                UserDTO user = new UserDTO(userID, role, "1", name, password, email, phone, 0, 0, date);
                 boolean checkDuplicate = dao.checkDuplicate(userID);
                 if (checkDuplicate) {
                     userError.setUserIDError("Duplicate User ID " + userID + "!");
