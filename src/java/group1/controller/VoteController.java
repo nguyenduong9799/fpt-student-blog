@@ -5,69 +5,66 @@
  */
 package group1.controller;
 
+import group1.dao.PostDAO;
+import group1.dto.PostDTO;
+import group1.dto.UserDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author khoala
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+@WebServlet(name = "VoteController", urlPatterns = {"/VoteController"})
+public class VoteController extends HttpServlet {
 
-    private static final String ERROR = "error.jsp";
-    private static final String SHOW_DETAIL_POST = "showDetailPostController";
-    private static final String APPROVE_DENY_POST = "ApproveDenyPostController";
-    private static final String LOGIN = "LoginController";
-    private static final String LOGOUT = "LogoutController";
-    private static final String SUBMIT_POST = "CreatePostController";
-    private static final String ADD_CATEGORY = "AddCategoryController";
-    private static final String VIEW_POST = "ViewPostController";
-    private static final String CREATE_ACCOUNT = "CreateAccountController";
-    private static final String CREATE_COMMENT = "CommentController"; 
-    private static final String VOTE_POST = "VoteController";
-  
+    private static final String ERROR = "ViewPostController";
+    private static final String SUCCESS = "ViewPostController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if ("Show details".equals(action)) {
+            int postID = Integer.parseInt(request.getParameter("postID"));
+            PostDAO dao = new PostDAO();
+            String userID = dao.getUserIDByPostID(postID);
+            HttpSession session = request.getSession();
+            UserDTO login = (UserDTO) session.getAttribute("LOGIN_USER");
+            String vote = request.getParameter("vote");
+            if ("Voted".equals(vote)) {
+                if (login != null) {
+                    String loginUser = login.getUserID();
+                    boolean subVote = dao.subVoteByPostID(postID, userID, loginUser);
+                    if (subVote) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    url = ERROR;
+                }
 
-                url = SHOW_DETAIL_POST;
-            } else if ("Approve".equals(action)) {
-                url = APPROVE_DENY_POST;
-            } else if ("Deny".equals(action)) {
-                url = APPROVE_DENY_POST;
-            } else if ("Login".equals(action)) {
-                url = LOGIN;
-            } else if ("Submit Post".equals(action)) {
-                url = SUBMIT_POST;
-            } else if ("Logout".equals(action)) {
-                url = LOGOUT;
-            } else if ("Add Category".equals(action)) {
-                url = ADD_CATEGORY;
-            } else if ("ViewPost".equals(action)) {
-                url = VIEW_POST;
-            }else if ("Create".equals(action)) {
-                url = CREATE_ACCOUNT;
-            }else if ("Comment".equals(action)) {
-                url = CREATE_COMMENT;
-            }else if ("Vote".equals(action)) {
-                url = VOTE_POST;
+            } else if ("Notyet".equals(vote)) {
+                if (login != null) {
+                    String loginUser = login.getUserID();
+                    boolean addVote = dao.addVoteByPostID(postID, userID, loginUser);
+                    if (addVote) {
+                        url = SUCCESS;
+                    }
+                } else {
+                    url = ERROR;
+                }
             }
-
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at VoteController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

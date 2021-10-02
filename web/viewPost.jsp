@@ -10,13 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/home.css">
-        <!-- Include the default theme -->
-        <link rel="stylesheet" href="minified/themes/default.min.css" />
-        <!-- Include the editors JS -->
-        <script src="minified/sceditor.min.js"></script>
-        <!-- Include the BBCode or XHTML formats -->
-        <script src="minified/jquery.sceditor.xhtml.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="./Font-Awesomecss/css/font-awesome.min.css">
         <title>ViewPost Page</title>
     </head>
     <body>
@@ -75,20 +68,35 @@
                 </div>
                 <div class="post-content-right">
                     <h3><%=post.getCategory()%></h3>
-                    <h3><%=post.getDate()%></h3> 
-                    <h3>Voted:<%=post.getVote()%></h3>
+                    <h3><%=post.getDate()%></h3>                    
+                    <%
+                        PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
+                        if (voted != null) {
+                    %>
+                    <a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
+                        <i class="fa fa-thumbs-up">Liked <%=post.getVote()%></i>
+                    </a>
+                    <%
+                    } else {
+                    %>
+                    <a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
+                        <i class="fa fa-thumbs-up"><%=post.getVote()%></i>
+                    </a>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="post-content-text">
-                   <%=post.getPostContent()%> 
+                    <%=post.getPostContent()%> 
                 </div>
-                
+
             </div>
             <div>
                 <%
                     if (loginUser != null) {
                 %>
                 <form action="MainController" method="POST">
-                    <textarea rows="10" cols="200" id="editor" name="commentContent"></textarea><br>
+                    <textarea rows="10" cols="200" placeholder="Comment in here" name="commentContent"></textarea><br>
                     <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>"/>
                     <input type="hidden" name="postID" value="<%=post.getPostID()%>"/>
                     <input class="button" type="submit" name="action" value="Comment"><br><br>
@@ -105,7 +113,7 @@
                         for (CommentDTO list : listComment) {
             %>
             <div class="post-comment">
-                <p id="userID"><%=list.getUserID()%></p>
+                <h4 id="userID"><%=list.getUserID()%></h4>
                 <p id="date"><%=list.getDate()%></p>
                 <p id="comment"><%=list.getCommentContent()%><p><br>
             </div>
@@ -118,15 +126,5 @@
         <div id="footer">
 
         </div>
-        <script>
-            var textarea = document.getElementById('editor');
-            sceditor.create(textarea, {
-                format: 'xhtml',
-                style: 'minified/themes/content/default.min.css'
-            });
-
-        </script>
-        
-        
     </body>
 </html>
