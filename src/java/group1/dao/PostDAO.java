@@ -520,4 +520,133 @@ public class PostDAO {
         }
         return list;
     }
+
+    public boolean addVoteByPostID(int postID, String userID, String loginUser) throws Exception {
+        boolean status = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblPosts SET vote = vote + 1 WHERE postID = ? "
+                        + " UPDATE tblUsers SET totalVote = totalVote + 1 WHERE userID = ? "
+                        + " Insert into tblVote(postID, userID) values(?, ?) ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, postID);
+                stm.setString(2, userID);
+                stm.setInt(3, postID);
+                stm.setString(4, loginUser);
+                status = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return status;
+    }
+
+    public boolean subVoteByPostID(int postID, String userID, String loginUser) throws Exception {
+        boolean status = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblPosts SET vote = vote - 1 WHERE postID = ? "
+                        + " UPDATE tblUsers SET totalVote = totalVote - 1 WHERE userID = ? "
+                        + " DELETE FROM tblVote WHERE postID = ? AND userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, postID);
+                stm.setString(2, userID);
+                stm.setInt(3, postID);
+                stm.setString(4, loginUser);
+                status = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return status;
+    }
+
+    public boolean checkDuplicateVote(int postID, String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT postID, userID"
+                        + " FROM tblVote"
+                        + " WHERE postID=? AND userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, postID);
+                stm.setString(2, userID);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public String getUserIDByPostID(int postID) throws SQLException {
+        String userID = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select userID "
+                        + "From tblPosts where postID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, postID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    userID = rs.getString("userID");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userID;
+    }
+
 }

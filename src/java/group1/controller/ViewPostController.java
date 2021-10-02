@@ -9,6 +9,7 @@ import group1.dao.CommentDAO;
 import group1.dao.PostDAO;
 import group1.dto.CommentDTO;
 import group1.dto.PostDTO;
+import group1.dto.UserDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ViewPostController", urlPatterns = {"/ViewPostController"})
 public class ViewPostController extends HttpServlet {
@@ -29,10 +31,21 @@ public class ViewPostController extends HttpServlet {
         String url = ERROR;
         try {
             int postID = Integer.parseInt(request.getParameter("postID"));
+            HttpSession session = request.getSession();
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");            
             PostDAO dao = new PostDAO();
             PostDTO post = dao.getPostByID(postID);
-            CommentDAO commentDao= new CommentDAO();
+            CommentDAO commentDao = new CommentDAO();
             List<CommentDTO> comment = commentDao.getListCommentByPostID(postID);
+            if (loginUser != null) {
+                String userID = loginUser.getUserID();
+                boolean checkVoted = dao.checkDuplicateVote(postID, userID);
+                if (checkVoted) {
+                    PostDTO voted = new PostDTO(postID, userID);
+                    request.setAttribute("USER_VOTED", voted);
+                    url = SUCCESS;
+                }
+            }
             if (post != null) {
                 request.setAttribute("POST_VIEW", post);
                 request.setAttribute("LIST_COMMENT", comment);
