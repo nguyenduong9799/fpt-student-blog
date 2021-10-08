@@ -253,8 +253,8 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date) "
-                        + " values(?,?,?,?,?,?)";
+                 String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date,vote ) "
+                        + " values(?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, post.getUserID());
                 stm.setString(2, post.getTitle());
@@ -262,6 +262,7 @@ public class PostDAO {
                 stm.setInt(4, CategoryDAO.getCategoryIDByName(post.getCategory()));
                 stm.setString(5, post.getPostContent());
                 stm.setString(6, post.getDate());
+                stm.setInt(7,0);
                 check = stm.executeUpdate() > 0;
             }
         } catch (Exception e) {
