@@ -30,7 +30,7 @@ public class MainController extends HttpServlet {
     private static final String CREATE_ACCOUNT = "CreateAccountController";
     private static final String CREATE_COMMENT = "CommentController"; 
     private static final String VOTE_POST = "VoteController";
-  
+    private static final String SEARCH = "SearchController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -60,6 +60,8 @@ public class MainController extends HttpServlet {
                 url = CREATE_COMMENT;
             }else if ("Vote".equals(action)) {
                 url = VOTE_POST;
+            } else if ("Search".equals(action)){
+                url = SEARCH;
             }
 
         } catch (Exception e) {
