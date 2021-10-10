@@ -115,10 +115,10 @@
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
-                                    <form action="#" class="search-form">
+                                    <form action="SearchController" class="search-form">
                                         <div class="form-group">
                                             <span class="icon icon-search"></span>
-                                            <input type="text" class="form-control" placeholder="Search">
+                                            <input value="${txtS}" name="search" type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
                                 </div>
