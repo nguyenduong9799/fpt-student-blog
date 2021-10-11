@@ -106,6 +106,7 @@
                                         <p class="mb-4"><%=post.getUserID()%></p>
                                         <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
+                                    
                                 </div>
                                 <%
                                             }
@@ -115,12 +116,14 @@
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
+                                    <c:set var="searchValue" scope="page" value="${param.search}"/>
                                     <form action="SearchController" class="search-form">
                                         <div class="form-group">
                                             <span class="icon icon-search"></span>
-                                            <input value="${txtS}" name="search" type="text" class="form-control" placeholder="Search">
+                                            <input value="${searchValue}" name="search" type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
+                                    <h4>${requestScope.ERRORSTRING}</h4>
                                 </div>
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Categories</h3>

@@ -439,18 +439,19 @@ public class PostDAO {
     }
 
     public static ArrayList<PostDTO> getAvailablePostByTitle(String title) throws SQLException {
-        ArrayList<PostDTO> list = null;
+        ArrayList<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select postID, userID, status, category, title, postContent, date, vote \n"
-                        + "From tblPosts\n"
-                        + "where title = ? and statusPID = '1'";
+                String sql = "Select postID, userID, statusPID, categoryID, title, postContent, date, vote "
+                        + "From tblPosts "
+                        + "where title LIKE ? and statusPID = ?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + title + "%");
+                stm.setString(2, "1");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     list.add(new PostDTO(rs.getInt("postID"),
@@ -464,7 +465,7 @@ public class PostDAO {
                 }
             }
         } catch (Exception e) {
-
+            
         } finally {
             if (rs != null) {
                 rs.close();
@@ -478,7 +479,7 @@ public class PostDAO {
         }
         return list;
     }
-
+    
     public static ArrayList<PostDTO> getAllPostByTitle(String title) throws SQLException {
         ArrayList<PostDTO> list = null;
         Connection conn = null;
