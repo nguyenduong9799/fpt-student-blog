@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AddCategoryController", urlPatterns = {"/AddCategoryController"})
 public class AddCategoryController extends HttpServlet {
- private static final String ADMIN = "admin.jsp";
+    private static final String ADMIN = "admin.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

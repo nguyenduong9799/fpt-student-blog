@@ -57,16 +57,16 @@ public class CategoryController extends HttpServlet {
                 url = USER;
             }
             if(listPost == null) listPost = new ArrayList<>();
-            
+
             session.setAttribute("LIST_POST", listPost);
-                
+
         } catch (Exception e) {
-           
+
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

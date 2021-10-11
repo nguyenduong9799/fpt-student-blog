@@ -71,7 +71,7 @@
                     </li>
                 </c:forEach> 
                 <form action="MainController" method="POST">
-                    <input type="text" name="addcategory" value="" />
+                    <input type="text" name="addcategory"/>
                     <input type="submit" name="action" value="Add Category"/>
                 </form>
                 <p>${requestScope.STATUSADD}</p>
