@@ -5,17 +5,11 @@
  */
 package group1.controller;
 
-import group1.dao.CategoryDAO;
 import group1.dao.PostDAO;
-import group1.dto.CategoryDTO;
 import group1.dto.PostDTO;
 import group1.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +24,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "SearchController", urlPatterns = {"/SearchController"})
 public class SearchController extends HttpServlet {
 
-    
+    private static final String USER = "home.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -41,24 +36,30 @@ public class SearchController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String url = USER;
         String title = request.getParameter("search");
-        PostDAO dao = new PostDAO();
+        HttpSession session = request.getSession();
+        UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+        ArrayList<PostDTO> listPost;
         try {
-            ArrayList<PostDTO> list = (ArrayList<PostDTO>) dao.getAllPostByTitle(title);
-            ArrayList<CategoryDTO> listC = (ArrayList<CategoryDTO>) CategoryDAO.getAllCategory();
-            request.setAttribute("listP", list);
-            request.setAttribute("ListC", listC);
-            request.setAttribute("txtS", title);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+            listPost = PostDAO.getAvailablePostByTitle(title);
+            if (listPost.isEmpty()) {
+                request.setAttribute("ERRORSTRING", "Empty!!");
+                request.setAttribute("POST_VIEW", listPost);
+                url = USER;
+            } else {
+                request.setAttribute("POST_VIEW", listPost);
+                url = USER;
+            }
+            request.setAttribute("search", title);
+        } catch (Exception e) {
+
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
-        
     }
-        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
