@@ -7,8 +7,10 @@ package group1.controller;
 
 import group1.dao.CommentDAO;
 import group1.dao.PostDAO;
+import group1.dao.TagDAO;
 import group1.dto.CommentDTO;
 import group1.dto.PostDTO;
+import group1.dto.TagDTO;
 import group1.dto.UserDTO;
 import java.io.IOException;
 import java.util.List;
@@ -32,11 +34,13 @@ public class ViewPostController extends HttpServlet {
         try {
             int postID = Integer.parseInt(request.getParameter("postID"));
             HttpSession session = request.getSession();
-            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");            
+            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             PostDAO dao = new PostDAO();
             PostDTO post = dao.getPostByID(postID);
+            TagDAO tagDAO = new TagDAO();
             CommentDAO commentDao = new CommentDAO();
             List<CommentDTO> comment = commentDao.getListCommentByPostID(postID);
+            List<TagDTO> listTag = tagDAO.getListTagByPostID(postID);
             if (loginUser != null) {
                 String userID = loginUser.getUserID();
                 boolean checkVoted = dao.checkDuplicateVote(postID, userID);
@@ -49,6 +53,7 @@ public class ViewPostController extends HttpServlet {
             if (post != null) {
                 request.setAttribute("POST_VIEW", post);
                 request.setAttribute("LIST_COMMENT", comment);
+                request.setAttribute("POST_TAGS", listTag);
                 url = SUCCESS;
             }
         } catch (Exception e) {
