@@ -7,11 +7,14 @@ package group1.controller;
 
 import group1.dao.CategoryDAO;
 import group1.dao.PostDAO;
+import group1.dao.TagDAO;
 import group1.dto.CategoryDTO;
 import group1.dto.PostDTO;
+import group1.dto.TagDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +30,8 @@ import javax.servlet.http.HttpSession;
 public class HomeController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -40,15 +44,18 @@ public class HomeController extends HttpServlet {
         try {
             ArrayList<PostDTO> listPost = PostDAO.getAvailablePost();
             ArrayList<CategoryDTO> listCategory = CategoryDAO.getAllCategory();
-            
-            if(listPost != null){
+            List<TagDTO> listTag = TagDAO.getListMostTag();
+
+            if (listPost != null) {
                 HttpSession session = request.getSession();
-                
+
                 session.setAttribute("LIST_CATEGORY", listCategory);
                 session.setAttribute("LIST_POST", listPost);
+                session.setAttribute("LIST_TAG", listTag);
+
             }
         } catch (Exception e) {
-            
+
         } finally {
             request.getRequestDispatcher("home.jsp").forward(request, response);
         }
