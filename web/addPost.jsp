@@ -111,6 +111,7 @@
                                         }
                                     %>
                                 </select>
+                                <input style="width: 90%;" type="text" name="tagList">
                                 <!--Content-->
                                 <h2>Content of the post</h2>           
                                 <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>

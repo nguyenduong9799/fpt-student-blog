@@ -6,6 +6,7 @@
 package group1.controller;
 
 import group1.dao.PostDAO;
+import group1.dao.TagDAO;
 import group1.dto.PostDTO;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -37,11 +38,24 @@ public class CreatePostController extends HttpServlet {
             String status = "Waiting";
             LocalDateTime currentDateTime = java.time.LocalDateTime.now();
             String date = currentDateTime.toString();
+
             PostDTO post = new PostDTO(userID, status, category, title, postContent, date);
             PostDAO dao = new PostDAO();
             boolean check = dao.insertPost(post);
             if (check) {
-                url=SUCCESS;
+                String taglist[] = request.getParameter("tagList").split(", ");
+                TagDAO tagDAO = new TagDAO();
+                for (String tag : taglist) {
+                    boolean checkDuplicate = tagDAO.checkTag(tag);
+                    if (checkDuplicate) {
+                        tagDAO.insertTagBlog(tagDAO.getIDTagByName(tag), dao.getPostIDByPostTitle(title));
+                    } else {
+                        if (tagDAO.insertTag(tag, date)) {
+                            tagDAO.insertTagBlog(tagDAO.getIDTagByName(tag), dao.getPostIDByPostTitle(title));
+                        }
+                    }
+                }
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at CreatePostController: " + e.toString());
