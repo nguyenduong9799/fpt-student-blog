@@ -91,10 +91,13 @@
                                     <p><%=post.getPostContent()%></p>
                                     <div class="tag-widget post-tag-container mb-5 mt-5">
                                         <div class="tagcloud">
-                                            <a href="#" class="tag-cloud-link">Life</a>
-                                            <a href="#" class="tag-cloud-link">Sport</a>
-                                            <a href="#" class="tag-cloud-link">Tech</a>
-                                            <a href="#" class="tag-cloud-link">Travel</a>
+                                              <%
+                                                for (TagDTO tag : listTag) {
+                                            %>
+                                            <a href="#" class="tag-cloud-link"><%=tag.getTagName()%></a>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
                                     <div class="about-author d-flex p-4 bg-light">
