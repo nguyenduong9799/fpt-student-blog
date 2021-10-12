@@ -21,6 +21,12 @@ public class TagDTO {
         this.createDate = createDate;
     }
 
+    public TagDTO(int tagID, String tagName) {
+        this.tagID = tagID;
+        this.tagName = tagName;
+    }
+
+
     public int getTagID() {
         return tagID;
     }
