@@ -253,7 +253,7 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                 String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date,vote ) "
+                String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date,vote ) "
                         + " values(?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, post.getUserID());
@@ -262,7 +262,7 @@ public class PostDAO {
                 stm.setInt(4, CategoryDAO.getCategoryIDByName(post.getCategory()));
                 stm.setString(5, post.getPostContent());
                 stm.setString(6, post.getDate());
-                stm.setInt(7,0);
+                stm.setInt(7, 0);
                 check = stm.executeUpdate() > 0;
             }
         } catch (Exception e) {
@@ -465,7 +465,7 @@ public class PostDAO {
                 }
             }
         } catch (Exception e) {
-            
+
         } finally {
             if (rs != null) {
                 rs.close();
@@ -479,7 +479,7 @@ public class PostDAO {
         }
         return list;
     }
-    
+
     public static ArrayList<PostDTO> getAllPostByTitle(String title) throws SQLException {
         ArrayList<PostDTO> list = null;
         Connection conn = null;
@@ -651,4 +651,36 @@ public class PostDAO {
         return userID;
     }
 
+    public int getPostIDByPostTitle(String title) throws SQLException {
+        int postID = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select postID "
+                        + "From tblPosts where title=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, title);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    postID = rs.getInt("postID");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return postID;
+    }
 }
