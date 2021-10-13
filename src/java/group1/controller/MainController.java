@@ -28,9 +28,11 @@ public class MainController extends HttpServlet {
     private static final String ADD_CATEGORY = "AddCategoryController";
     private static final String VIEW_POST = "ViewPostController";
     private static final String CREATE_ACCOUNT = "CreateAccountController";
-    private static final String CREATE_COMMENT = "CommentController"; 
+    private static final String CREATE_COMMENT = "CommentController";
     private static final String VOTE_POST = "VoteController";
     private static final String SEARCH = "SearchController";
+    private static final String CREATE_NOFICATION = "CreateNoficationController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,7 +40,6 @@ public class MainController extends HttpServlet {
         try {
             String action = request.getParameter("action");
             if ("Detail".equals(action)) {
-
                 url = SHOW_DETAIL_POST;
             } else if ("Approve".equals(action)) {
                 url = APPROVE_DENY_POST;
@@ -54,14 +55,16 @@ public class MainController extends HttpServlet {
                 url = ADD_CATEGORY;
             } else if ("ViewPost".equals(action)) {
                 url = VIEW_POST;
-            }else if ("Create".equals(action)) {
+            } else if ("Create".equals(action)) {
                 url = CREATE_ACCOUNT;
-            }else if ("Comment".equals(action)) {
+            } else if ("Comment".equals(action)) {
                 url = CREATE_COMMENT;
-            }else if ("Vote".equals(action)) {
+            } else if ("Vote".equals(action)) {
                 url = VOTE_POST;
-            } else if ("Search".equals(action)){
+            } else if ("Search".equals(action)) {
                 url = SEARCH;
+            } else if ("Create Notification".equals(action)) {
+                url = CREATE_NOFICATION;
             }
 
         } catch (Exception e) {
