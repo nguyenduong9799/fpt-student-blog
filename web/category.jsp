@@ -11,7 +11,7 @@
 <html>
 
     <head>
-        <title>Home Page</title>
+        <title>Category Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -106,6 +106,7 @@
                                         <p class="mb-4"><%=post.getUserID()%></p>
                                         <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
+                                    
                                 </div>
                                 <%
                                             }
@@ -115,17 +116,14 @@
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
-                                    <form action="#" class="search-form">
+                                    <c:set var="searchValue" scope="page" value="${param.search}"/>
+                                    <form action="SearchController" class="search-form">
                                         <div class="form-group">
-<<<<<<< Updated upstream
-                                            <span class="icon icon-search"></span>
-                                            <input type="text" class="form-control" placeholder="Search">
-=======
                                             <a href="search.jsp" class="icon icon-search"></a>
                                             <input value="${searchValue}" name="search" type="text" class="form-control" placeholder="Search">
->>>>>>> Stashed changes
                                         </div>
                                     </form>
+                                    <h4>${requestScope.ERRORSTRING}</h4>
                                 </div>
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Categories</h3>
@@ -184,15 +182,21 @@
 
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Tag</h3>
+                                   <c:if test="${sessionScope.LIST_TAG == null}">
+                                        <c:redirect url="HomeController"></c:redirect>
+                                    </c:if>
                                     <ul class="tagcloud">
-                                        <a href="#" class="tag-cloud-link">animals</a>
+                                        <c:forEach items="${sessionScope.LIST_TAG}" var="o">
+                                            <a href="#">${o.tagName}</a>
+                                        </c:forEach> 
+<!--                                    <a href="#" class="tag-cloud-link">animals</a>
                                         <a href="#" class="tag-cloud-link">human</a>
                                         <a href="#" class="tag-cloud-link">people</a>
                                         <a href="#" class="tag-cloud-link">cat</a>
                                         <a href="#" class="tag-cloud-link">dog</a>
                                         <a href="#" class="tag-cloud-link">nature</a>
                                         <a href="#" class="tag-cloud-link">leaves</a>
-                                        <a href="#" class="tag-cloud-link">food</a>
+                                        <a href="#" class="tag-cloud-link">food</a>-->
                                     </ul>
                                 </div>
                                 <div class="sidebar-box ftco-animate">

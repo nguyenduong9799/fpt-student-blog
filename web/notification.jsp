@@ -117,7 +117,7 @@
                                 <div class="sidebar-box pt-md-4">
                                     <form action="#" class="search-form">
                                         <div class="form-group">
-                                            <span class="icon icon-search"></span>
+                                            <a href="search.jsp" class="icon icon-search"></a>
                                             <input type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
