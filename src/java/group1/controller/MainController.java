@@ -37,7 +37,7 @@ public class MainController extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-            if ("Show details".equals(action)) {
+            if ("Detail".equals(action)) {
 
                 url = SHOW_DETAIL_POST;
             } else if ("Approve".equals(action)) {

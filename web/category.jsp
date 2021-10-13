@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CategoryDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,8 +9,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
+
     <head>
-        <title>Notification Page</title>
+        <title>Category Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -46,8 +46,8 @@
                 <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fptblog</a></h1>
                 <nav id="colorlib-main-menu" role="navigation">
                     <ul>
-                        <li ><a href="home.jsp">Home</a></li>
-                        <li class="colorlib-active"><a href="notification.jsp">Notification</a></li><br>
+                        <li class="colorlib-active"><a href="home.jsp">Home</a></li>
+                        <li><a href="notification.jsp">Notification</a></li><br>
                             <%
                                 UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
                                 if (loginUser != null) {
@@ -106,6 +106,7 @@
                                         <p class="mb-4"><%=post.getUserID()%></p>
                                         <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
+                                    
                                 </div>
                                 <%
                                             }
@@ -115,12 +116,14 @@
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
-                                    <form action="#" class="search-form">
+                                    <c:set var="searchValue" scope="page" value="${param.search}"/>
+                                    <form action="SearchController" class="search-form">
                                         <div class="form-group">
-                                            <a href="search.jsp" class="icon icon-search"></a>
-                                            <input type="text" class="form-control" placeholder="Search">
+                                            <a href="notification.jsp" class="icon icon-search"></a>
+                                            <input value="${searchValue}" name="search" type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
+                                    <h4>${requestScope.ERRORSTRING}</h4>
                                 </div>
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Categories</h3>
@@ -130,7 +133,7 @@
                                     <ul class="categories">                                       
                                         <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
                                             <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                                        </c:forEach> 
+                                            </c:forEach> 
                                     </ul>
                                 </div>
 

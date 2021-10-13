@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CommentDTO"%>
 <%@page import="group1.dto.TagDTO"%>
 <%@page import="java.util.List"%>
@@ -180,7 +181,7 @@
                                 <div class="sidebar-box pt-md-4">
                                     <form action="#" class="search-form">
                                         <div class="form-group">
-                                            <span class="icon icon-search"></span>
+                                            <a href="search.jsp" class="icon icon-search"></a>
                                             <input type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
