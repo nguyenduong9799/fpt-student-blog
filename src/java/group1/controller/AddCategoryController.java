@@ -20,23 +20,24 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AddCategoryController", urlPatterns = {"/AddCategoryController"})
 public class AddCategoryController extends HttpServlet {
- private static final String ADMIN = "admin.jsp";
+
+    private static final String ADMIN = "admin.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ADMIN;
-        String categoryName = request.getParameter("addcategory");
-        CategoryDAO dao = new CategoryDAO();
-        boolean valid = false;
         try {
+            String categoryName = request.getParameter("addcategory");
+            CategoryDAO dao = new CategoryDAO();
+            boolean valid = false;
             valid = dao.AddCategory(categoryName);
             if (valid) {
                 request.setAttribute("STATUSADD", "Add successful!");
             } else {
                 request.setAttribute("STATUSADD", "Add failed!");
             }
-            
+
         } catch (Exception e) {
             log(e.getMessage());
         } finally {

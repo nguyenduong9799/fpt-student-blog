@@ -85,41 +85,30 @@
                     <div class="container px-0">
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
-                                <%
-                                    PostDAO dao = new PostDAO();
-                                    List<PostDTO> list = dao.getApprovedPost();
-                                    if (list != null) {
-                                        if (!list.isEmpty()) {
-                                            for (PostDTO post : list) {
-                                %>
-
+                                <c:forEach items="${requestScope.POST_VIEW}" var="o">       
                                 <div class="blog-entry ftco-animate">
                                     <div class="text p-4">
-                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
+                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
-                                                <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
-                                                <span><i class="icon-calendar mr-2"></i><%=post.getDate()%></span><br>
+                                                <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
+                                                <span><i class="icon-calendar mr-2"></i>${o.date}</span><br>
                                                 <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
                                             </p>
                                         </div>
-                                        <p class="mb-4"><%=post.getUserID()%></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                        <p class="mb-4">${o.userID}</p>
+                                        <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
-                                    
+
                                 </div>
-                                <%
-                                            }
-                                        }
-                                    }
-                                %>
+                                 </c:forEach> 
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
                                     <c:set var="searchValue" scope="page" value="${param.search}"/>
                                     <form action="SearchController" class="search-form">
                                         <div class="form-group">
-                                            <a href="notification.jsp" class="icon icon-search"></a>
+                                            <a href="#" class="icon icon-search"></a>
                                             <input value="${searchValue}" name="search" type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
@@ -136,7 +125,6 @@
                                             </c:forEach> 
                                     </ul>
                                 </div>
-
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Articles</h3>
                                     <div class="block-21 mb-4 d-flex">
@@ -151,66 +139,20 @@
                                                 <div><a href="#"><span class="icon-chat"></span> 19</a></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>    
                                 </div>
 
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Tag</h3>
+                                   <c:if test="${sessionScope.LIST_TAG == null}">
+                                        <c:redirect url="HomeController"></c:redirect>
+                                    </c:if>
                                     <ul class="tagcloud">
-                                        <a href="#" class="tag-cloud-link">animals</a>
-                                        <a href="#" class="tag-cloud-link">human</a>
-                                        <a href="#" class="tag-cloud-link">people</a>
-                                        <a href="#" class="tag-cloud-link">cat</a>
-                                        <a href="#" class="tag-cloud-link">dog</a>
-                                        <a href="#" class="tag-cloud-link">nature</a>
-                                        <a href="#" class="tag-cloud-link">leaves</a>
-                                        <a href="#" class="tag-cloud-link">food</a>
+                                        <c:forEach items="${sessionScope.LIST_TAG}" var="o">
+                                            <a href="#">${o.tagName}</a>
+                                        </c:forEach> 
                                     </ul>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Archives</h3>
-                                    <ul class="categories">
-                                        <li><a href="#">December 2018 <span>(10)</span></a></li>
-                                        <li><a href="#">September 2018 <span>(6)</span></a></li>
-                                        <li><a href="#">August 2018 <span>(8)</span></a></li>
-                                        <li><a href="#">July 2018 <span>(2)</span></a></li>
-                                        <li><a href="#">June 2018 <span>(7)</span></a></li>
-                                        <li><a href="#">May 2018 <span>(5)</span></a></li>
-                                    </ul>
-                                </div>
-
-
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Paragraph</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
-                                        necessitatibus voluptate quod mollitia delectus aut.</p>
-                                </div>
+                                </div>  
                             </div><!-- END COL --> 
                         </div>
                     </div>

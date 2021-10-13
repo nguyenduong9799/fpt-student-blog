@@ -87,7 +87,7 @@
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
                                     PostDAO dao = new PostDAO();
-                                    List<PostDTO> list = dao.getApprovedPost();
+                                    List<PostDTO> list = dao.getNotification();
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
@@ -149,64 +149,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-
                                 <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Tag</h3>
-                                    <ul class="tagcloud">
-                                        <a href="#" class="tag-cloud-link">animals</a>
-                                        <a href="#" class="tag-cloud-link">human</a>
-                                        <a href="#" class="tag-cloud-link">people</a>
-                                        <a href="#" class="tag-cloud-link">cat</a>
-                                        <a href="#" class="tag-cloud-link">dog</a>
-                                        <a href="#" class="tag-cloud-link">nature</a>
-                                        <a href="#" class="tag-cloud-link">leaves</a>
-                                        <a href="#" class="tag-cloud-link">food</a>
+                                    <h3 class="sidebar-heading">Categories</h3>
+                                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                                        <c:redirect url="HomeController"></c:redirect>
+                                    </c:if>
+                                    <ul class="categories">                                       
+                                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                                            <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
+                                            </c:forEach> 
                                     </ul>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Archives</h3>
-                                    <ul class="categories">
-                                        <li><a href="#">December 2018 <span>(10)</span></a></li>
-                                        <li><a href="#">September 2018 <span>(6)</span></a></li>
-                                        <li><a href="#">August 2018 <span>(8)</span></a></li>
-                                        <li><a href="#">July 2018 <span>(2)</span></a></li>
-                                        <li><a href="#">June 2018 <span>(7)</span></a></li>
-                                        <li><a href="#">May 2018 <span>(5)</span></a></li>
-                                    </ul>
-                                </div>
-
-
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Paragraph</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
-                                        necessitatibus voluptate quod mollitia delectus aut.</p>
                                 </div>
                             </div><!-- END COL --> 
                         </div>

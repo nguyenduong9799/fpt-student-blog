@@ -85,34 +85,23 @@
                     <div class="container px-0">
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
-                                <%
-                                    PostDAO dao = new PostDAO();
-                                    List<PostDTO> list = dao.getApprovedPost();
-                                    if (list != null) {
-                                        if (!list.isEmpty()) {
-                                            for (PostDTO post : list) {
-                                %>
-
+                                <c:forEach items="${sessionScope.LIST_POST}" var="o">       
                                 <div class="blog-entry ftco-animate">
                                     <div class="text p-4">
-                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
+                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
-                                                <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
-                                                <span><i class="icon-calendar mr-2"></i><%=post.getDate()%></span><br>
+                                                <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
+                                                <span><i class="icon-calendar mr-2"></i>${o.date}</span><br>
                                                 <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
                                             </p>
                                         </div>
-                                        <p class="mb-4"><%=post.getUserID()%></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                        <p class="mb-4">${o.userID}</p>
+                                        <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
-                                    
+
                                 </div>
-                                <%
-                                            }
-                                        }
-                                    }
-                                %>
+                                 </c:forEach> 
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">

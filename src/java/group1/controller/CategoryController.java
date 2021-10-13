@@ -27,6 +27,7 @@ public class CategoryController extends HttpServlet {
     public static final String USER = "home.jsp";
     public static final String ADMIN = "admin.jsp";
     public static final String MENTOR = "mentor.jsp";
+    public static final String SUCCESS = "category.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -57,8 +58,8 @@ public class CategoryController extends HttpServlet {
                 url = USER;
             }
             if(listPost == null) listPost = new ArrayList<>();
-            
             session.setAttribute("LIST_POST", listPost);
+            url= SUCCESS;
                 
         } catch (Exception e) {
            

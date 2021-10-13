@@ -133,7 +133,7 @@ public class CategoryDAO {
                         + "VALUES(?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, categoryName);
-                valid = stm.executeUpdate(sql) > 0;
+                valid = stm.executeUpdate() > 0;
             }
         } catch (Exception e) {
         } finally {
