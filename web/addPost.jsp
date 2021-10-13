@@ -141,11 +141,11 @@
                         sceditor.create(textarea, {
                             format: 'xhtml',
                             icons: 'monocons',
-                            style: '../minified/themes/content/default.min.css'
+                            style: 'minified/themes/content/default.min.css'
                         });
             var themeInput = document.getElementById('theme');
             themeInput.onchange = function () {
-                var theme = '../minified/themes/' + themeInput.value + '.min.css';
+                var theme = 'minified/themes/' + themeInput.value + '.min.css';
 
                 document.getElementById('theme-style').href = theme;
             };
