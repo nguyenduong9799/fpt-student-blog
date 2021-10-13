@@ -119,7 +119,7 @@
                                     <c:set var="searchValue" scope="page" value="${param.search}"/>
                                     <form action="SearchController" class="search-form">
                                         <div class="form-group">
-                                            <span class="icon icon-search"></span>
+                                            <a href="search.jsp" class="icon icon-search"></a>
                                             <input value="${searchValue}" name="search" type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
