@@ -93,9 +93,9 @@
                                         <table id="datatablesSimple" class="dataTable-table">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="" style="width: 25%;">User ID</th>
-                                                    <th data-sortable="" style="width: 5%;">Role ID</a</th>
-                                                    <th data-sortable="" style="width: 5%;">Status UID</th>
+                                                    <th data-sortable="" style="width: 20%;">User ID</th>
+                                                    <th data-sortable="" style="width: 10%;">Role ID</a</th>
+                                                    <th data-sortable="" style="width: 10%;">Status UID</th>
                                                     <th data-sortable="" style="width: 20%;">User Name</th>
                                                     <th data-sortable="" style="width: 20%;">Email</th>
                                                     <th data-sortable="" style="width: 20%;">Phone</th>
