@@ -12,6 +12,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -151,6 +153,86 @@ public class UserDAO {
             }
         }
         return check;
+    }
+    public List<UserDTO> getListUser() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT * "
+                        + " FROM tblUsers "
+                        + " WHERE roleID like ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%" + "US" + "%" );
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String roleID = rs.getString("roleID");
+                    String statusUID = rs.getString("statusUID");
+                    String userName = rs.getString("userName");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    int totalVote = rs.getInt("totalVote");
+                    Date date = rs.getDate("date");
+                    list.add( new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+    public List<UserDTO> getListMentor() throws SQLException {
+        List<UserDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT * "
+                        + " FROM tblUsers "
+                        + " WHERE roleID like ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%" + "MT" + "%" );
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String userID = rs.getString("userID");
+                    String roleID = rs.getString("roleID");
+                    String statusUID = rs.getString("statusUID");
+                    String userName = rs.getString("userName");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    int totalVote = rs.getInt("totalVote");
+                    Date date = rs.getDate("date");
+                    list.add( new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
     }
 //    public static void main(String[] args) throws SQLException {
 //        UserDAO dao = new UserDAO();

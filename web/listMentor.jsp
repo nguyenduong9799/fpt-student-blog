@@ -16,7 +16,7 @@
         <style type="text/css">/* Chart.js */
             @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>
 
-        <title>Admin Page</title>
+        <title>List Mentor Page</title>
     </head>
     <body class="sb-nav-fixed">
         <%
@@ -42,7 +42,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="file:///D:/Study/SWP391/startbootstrap-sb-admin-gh-pages/index.html#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><svg class="svg-inline--fa fa-user fa-w-14 fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg><!-- <i class="fas fa-user fa-fw"></i> Font Awesome fontawesome.com --></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a></li>
-                        
+
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="MainController?action=Logout">Logout</a></li>
                     </ul>
@@ -74,7 +74,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com -->
-                                Data Table List User
+                                Data Table List Mentor
                             </div>
                             <div class="card-body">
                                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
@@ -86,7 +86,7 @@
                                     <div class="dataTable-container">
                                         <%
                                             UserDAO dao = new UserDAO();
-                                            List<UserDTO> list = dao.getListUser();
+                                            List<UserDTO> list = dao.getListMentor();
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
@@ -99,8 +99,6 @@
                                                     <th data-sortable="" style="width: 20%;">User Name</th>
                                                     <th data-sortable="" style="width: 20%;">Email</th>
                                                     <th data-sortable="" style="width: 20%;">Phone</th>
-                                                    <th data-sortable="" style="width: 5%;">Total Vote</th>
-           
                                                 </tr>
                                             </thead>
 
@@ -116,7 +114,7 @@
                                                     <td><%=user.getUserName()%></td>
                                                     <td><%=user.getEmail()%></td>
                                                     <td><%=user.getPhone()%></td>
-                                                    <td><%=user.getTotalVote()%></td>
+      
                                                     <td><input class="button" type="submit" name="action" value="Detail"></td>
                                                 </tr>
                                                 <input type="hidden" name="postID" value="<%=user.getUserID()%>">
@@ -152,3 +150,4 @@
         <script src="./Mentor_files/datatables-simple-demo.js.download"></script>
     </body>  
 </html>
+
