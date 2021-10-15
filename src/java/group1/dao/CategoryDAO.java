@@ -120,7 +120,7 @@ public class CategoryDAO {
         }
         return categoryID;
     }
-    
+
     public boolean AddCategory(String categoryName) throws SQLException {
         boolean valid = false;
         Connection conn = null;
@@ -149,5 +149,36 @@ public class CategoryDAO {
         }
         return valid;
 
+    }
+
+    public boolean UpdateCategory(String categoryName, int categoryID) throws SQLException {
+        boolean valid = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "update tblCategories "
+                        + "set categoryName = ? "                    
+                        + "where categoryID = ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, categoryName);
+                stm.setInt(2, categoryID);
+                valid = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return valid;
     }
 }
