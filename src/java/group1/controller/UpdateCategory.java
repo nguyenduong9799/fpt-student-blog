@@ -9,7 +9,10 @@ import group1.dao.CategoryDAO;
 import group1.dto.CategoryDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,33 +24,41 @@ import javax.servlet.http.HttpSession;
  *
  * @author buili
  */
-@WebServlet(name = "AddCategoryController", urlPatterns = {"/AddCategoryController"})
-public class AddCategoryController extends HttpServlet {
+@WebServlet(name = "UpdateCategory", urlPatterns = {"/UpdateCategory"})
+public class UpdateCategory extends HttpServlet {
 
     private static final String ADMIN = "listCategory.jsp";
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ADMIN;
         try {
-            String categoryName = request.getParameter("addcategory");
+            String categoryName = request.getParameter("categoryName");
+            int categoryID = Integer.parseInt(request.getParameter("categoryID"));
             CategoryDAO dao = new CategoryDAO();
             boolean valid = false;
-            valid = dao.AddCategory(categoryName);
+            valid = dao.UpdateCategory(categoryName, categoryID);
+
             if (valid) {
-                request.setAttribute("STATUSADD", "Add successful!");
+                request.setAttribute("STATUSD", "Update successful!");
                 HttpSession session = request.getSession();
                 ArrayList<CategoryDTO> list = dao.getAllCategory();
                 session.setAttribute("LIST_CATEGORY", list);
             } else {
-                request.setAttribute("STATUSADD", "Add failed!");
+                request.setAttribute("STATUSD", "Update failed!");
             }
-
         } catch (Exception e) {
             log(e.getMessage());
         } finally {
-            //response.sendRedirect(url);
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

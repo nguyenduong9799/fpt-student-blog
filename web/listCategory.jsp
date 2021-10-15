@@ -1,7 +1,7 @@
 
 <%@page import="java.util.List"%>
 <%@page import="group1.dao.UserDAO"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="group1.dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -87,6 +87,7 @@
                                         <c:if test="${sessionScope.LIST_CATEGORY == null}">
                                             <c:redirect url="HomeController"></c:redirect>
                                         </c:if>
+                                        <p>${requestScope.STATUSD}<p>
                                         <table id="datatablesSimple" class="dataTable-table">
                                             <thead>
                                                 <tr>
@@ -97,24 +98,28 @@
                                             </thead>
 
                                             <tbody>
-
-                                                <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                                                    <tr>
-                                                        <td>${o.categoryName}</td>
-                                                        <td></td>   
-                                                    </tr>
-
-                                                </c:forEach> 
-                                            <form action="MainController" method="POST">
+                                               <c:forEach var="o" items="${sessionScope.LIST_CATEGORY}" varStatus="loop">
                                                 <tr>
-                                                    <td><input type="text" name="addcategory" value="" /></td> 
-                                                    <td><input type="submit" name="action" value="Add Category"/></td>  
+                                               <form action="MainController" method="POST">
+                                                    <td>
+                                                        <input type="text" name="categoryName" value="${o.categoryName}"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="submit" name="action" value="Update Category"/>
+                                                    </td>
+                                                    <input type="hidden" name="categoryID" value="${o.categoryID}"/>
+                                                </form> 
                                                 </tr>
-
+                                                </c:forEach>
+                                            <tr>
+                                            <form action="MainController" method="POST">
+                                                <td><input type="text" name="addcategory" value="" /></td> 
+                                                <td><input type="submit" name="action" value="Add Category"/></td>  
                                             </form>
+                                            </tr>
                                             </tbody>
                                         </table>
-                                        <p>${requestScope.STATUSADD}</p>
+                                        <p>${requestScope.STATUSADD}<p>
                                     </div>
                                 </div>
                             </div>
@@ -133,6 +138,12 @@
         <script src="./Mentor_files/chart-bar-demo.js.download"></script>
         <script src="./Mentor_files/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="./Mentor_files/datatables-simple-demo.js.download"></script>
+        <script>
+            function openInput(index, btn) {
+                document.getElementsByName('updatecategory')[index].readOnly = false;
+                btn.innerHTML = 'Save';
+            }
+        </script>
     </body>  
 </html>
 

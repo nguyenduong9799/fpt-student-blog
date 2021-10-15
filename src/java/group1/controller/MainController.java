@@ -32,7 +32,8 @@ public class MainController extends HttpServlet {
     private static final String VOTE_POST = "VoteController";
     private static final String SEARCH = "SearchController";
     private static final String CREATE_NOFICATION = "CreateNoficationController";
-
+    private static final String UPDATE_CATEGORY = "UpdateCategory";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -65,6 +66,8 @@ public class MainController extends HttpServlet {
                 url = SEARCH;
             } else if ("Create Notification".equals(action)) {
                 url = CREATE_NOFICATION;
+            } else if ("Update Category".equals(action)){
+                url = UPDATE_CATEGORY;
             }
 
         } catch (Exception e) {
