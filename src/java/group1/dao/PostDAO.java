@@ -141,7 +141,7 @@ public class PostDAO {
         return list;
     }
 
-    public List<PostDTO> getApprovedPost() throws SQLException {
+    public List<PostDTO> getApprovedPost(int a, int b) throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stm = null;
@@ -149,8 +149,12 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select * from tblPosts where statusPID=1 order by date desc ";
+                String sql = "select * from "
+                        + " (select ROW_NUMBER() over (order by date desc) as r,* from tblPosts where statusPID=1) as x "
+                        + " where r between ? and ?";
                 stm = conn.prepareStatement(sql);
+                stm.setInt(1, a);
+                stm.setInt(2, b);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int postID = rs.getInt("postID");
@@ -720,5 +724,36 @@ public class PostDAO {
             }
         }
         return list;
+    }
+    
+    public int getTotalPost() throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(*) from tblPosts where statusPID=1";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
     }
 }
