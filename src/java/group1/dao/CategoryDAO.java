@@ -28,7 +28,7 @@ public class CategoryDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "Select categoryID, categoryName\n"
-                        + "From tblCategories \n";
+                        + "From tblCategories Where categoryName NOT IN ('NOTIFICATION')\n";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {

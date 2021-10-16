@@ -86,8 +86,20 @@
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
+                                    int first = 0, last = 0, pages = 1;
+                                    if (request.getParameter("pages") != null) {
+                                        pages = (int) Integer.parseInt(request.getParameter("pages"));
+                                    }
                                     PostDAO dao = new PostDAO();
-                                    List<PostDTO> list = dao.getApprovedPost();
+                                    int total = dao.getTotalPost();
+                                    if (total <= 4) {
+                                        first = pages;
+                                        last = total;
+                                    } else {
+                                        first = pages * 4 - 3;
+                                        last = pages * 4;
+                                    }
+                                    List<PostDTO> list = dao.getApprovedPost(first, last);
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
@@ -106,7 +118,7 @@
                                         <p class="mb-4"><%=post.getUserID()%></p>
                                         <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
-                                    
+
                                 </div>
                                 <%
                                             }
@@ -156,7 +168,7 @@
 
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Tag</h3>
-                                   <c:if test="${sessionScope.LIST_TAG == null}">
+                                    <c:if test="${sessionScope.LIST_TAG == null}">
                                         <c:redirect url="HomeController"></c:redirect>
                                     </c:if>
                                     <ul class="tagcloud">
@@ -165,10 +177,90 @@
                                         </c:forEach> 
                                     </ul>
                                 </div>
-                               
+
+                                <div>
+                                    <ul class="start">    
+                                        <%                //Button Previous
+                                            int back = 0;
+                                            if (pages == 0 || pages == 1) {
+                                                back = 1;//Luon la page 1
+                                            } else {
+                                                back = pages - 1;//Neu pages tu 2 tro len thi back tru 1
+                                            }
+                                        %>
+                                        <li ><a href="home.jsp?pages=<%=back%>"><i></i></a></li>
+                                                    <%
+                                                        //Button Number pages
+                                                        int loop = 0, num = 0;
+                                                        if ((total / 4) % 2 == 0) {
+                                                            num = total / 4;
+                                                        } else {
+                                                            num = (total + 1) / 4;
+                                                        }
+                                                        //Nếu total lẻ thêm 1
+                                                        if (total % 2 != 0) {
+                                                            loop = (total / 4) + 1;
+
+                                                        } else {
+                                                            //Nếu total chẵn nhỏ hơn fullpage và # fullPage thì thêm 1
+                                                            if (total < (num * 4) + 4 && total != num * 4) {
+                                                                loop = (total / 4) + 1;
+                                                            } else {
+                                                                //Nếu bằng fullPage thì không thêm
+                                                                loop = (total / 4);
+                                                            }
+                                                        }
+                                                        //Lap so pages
+                                                        for (int i = 1; i <= loop; i++) {
+                                                    %>
+                                                    <%
+                                                        if (pages == i) {
+                                                    %> 
+                                        <li><span><a href="home.jsp?pages=<%=i%>"><%=i%></a></span></li>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                        <li class="arrow"><a href="home.jsp?pages=<%=i%>"><%=i%></a> </li>
+
+                                        <%
+                                                }
+                                            }
+                                        %>
+                                        <%
+                                            //Button Next
+                                            int next = 0;
+                                            //Nếu total lẻ
+                                            if (total % 2 != 0) {
+                                                if (pages == (total / 4) + 1) {
+                                                    next = pages;//Khong next
+                                                } else {
+                                                    next = pages + 1;//Co next
+                                                }
+                                            } else {
+                                                //Nếu total chẵn nhỏ hơn fullpage
+                                                //Và không fullPage thì thêm 1
+                                                if (total < (num * 4) + 4 && total != num * 4) {
+                                                    if (pages == (total / 4) + 1) {
+                                                        next = pages;//Khong next
+                                                    } else {
+                                                        next = pages + 1;//Co next
+                                                    }
+                                                } else {
+                                                    //Nếu fullPage đến trang cuối dừng
+                                                    //Chưa tới trang cuối thì được next
+                                                    if (pages == (total / 4)) {
+                                                        next = pages;//Khong next
+                                                    } else {
+                                                        next = pages + 1;//Co next
+                                                    }
+                                                }
+                                            }
+                                        %>
+                                        <li ><a href="home.jsp?pages=<%=next%>"><i class="next"></i></a></li>
+                                    </ul>
+                                </div>
 
 
-                               
                             </div><!-- END COL --> 
                         </div>
                     </div>
