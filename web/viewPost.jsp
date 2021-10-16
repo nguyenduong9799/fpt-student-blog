@@ -128,7 +128,11 @@
                                         </div>
                                     </div>
                                     <div class="pt-5 mt-5">
-                                        <h3 class="mb-5 font-weight-bold">6 Comments</h3>
+                                        <%
+                                            PostDAO dao = new PostDAO();
+                                            int totalComment = dao.getTotalComment(post.getPostID());
+                                        %>
+                                        <h3 class="mb-5 font-weight-bold"><%=totalComment%> Comments</h3>
                                         <ul class="comment-list">
                                             <%
                                                 List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
