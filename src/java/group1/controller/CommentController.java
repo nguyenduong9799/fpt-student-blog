@@ -31,7 +31,8 @@ public class CommentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String commentContent = new String(request.getParameter("commentContent").getBytes("iso-8859-1"), "UTF-8");
+            //String commentContent = new String(request.getParameter("commentContent").getBytes("iso-8859-1"), "UTF-8");
+            String commentContent = request.getParameter("commentContent");
             String userID = request.getParameter("userID");
             String post = request.getParameter("postID");
             int postID = Integer.parseInt(post);
