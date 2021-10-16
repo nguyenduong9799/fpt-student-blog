@@ -24,10 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CategoryController", urlPatterns = {"/CategoryController"})
 public class CategoryController extends HttpServlet {
-    public static final String USER = "home.jsp";
-    public static final String ADMIN = "admin.jsp";
-    public static final String MENTOR = "mentor.jsp";
-    public static final String SUCCESS = "category.jsp";
+    public static final String USER = "category.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
@@ -39,27 +36,17 @@ public class CategoryController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "login.jsp";
+        String url = USER;
         try {
             HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            
             int categoryID = Integer.parseInt(request.getParameter("txtCategoryID"));
             ArrayList<PostDTO> listPost = null;
-            if(user.getRoleID().equals("AD")){
-                listPost = PostDAO.getAllPostByCategory(categoryID);
-                url = ADMIN;
-            }
-            else if(user.getRoleID().equals("MT")){
-                listPost = PostDAO.getAllPostByCategory(categoryID);
-                url = MENTOR;
-            }
-            else{
-                listPost = PostDAO.getAvailablePostByCategory(categoryID);
-                url = USER;
-            }
+            listPost = PostDAO.getAllPostByCategory(categoryID);
+ 
             if(listPost == null) listPost = new ArrayList<>();
             session.setAttribute("LIST_POST", listPost);
-            url= SUCCESS;
+            url = USER;
                 
         } catch (Exception e) {
            
