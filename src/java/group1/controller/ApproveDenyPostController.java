@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ApproveDenyPostController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS_APPROVE = "waitingPost.jsp";
-    private static final String SUCCESS_DENY = "waitingPost.jsp";
+    private static final String SUCCESS_APPROVE = "mentor.jsp";
+    private static final String SUCCESS_DENY = "mentor.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
