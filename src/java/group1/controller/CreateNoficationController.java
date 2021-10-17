@@ -11,6 +11,7 @@ import group1.dto.PostDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,15 +31,16 @@ public class CreateNoficationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url=ERROR;
+        String url = ERROR;
         try {
-            String userID=request.getParameter("userID");
+            String userID = request.getParameter("userID");
             String title = request.getParameter("title");
             String category = "NOTIFICATION";
             String postContent = request.getParameter("postContent");
             String status = "Notificate";
             LocalDateTime currentDateTime = java.time.LocalDateTime.now();
-            String date = currentDateTime.toString();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String date = currentDateTime.format(format);
             PostDTO post = new PostDTO(userID, status, category, title, postContent, date);
             PostDAO dao = new PostDAO();
             boolean check = dao.insertPost(post);
@@ -46,8 +48,8 @@ public class CreateNoficationController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at CreateNoficationController:"+e.toString());
-        }finally{
+            log("Error at CreateNoficationController:" + e.toString());
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

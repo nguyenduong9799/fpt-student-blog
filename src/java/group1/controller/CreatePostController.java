@@ -10,6 +10,7 @@ import group1.dao.TagDAO;
 import group1.dto.PostDTO;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +38,8 @@ public class CreatePostController extends HttpServlet {
             String userID = request.getParameter("userID");
             String status = "Waiting";
             LocalDateTime currentDateTime = java.time.LocalDateTime.now();
-            String date = currentDateTime.toString();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+            String date = currentDateTime.format(format);
 
             PostDTO post = new PostDTO(userID, status, category, title, postContent, date);
             PostDAO dao = new PostDAO();

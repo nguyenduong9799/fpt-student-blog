@@ -10,6 +10,7 @@ import group1.dto.CommentDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,7 @@ public class CommentController extends HttpServlet {
 
     private static final String ERROR = "ViewPostController";
     private static final String SUCCESS = "ViewPostController";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,13 +38,14 @@ public class CommentController extends HttpServlet {
             String post = request.getParameter("postID");
             int postID = Integer.parseInt(post);
             LocalDateTime currentDateTime = java.time.LocalDateTime.now();
-            String date = currentDateTime.toString();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String date = currentDateTime.format(format);
             CommentDAO dao = new CommentDAO();
             CommentDTO comment = new CommentDTO(postID, userID, date, commentContent);
             boolean checkInsert = dao.insertComment(comment);
-            if (checkInsert){
+            if (checkInsert) {
                 url = SUCCESS;
-            }else{
+            } else {
                 url = ERROR;
             }
         } catch (Exception e) {
