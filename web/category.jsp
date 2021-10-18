@@ -87,14 +87,13 @@
                             <div class="col-lg-8 px-md-5 py-5">
                                 <jsp:useBean id="a" class="group1.dao.PostDAO"/>
                                 <jsp:useBean id="b" class="group1.dao.UserDAO"/>
-                                <jsp:useBean id="d" class="group1.dao.CategoryDAO"/>
                                 <c:forEach items="${sessionScope.LIST_POST}" var="o">       
                                 <div class="blog-entry ftco-animate">
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
-                                                <span><i class="icon-folder-o mr-2"></i>${d.getCategoryNameByCategoryID(o.category)}</a></span><br>
+                                                <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
                                                 <span><i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span><br>
                                                 <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)} Comments</span>
                                             </p>
