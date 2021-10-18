@@ -827,4 +827,10 @@ public class PostDAO {
         }
         return total;
     }
+    
+    public String splitDate(String date) throws SQLException {
+        int index = date.indexOf(".");
+        String dateSplited = date.substring(0, index);
+        return dateSplited;
+    }
 }
