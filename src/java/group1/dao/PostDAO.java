@@ -359,7 +359,7 @@ public class PostDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "select * from tblPosts \n"
-                        + "Where statusPID = '1'";
+                        + "Where statusPID = 1";
                 stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -446,7 +446,7 @@ public class PostDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "select * from tblPosts\n"
-                        + "where categoryID = ? and statusPID = '1'";
+                        + "where categoryID = ? and statusPID = 1";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, categoryID);
                 rs = stm.executeQuery();
