@@ -85,6 +85,7 @@
                     <div class="container px-0">
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
+                                <jsp:useBean id="a" class="group1.dao.PostDAO"/>
                                 <c:forEach items="${requestScope.POST_VIEW}" var="o">       
                                 <div class="blog-entry ftco-animate">
                                     <div class="text p-4">
@@ -92,8 +93,8 @@
                                         <div class="meta-wrap">
                                             <p class="meta">
                                                 <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
-                                                <span><i class="icon-calendar mr-2"></i>${o.date}</span><br>
-                                                <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+                                                <span><i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span><br>
+                                                <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)} Comments</span>
                                             </p>
                                         </div>
                                         <p class="mb-4">${o.userID}</p>

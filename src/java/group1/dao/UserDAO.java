@@ -20,7 +20,8 @@ import java.util.List;
  * @author Admin
  */
 public class UserDAO {
-    public UserDTO checkLogin(String userID, String password) throws SQLException{
+
+    public UserDTO checkLogin(String userID, String password) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -61,33 +62,74 @@ public class UserDAO {
         }
         return user;
     }
-         public static String getUserNameByID(String userID) throws SQLException{
-       String userName = null;
+
+    public static String getUserNameByID(String userID) throws SQLException {
+        String userName = null;
         Connection conn = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
-                String sql = "Select userName " +
-                             "From tblUsers where userID=?";
+            if (conn != null) {
+                String sql = "Select userName "
+                        + "From tblUsers where userID=?";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 rs = stm.executeQuery();
-                while(rs.next()){
-                   userName=rs.getString("userName");
+                while (rs.next()) {
+                    userName = rs.getString("userName");
                 }
             }
         } catch (Exception e) {
-            
+
         } finally {
-            if(rs != null) rs.close();
-            if(stm != null) stm.close();
-            if(conn != null) conn.close();
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return userName;
     }
-         public boolean checkDuplicate(String userID) throws SQLException {
+    
+    public String getUserNameByUserID(String userID) throws SQLException {
+        String userName = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select userName "
+                        + "From tblUsers where userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    userName = rs.getString("userName");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return userName;
+    }
+
+    public boolean checkDuplicate(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -154,6 +196,7 @@ public class UserDAO {
         }
         return check;
     }
+
     public List<UserDTO> getListUser() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -166,7 +209,7 @@ public class UserDAO {
                         + " FROM tblUsers "
                         + " WHERE roleID like ?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "%" + "US" + "%" );
+                stm.setString(1, "%" + "US" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String userID = rs.getString("userID");
@@ -177,7 +220,7 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     int totalVote = rs.getInt("totalVote");
                     Date date = rs.getDate("date");
-                    list.add( new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
+                    list.add(new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
                 }
             }
         } catch (Exception e) {
@@ -194,6 +237,7 @@ public class UserDAO {
         }
         return list;
     }
+
     public List<UserDTO> getListMentor() throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -206,7 +250,7 @@ public class UserDAO {
                         + " FROM tblUsers "
                         + " WHERE roleID like ?";
                 stm = conn.prepareStatement(sql);
-                stm.setString(1, "%" + "MT" + "%" );
+                stm.setString(1, "%" + "MT" + "%");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String userID = rs.getString("userID");
@@ -217,7 +261,7 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     int totalVote = rs.getInt("totalVote");
                     Date date = rs.getDate("date");
-                    list.add( new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
+                    list.add(new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
                 }
             }
         } catch (Exception e) {

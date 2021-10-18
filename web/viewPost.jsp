@@ -85,6 +85,7 @@
                             <div class="col-lg-8 px-md-5 py-5">
                                 <div class="row">
                                     <%
+                                        PostDAO dao = new PostDAO();
                                         PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
                                         List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
                                     %>
@@ -123,16 +124,12 @@
                                         <div class="desc">
                                             <h3>Written by : <%=post.getUserID()%></h3>
                                             <h3>Category :<%=post.getCategory()%></h3>
-                                            <h3>Date Written :<%=post.getDate()%></h3>
+                                            <h3>Date Written :<%=dao.splitDate(post.getDate())%></h3>
 
                                         </div>
                                     </div>
                                     <div class="pt-5 mt-5">
-                                        <%
-                                            PostDAO dao = new PostDAO();
-                                            int totalComment = dao.getTotalComment(post.getPostID());
-                                        %>
-                                        <h3 class="mb-5 font-weight-bold"><%=totalComment%> Comments</h3>
+                                        <h3 class="mb-5 font-weight-bold"><%=dao.getTotalComment(post.getPostID())%> Comments</h3>
                                         <ul class="comment-list">
                                             <%
                                                 List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
@@ -143,7 +140,7 @@
                                             <li class="comment">
                                                 <div class="comment-body">
                                                     <h3><%=list.getUserID()%></h3>
-                                                    <div class="meta"><%=list.getDate()%></div>
+                                                    <div class="meta"><%=dao.splitDate(list.getDate())%></div>
                                                     <p><%=list.getCommentContent()%></p>
                                                 </div>
                                             </li>

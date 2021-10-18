@@ -91,6 +91,9 @@
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
+                                                int index = post.getDate().indexOf(".");
+                                                String date = post.getDate().substring(0, index);
+                                                int totalComment = dao.getTotalComment(post.getPostID());
                                 %>
 
                                 <div class="blog-entry ftco-animate">
@@ -99,8 +102,8 @@
                                         <div class="meta-wrap">
                                             <p class="meta">
                                                 <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
-                                                <span><i class="icon-calendar mr-2"></i><%=post.getDate()%></span><br>
-                                                <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+                                                <span><i class="icon-calendar mr-2"></i><%=date%></span><br>
+                                                <span><i class="icon-comment2 mr-2"></i><%=totalComment%> Comments</span>
                                             </p>
                                         </div>
                                         <p class="mb-4"><%=post.getUserID()%></p>
