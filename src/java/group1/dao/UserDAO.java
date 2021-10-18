@@ -95,39 +95,6 @@ public class UserDAO {
         }
         return userName;
     }
-    
-    public String getUserNameByUserID(String userID) throws SQLException {
-        String userName = null;
-        Connection conn = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                String sql = "Select userName "
-                        + "From tblUsers where userID=?";
-                stm = conn.prepareStatement(sql);
-                stm.setString(1, userID);
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    userName = rs.getString("userName");
-                }
-            }
-        } catch (Exception e) {
-
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return userName;
-    }
 
     public boolean checkDuplicate(String userID) throws SQLException {
         boolean check = false;
