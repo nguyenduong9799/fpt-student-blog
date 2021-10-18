@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
-   <body>
+    <body>
         <div id="colorlib-page">
             <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="js-fullheight img" style="background-image: url(images/sidebar-bg.jpg);">
@@ -86,7 +86,7 @@
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
                                     PostDAO dao = new PostDAO();
-                                    List<PostDTO> list = dao.getApprovedPost();
+                                    List<PostDTO> list = (List<PostDTO>) request.getAttribute("LIST_POST_BY_USERID");
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
@@ -112,7 +112,7 @@
                                     }
                                 %>
                             </div>
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                           <!-- <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
                                     <form action="#" class="search-form">
                                         <div class="form-group">
@@ -206,7 +206,7 @@
                                     <h3 class="sidebar-heading">Paragraph</h3>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
                                         necessitatibus voluptate quod mollitia delectus aut.</p>
-                                </div>
+                                </div>-->
                             </div><!-- END COL --> 
                         </div>
                     </div>

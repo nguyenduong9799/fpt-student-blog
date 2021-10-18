@@ -52,7 +52,7 @@
                                 UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
                                 if (loginUser != null) {
                             %>
-                        <li><a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a></li>
+                        <li><a href="MainController?action=Profile">Welcome: <%= loginUser.getUserName()%></a></li>
                         <li><a href="addPost.jsp">Create New Post</a></li>
                         <li ><a href="MainController?action=Logout">Logout</a></li>
                             <%

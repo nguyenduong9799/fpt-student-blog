@@ -34,6 +34,7 @@ public class MainController extends HttpServlet {
     private static final String CREATE_NOFICATION = "CreateNoficationController";
     private static final String UPDATE_CATEGORY = "UpdateCategory";
     private static final String GET_POST_BY_TAG = "GetPostByTagController";
+    private static final String PROFILE = "ProfileController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,6 +72,8 @@ public class MainController extends HttpServlet {
                 url = UPDATE_CATEGORY;
             } else if ("GetPostByTag".equals(action)) {
                 url = GET_POST_BY_TAG;
+            }else if ("Profile".equals(action)) {
+                url = PROFILE;
             }
 
         } catch (Exception e) {

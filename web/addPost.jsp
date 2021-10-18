@@ -93,7 +93,7 @@
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
                     <div class="container px-0">
                         <div class="row no-gutters">
-                            <form action="MainController" method="POST" accept-charset="UTF-8">
+                            <form style="margin-left: 30px;"action="MainController" method="POST" accept-charset="UTF-8">
                                 <textarea style="margin-top: 20px;"id="title" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>
                                 <!--Category-->       
                                 <select class="select" name="category">
