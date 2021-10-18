@@ -102,6 +102,47 @@ public class PostDAO {
         return post;
     }
 
+    public List<PostDTO> getPostByUserID(String userID) throws SQLException {
+        List<PostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select * from tblPosts where userID=? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int postID = rs.getInt("postID");
+                    String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
+                    String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
+                    String title = rs.getString("title");
+                    String postContent = rs.getString("postContent");
+                    String date = rs.getString("date");
+                    int vote = rs.getInt("vote");
+                    String approveComment = rs.getString("approveComment");
+
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
     public List<PostDTO> getWaitingPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -179,7 +220,7 @@ public class PostDAO {
         }
         return list;
     }
-    
+
     public List<PostDTO> getApprovedPost(int a, int b) throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -726,6 +767,7 @@ public class PostDAO {
         }
         return postID;
     }
+
     public List<PostDTO> getNotification() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -764,7 +806,7 @@ public class PostDAO {
         }
         return list;
     }
-    
+
     public int getTotalPost() throws SQLException {
         int total = 0;
         Connection conn = null;
@@ -795,7 +837,7 @@ public class PostDAO {
         }
         return total;
     }
-    
+
     public int getTotalComment(int postID) throws SQLException {
         int total = 0;
         Connection conn = null;
@@ -827,7 +869,7 @@ public class PostDAO {
         }
         return total;
     }
-    
+
     public String splitDate(String date) throws SQLException {
         int index = date.indexOf(".");
         String dateSplited = date.substring(0, index);
