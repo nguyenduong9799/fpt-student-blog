@@ -99,7 +99,7 @@
                                         first = pages * 4 - 3;
                                         last = pages * 4;
                                     }
-                                    List<PostDTO> list = dao.getApprovedPost(first, last);
+                                    List<PostDTO> list = (List<PostDTO>) request.getAttribute("LIST_POST_BY_TAG");
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
