@@ -172,15 +172,13 @@
 
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Tag</h3>
+                                    <c:if test="${sessionScope.LIST_TAG == null}">
+                                        <c:redirect url="HomeController"></c:redirect>
+                                    </c:if>
                                     <ul class="tagcloud">
-                                        <a href="#" class="tag-cloud-link">animals</a>
-                                        <a href="#" class="tag-cloud-link">human</a>
-                                        <a href="#" class="tag-cloud-link">people</a>
-                                        <a href="#" class="tag-cloud-link">cat</a>
-                                        <a href="#" class="tag-cloud-link">dog</a>
-                                        <a href="#" class="tag-cloud-link">nature</a>
-                                        <a href="#" class="tag-cloud-link">leaves</a>
-                                        <a href="#" class="tag-cloud-link">food</a>
+                                        <c:forEach items="${sessionScope.LIST_TAG}" var="o">
+                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
+                                        </c:forEach> 
                                     </ul>
                                 </div>
                                 <div class="sidebar-box ftco-animate">

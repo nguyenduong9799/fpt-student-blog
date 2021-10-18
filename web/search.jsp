@@ -144,13 +144,13 @@
                                 </div>
 
                                 <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Tag</h3>
-                                   <c:if test="${sessionScope.LIST_TAG == null}">
+                                     <h3 class="sidebar-heading">Popular Tag</h3>
+                                    <c:if test="${sessionScope.LIST_TAG == null}">
                                         <c:redirect url="HomeController"></c:redirect>
                                     </c:if>
                                     <ul class="tagcloud">
                                         <c:forEach items="${sessionScope.LIST_TAG}" var="o">
-                                            <a href="#">${o.tagName}</a>
+                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
                                         </c:forEach> 
                                     </ul>
                                 </div>  

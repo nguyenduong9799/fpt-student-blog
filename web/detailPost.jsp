@@ -83,7 +83,7 @@
                         <%
                             for (TagDTO tag : listTag) {
                         %>
-                        <a href="" style="font-size: 20px;"><%=tag.getTagName()%></a> 
+                        <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" style="font-size: 20px;"><%=tag.getTagName()%></a> 
                         <%
                             }
                         %>

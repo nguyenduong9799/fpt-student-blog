@@ -96,7 +96,7 @@
                                               <%
                                                 for (TagDTO tag : listTag) {
                                             %>
-                                            <a href="#" class="tag-cloud-link"><%=tag.getTagName()%></a>
+                                            <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" class="tag-cloud-link"><%=tag.getTagName()%></a>
                                             <%
                                                 }
                                             %>
