@@ -411,7 +411,7 @@ public class PostDAO {
                         list = new ArrayList<>();
                     }
                     int postID = rs.getInt("postID");
-                    String userID = rs.getString("userID");
+                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
                     String status = rs.getString("statusPID");
                     String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
                     String title = rs.getString("title");

@@ -86,7 +86,6 @@
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
                                 <jsp:useBean id="a" class="group1.dao.PostDAO"/>
-                                <jsp:useBean id="b" class="group1.dao.UserDAO"/>
                                 <c:forEach items="${sessionScope.LIST_POST}" var="o">       
                                 <div class="blog-entry ftco-animate">
                                     <div class="text p-4">
@@ -98,7 +97,7 @@
                                                 <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)} Comments</span>
                                             </p>
                                         </div>
-                                        <p class="mb-4">${b.getUserNameByUserID(o.userID)}</p>
+                                        <p class="mb-4">${o.userID}</p>
                                         <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
 
