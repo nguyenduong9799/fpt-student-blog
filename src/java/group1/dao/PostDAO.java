@@ -221,49 +221,6 @@ public class PostDAO {
         return list;
     }
 
-    public List<PostDTO> getApprovedPost(int a, int b) throws SQLException {
-        List<PostDTO> list = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                String sql = "select * from "
-                        + " (select ROW_NUMBER() over (order by date desc) as r,* from tblPosts where statusPID=1) as x "
-                        + " where r between ? and ?";
-                stm = conn.prepareStatement(sql);
-                stm.setInt(1, a);
-                stm.setInt(2, b);
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    int postID = rs.getInt("postID");
-                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
-                    String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
-                    String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
-                    String title = rs.getString("title");
-                    String postContent = rs.getString("postContent");
-                    String date = rs.getString("date");
-                    int vote = rs.getInt("vote");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return list;
-    }
-
     public List<PostDTO> getDeniedPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -849,6 +806,37 @@ public class PostDAO {
                 String sql = "select count(*) from tblComment where postID = ?";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, postID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
+    
+    public int getTotalNotification() throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(*) from tblPosts where statusPID=3";
+                stm = conn.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     total = rs.getInt(1);

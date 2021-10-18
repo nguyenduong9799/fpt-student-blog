@@ -86,26 +86,15 @@
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
-                                    int first = 0, last = 0, pages = 1;
-                                    if (request.getParameter("pages") != null) {
-                                        pages = (int) Integer.parseInt(request.getParameter("pages"));
-                                    }
                                     PostDAO dao = new PostDAO();
                                     int total = dao.getTotalPost();
-                                    if (total <= 4) {
-                                        first = pages;
-                                        last = total;
-                                    } else {
-                                        first = pages * 4 - 3;
-                                        last = pages * 4;
-                                    }
-                                    List<PostDTO> list = dao.getApprovedPost(first, last);
+                                    List<PostDTO> list = dao.getApprovedPost();
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
                                 %>
 
-                                <div class="blog-entry ftco-animate">
+                                <div class="blog-entry ftco-animate contentPage">
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
@@ -125,6 +114,8 @@
                                         }
                                     }
                                 %>
+                                <!-- Hiên thị nút bấm -->
+                                <ul id="pagination"></ul>
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
@@ -178,88 +169,6 @@
                                     </ul>
                                 </div>
 
-                                <div>
-                                    <ul class="start">    
-                                        <%                //Button Previous
-                                            int back = 0;
-                                            if (pages == 0 || pages == 1) {
-                                                back = 1;//Luon la page 1
-                                            } else {
-                                                back = pages - 1;//Neu pages tu 2 tro len thi back tru 1
-                                            }
-                                        %>
-                                        <li ><a href="home.jsp?pages=<%=back%>"><i></i></a></li>
-                                                    <%
-                                                        //Button Number pages
-                                                        int loop = 0, num = 0;
-                                                        if ((total / 4) % 2 == 0) {
-                                                            num = total / 4;
-                                                        } else {
-                                                            num = (total + 1) / 4;
-                                                        }
-                                                        //Nếu total lẻ thêm 1
-                                                        if (total % 2 != 0) {
-                                                            loop = (total / 4) + 1;
-
-                                                        } else {
-                                                            //Nếu total chẵn nhỏ hơn fullpage và # fullPage thì thêm 1
-                                                            if (total < (num * 4) + 4 && total != num * 4) {
-                                                                loop = (total / 4) + 1;
-                                                            } else {
-                                                                //Nếu bằng fullPage thì không thêm
-                                                                loop = (total / 4);
-                                                            }
-                                                        }
-                                                        //Lap so pages
-                                                        for (int i = 1; i <= loop; i++) {
-                                                    %>
-                                                    <%
-                                                        if (pages == i) {
-                                                    %> 
-                                        <li><span><a href="home.jsp?pages=<%=i%>"><%=i%></a></span></li>
-                                                    <%
-                                                    } else {
-                                                    %>
-                                        <li class="arrow"><a href="home.jsp?pages=<%=i%>"><%=i%></a> </li>
-
-                                        <%
-                                                }
-                                            }
-                                        %>
-                                        <%
-                                            //Button Next
-                                            int next = 0;
-                                            //Nếu total lẻ
-                                            if (total % 2 != 0) {
-                                                if (pages == (total / 4) + 1) {
-                                                    next = pages;//Khong next
-                                                } else {
-                                                    next = pages + 1;//Co next
-                                                }
-                                            } else {
-                                                //Nếu total chẵn nhỏ hơn fullpage
-                                                //Và không fullPage thì thêm 1
-                                                if (total < (num * 4) + 4 && total != num * 4) {
-                                                    if (pages == (total / 4) + 1) {
-                                                        next = pages;//Khong next
-                                                    } else {
-                                                        next = pages + 1;//Co next
-                                                    }
-                                                } else {
-                                                    //Nếu fullPage đến trang cuối dừng
-                                                    //Chưa tới trang cuối thì được next
-                                                    if (pages == (total / 4)) {
-                                                        next = pages;//Khong next
-                                                    } else {
-                                                        next = pages + 1;//Co next
-                                                    }
-                                                }
-                                            }
-                                        %>
-                                        <li ><a href="home.jsp?pages=<%=next%>"><i class="next"></i></a></li>
-                                    </ul>
-                                </div>
-
 
                             </div><!-- END COL --> 
                         </div>
@@ -287,5 +196,37 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+        <!-- JS tạo nút bấm di chuyển trang start -->
+        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <!-- JS tạo nút bấm di chuyển trang end -->
+        <script type="text/javascript">
+            $(function () {
+                var pageSize = 5; // Hiển thị 6 sản phẩm trên 1 trang
+                showPage = function (page) {
+                    $(".contentPage").hide();
+                    $(".contentPage").each(function (n) {
+                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                            $(this).show();
+                    });
+                }
+                showPage(1);
+                ///** Cần truyền giá trị vào đây **///
+                var totalRows = <%=total%>; // Tổng số sản phẩm hiển thị
+                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
+                var iTotalPages = Math.ceil(totalRows / pageSize);
+
+                var obj = $('#pagination').twbsPagination({
+                    totalPages: iTotalPages,
+                    visiblePages: btnPage,
+                    onPageClick: function (event, page) {
+                        console.info(page);
+                        showPage(page);
+                    }
+                });
+                console.info(obj.data());
+            });
+        </script>
     </body>
 </html>

@@ -283,4 +283,38 @@ public class TagDAO {
         }
         return check;
     }
+    
+    public int getTotalPostByTag(int tagID) throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(p.postID)" 
+                        +" from tblPosts p join tblTagBlog tb on tb.postID=p.postID "
+                        +" where tb.tagID=? and statusPID=1";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, tagID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
 }
