@@ -413,7 +413,7 @@ public class PostDAO {
                     int postID = rs.getInt("postID");
                     String userID = rs.getString("userID");
                     String status = rs.getString("statusPID");
-                    String category = rs.getString("categoryID");
+                    String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
                     String title = rs.getString("title");
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
