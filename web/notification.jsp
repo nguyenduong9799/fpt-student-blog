@@ -87,23 +87,21 @@
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
                                     PostDAO dao = new PostDAO();
+                                    int total = dao.getTotalNotification();
                                     List<PostDTO> list = dao.getNotification();
                                     if (list != null) {
                                         if (!list.isEmpty()) {
                                             for (PostDTO post : list) {
-                                                int index = post.getDate().indexOf(".");
-                                                String date = post.getDate().substring(0, index);
-                                                int totalComment = dao.getTotalComment(post.getPostID());
                                 %>
 
-                                <div class="blog-entry ftco-animate">
+                                <div class="blog-entry ftco-animate contentPage">
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
                                                 <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
-                                                <span><i class="icon-calendar mr-2"></i><%=date%></span><br>
-                                                <span><i class="icon-comment2 mr-2"></i><%=totalComment%> Comments</span>
+                                                <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span><br>
+                                                <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%> Comments</span>
                                             </p>
                                         </div>
                                         <p class="mb-4"><%=post.getUserID()%></p>
@@ -115,6 +113,8 @@
                                         }
                                     }
                                 %>
+                                <!-- Hiên thị nút bấm -->
+                                <ul id="pagination"></ul>
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
@@ -155,12 +155,12 @@
                                 </div>
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Tag</h3>
-                                   <c:if test="${sessionScope.LIST_TAG == null}">
+                                    <c:if test="${sessionScope.LIST_TAG == null}">
                                         <c:redirect url="HomeController"></c:redirect>
                                     </c:if>
                                     <ul class="tagcloud">
                                         <c:forEach items="${sessionScope.LIST_TAG}" var="o">
-                                            <a href="#">${o.tagName}</a>
+                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
                                         </c:forEach> 
                                     </ul>
                                 </div>
@@ -190,5 +190,37 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+        <!-- JS tạo nút bấm di chuyển trang start -->
+        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <!-- JS tạo nút bấm di chuyển trang end -->
+        <script type="text/javascript">
+            $(function () {
+                var pageSize = 5; // Hiển thị 6 sản phẩm trên 1 trang
+                showPage = function (page) {
+                    $(".contentPage").hide();
+                    $(".contentPage").each(function (n) {
+                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                            $(this).show();
+                    });
+                }
+                showPage(1);
+                ///** Cần truyền giá trị vào đây **///
+                var totalRows = <%=total%>; // Tổng số sản phẩm hiển thị
+                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
+                var iTotalPages = Math.ceil(totalRows / pageSize);
+
+                var obj = $('#pagination').twbsPagination({
+                    totalPages: iTotalPages,
+                    visiblePages: btnPage,
+                    onPageClick: function (event, page) {
+                        console.info(page);
+                        showPage(page);
+                    }
+                });
+                console.info(obj.data());
+            });
+        </script>
     </body>
 </html>

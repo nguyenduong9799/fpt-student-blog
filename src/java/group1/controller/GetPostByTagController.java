@@ -33,9 +33,11 @@ public class GetPostByTagController extends HttpServlet {
         try {
             int tagID = Integer.parseInt(request.getParameter("tagID"));
             TagDAO dao=new TagDAO();
+            int total = dao.getTotalPostByTag(tagID);
             List<PostDTO> list =dao.getListPostByTagID(tagID);
             if (list!=null) {
                 request.setAttribute("LIST_POST_BY_TAG", list);
+                request.setAttribute("TOTAL_POST_BY_TAG", total);
                 url=SUCCESS;
             }
         } catch (Exception e) {
