@@ -93,7 +93,7 @@
                                     <p><%=post.getPostContent()%></p>
                                     <div class="tag-widget post-tag-container mb-5 mt-5">
                                         <div class="tagcloud">
-                                              <%
+                                            <%
                                                 for (TagDTO tag : listTag) {
                                             %>
                                             <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" class="tag-cloud-link"><%=tag.getTagName()%></a>
@@ -195,7 +195,7 @@
                                     <ul class="categories">                                       
                                         <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
                                             <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                                        </c:forEach> 
+                                            </c:forEach> 
                                     </ul>
                                 </div>
 
@@ -244,12 +244,12 @@
 
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Popular Tag</h3>
-                                     <c:if test="${sessionScope.LIST_TAG == null}">
+                                    <c:if test="${sessionScope.LIST_TAG == null}">
                                         <c:redirect url="HomeController"></c:redirect>
                                     </c:if>
                                     <ul class="tagcloud">
                                         <c:forEach items="${sessionScope.LIST_TAG}" var="o">
-                                            <a href="#">${o.tagName}</a>
+                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
                                         </c:forEach> 
                                     </ul>
                                 </div>
