@@ -210,7 +210,7 @@
                         if (n >= pageSize * (page - 1) && n < pageSize * page)
                             $(this).show();
                     });
-                }
+                };
                 showPage(1);
                 ///** Cần truyền giá trị vào đây **///
                 var totalRows = <%=total%>; // Tổng số sản phẩm hiển thị
