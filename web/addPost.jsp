@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="referrer" content="no-referrer">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/addPost.css" rel="stylesheet" type="text/css"/>
         <link href="css/mentor.css" rel="stylesheet" type="text/css"/>
@@ -40,10 +41,10 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
-       <!--sceditor-->
+        <!--sceditor-->
         <link rel="stylesheet" href="./minified/themes/default.min.css" id="theme-style" />
         <script src="./minified/sceditor.min.js"></script>
-        <!--<script src="development/plugins/dragdrop.js" type="text/javascript"></script>-->
+        <script src="minified/plugins/dragdrop.js" type="text/javascript"></script>
         <script src="./minified/icons/monocons.js"></script>
         <script src="./minified/formats/xhtml.js"></script>
         <title>Create Post Page</title>
@@ -94,7 +95,7 @@
                     <div class="container px-0">
                         <div class="row no-gutters">
                             <form style="margin-left: 30px;"action="MainController" method="POST" accept-charset="UTF-8">
-                                <textarea style="margin-top: 20px;"id="title" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>
+                                <textarea style="margin-top: 20px;" id="title" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>
                                 <!--Category-->       
                                 <select class="select" name="category">
                                     <option selected disabled>Choose Category</option>
@@ -121,11 +122,11 @@
                                     <label for="theme" >Theme:</label>
                                     <select id="theme" >
                                         <option value="default">Default</option>
-<!--                                    <option value="defaultdark">Default dark</option>
-                                        <option value="modern">Modern</option>
-                                        <option value="office-toolbar">Office Toolbar</option>
-                                        <option value="office">Office</option>
-                                        <option value="square">Square</option>-->
+                                        <!--                                    <option value="defaultdark">Default dark</option>
+                                                                                <option value="modern">Modern</option>
+                                                                                <option value="office-toolbar">Office Toolbar</option>
+                                                                                <option value="office">Office</option>
+                                                                                <option value="square">Square</option>-->
                                     </select>
                                 </div>
                             </form>  
@@ -138,69 +139,69 @@
         </div><!-- END COLORLIB-PAGE -->
         <script>
             var textarea = document.getElementById('editor');
-                        sceditor.create(textarea, {
-                            format: 'xhtml',
-                            icons: 'monocons',
-                            style: 'minified/themes/content/default.min.css'
-                        });
+//            sceditor.create(textarea, {
+//                format: 'xhtml',
+//                icons: 'monocons',
+//                style: 'minified/themes/content/default.min.css'
+//            });
             var themeInput = document.getElementById('theme');
             themeInput.onchange = function () {
                 var theme = 'minified/themes/' + themeInput.value + '.min.css';
 
                 document.getElementById('theme-style').href = theme;
             };
-//            function imgurUpload(file) {
-//                var headers = new Headers({
-//                    'Authorization': 'Client-ID 7911328dd6c64c1'
-//                });
-//
-//                var form = new FormData();
-//                form.append('image', file);
-//
-//                return fetch('https://api.imgur.com/3/image', {
-//                    method: 'post',
-//                    headers: headers,
-//                    body: form
-//                }).then(function (response) {
-//                    return response.json();
-//                }).then(function (result) {
-//                    if (result.success) {
-//                        return result.data.link;
-//                    }
-//
-//                    throw 'Upload error';
-//                });
-//            }
-//
-//            var dragdropOptions = {
-//                allowedTypes: ['image/jpeg', 'image/png'],
-//
-//                handleFile: function (file, createPlaceholder) {
-//                    var placeholder = createPlaceholder();
-//
-//                    imgurUpload(file).then(function (url) {
-//                        // Replace the placeholder with the image HTML
-//                        placeholder.insert('<img src=\'' + url + '\' />');
-//                    }).catch(function () {
-//                        // Error so remove the placeholder
-//                        placeholder.cancel();
-//
-//                        alert('Problem uploading image to imgur.');
-//                    });
-//                }
-//            };
-//            sceditor.create(textarea, {
-//                // Enable the drag and drop plugin
-//                plugins: 'dragdrop',
-//                // Set the drag and drop plugin options
-//                dragdrop: dragdropOptions,
-//
-//                // Rest of SCEditor options
-//                format: 'xhmtl',
-//                icons: 'monocons',
-//                autofocus: true,
-//                style: 'minified/themes/content/default.min.css'
-//            });
+            function imgurUpload(file) {
+                var headers = new Headers({
+                    'Authorization': 'Client-ID 7911328dd6c64c1'
+                });
+
+                var form = new FormData();
+                form.append('image', file);
+
+                return fetch('https://api.imgur.com/3/image', {
+                    method: 'post',
+                    headers: headers,
+                    body: form
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (result) {
+                    if (result.success) {
+                        return result.data.link;
+                    }
+
+                    throw 'Upload error';
+                });
+            }
+
+            var dragdropOptions = {
+                allowedTypes: ['image/jpeg', 'image/png'],
+
+                handleFile: function (file, createPlaceholder) {
+                    var placeholder = createPlaceholder();
+
+                    imgurUpload(file).then(function (url) {
+                        // Replace the placeholder with the image HTML
+                        placeholder.insert('<img src=\'' + url + '\' />');
+                    }).catch(function () {
+                        // Error so remove the placeholder
+                        placeholder.cancel();
+
+                        alert('Problem uploading image to imgur.');
+                    });
+                }
+            };
+            sceditor.create(textarea, {
+                // Enable the drag and drop plugin
+                plugins: 'dragdrop',
+                // Set the drag and drop plugin options
+                dragdrop: dragdropOptions,
+
+                // Rest of SCEditor options
+                format: 'xhmtl',
+                icons: 'monocons',
+                autofocus: true,
+                style: 'minified/themes/content/default.min.css'
+            });
         </script>
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
