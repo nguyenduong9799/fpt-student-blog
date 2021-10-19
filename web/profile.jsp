@@ -99,7 +99,7 @@
                                             <p class="meta">
                                                 <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
                                                 <span><i class="icon-calendar mr-2"></i><%=post.getDate()%></span><br>
-                                                <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+                                                <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%> Comment</span>
                                             </p>
                                         </div>
                                         <p class="mb-4"><%=post.getUserID()%></p>
