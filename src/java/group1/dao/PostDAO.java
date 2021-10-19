@@ -101,6 +101,7 @@ public class PostDAO {
         }
         return post;
     }
+    
 
     public List<PostDTO> getPostByUserID(String userID) throws SQLException {
         List<PostDTO> list = new ArrayList<>();
@@ -110,7 +111,7 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "select * from tblPosts where userID=? ";
+                String sql = "select * from tblPosts where userID=? order by date desc";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 rs = stm.executeQuery();

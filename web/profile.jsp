@@ -104,6 +104,21 @@
                                         </div>
                                         <p class="mb-4"><%=post.getUserID()%></p>
                                         <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                                <%
+                                                    if ("Approved".equals(post.getStatus())) {
+                                                %>
+                                        <p><a><img alt="" src="images/Accept.png"></a></p>
+                                                <%
+                                                } else if ("Denied".equals(post.getStatus())) {
+                                                %>
+                                        <p><a><img alt="" src="images/Deny.png"></a></p>
+                                                <%
+                                                } else {
+                                                %>
+                                        <p><a><img alt="" src="images/Pending.png"></a></p>
+                                                <%
+                                                    }
+                                                %>
                                     </div>
                                 </div>
                                 <%
@@ -112,126 +127,126 @@
                                     }
                                 %>
                             </div>
-                           <!-- <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <div class="sidebar-box pt-md-4">
-                                    <form action="#" class="search-form">
-                                        <div class="form-group">
-                                            <span class="icon icon-search"></span>
-                                            <input type="text" class="form-control" placeholder="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Categories</h3>
-                                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="categories">                                       
-                                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                                            <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                                            </c:forEach> 
-                                    </ul>
-                                </div>
+                            <!-- <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                                 <div class="sidebar-box pt-md-4">
+                                     <form action="#" class="search-form">
+                                         <div class="form-group">
+                                             <span class="icon icon-search"></span>
+                                             <input type="text" class="form-control" placeholder="Search">
+                                         </div>
+                                     </form>
+                                 </div>
+                                 <div class="sidebar-box ftco-animate">
+                                     <h3 class="sidebar-heading">Categories</h3>
+                            <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                                <c:redirect url="HomeController"></c:redirect>
+                            </c:if>
+                            <ul class="categories">                                       
+                            <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                                <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
+                            </c:forEach> 
+                    </ul>
+                </div>
 
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Articles</h3>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="sidebar-heading">Popular Articles</h3>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                    control</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
                                 </div>
-
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Tag</h3>
-                                    <ul class="tagcloud">
-                                        <a href="#" class="tag-cloud-link">animals</a>
-                                        <a href="#" class="tag-cloud-link">human</a>
-                                        <a href="#" class="tag-cloud-link">people</a>
-                                        <a href="#" class="tag-cloud-link">cat</a>
-                                        <a href="#" class="tag-cloud-link">dog</a>
-                                        <a href="#" class="tag-cloud-link">nature</a>
-                                        <a href="#" class="tag-cloud-link">leaves</a>
-                                        <a href="#" class="tag-cloud-link">food</a>
-                                    </ul>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Archives</h3>
-                                    <ul class="categories">
-                                        <li><a href="#">December 2018 <span>(10)</span></a></li>
-                                        <li><a href="#">September 2018 <span>(6)</span></a></li>
-                                        <li><a href="#">August 2018 <span>(8)</span></a></li>
-                                        <li><a href="#">July 2018 <span>(2)</span></a></li>
-                                        <li><a href="#">June 2018 <span>(7)</span></a></li>
-                                        <li><a href="#">May 2018 <span>(5)</span></a></li>
-                                    </ul>
-                                </div>
-
-
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Paragraph</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
-                                        necessitatibus voluptate quod mollitia delectus aut.</p>
-                                </div>-->
-                            </div><!-- END COL --> 
+                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
                         </div>
                     </div>
-                </section>
-            </div><!-- END COLORLIB-MAIN -->
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                    control</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
+                                </div>
+                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                    control</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
+                                </div>
+                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        </div><!-- END COLORLIB-PAGE -->
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="sidebar-heading">Popular Tag</h3>
+                    <ul class="tagcloud">
+                        <a href="#" class="tag-cloud-link">animals</a>
+                        <a href="#" class="tag-cloud-link">human</a>
+                        <a href="#" class="tag-cloud-link">people</a>
+                        <a href="#" class="tag-cloud-link">cat</a>
+                        <a href="#" class="tag-cloud-link">dog</a>
+                        <a href="#" class="tag-cloud-link">nature</a>
+                        <a href="#" class="tag-cloud-link">leaves</a>
+                        <a href="#" class="tag-cloud-link">food</a>
+                    </ul>
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="sidebar-heading">Archives</h3>
+                    <ul class="categories">
+                        <li><a href="#">December 2018 <span>(10)</span></a></li>
+                        <li><a href="#">September 2018 <span>(6)</span></a></li>
+                        <li><a href="#">August 2018 <span>(8)</span></a></li>
+                        <li><a href="#">July 2018 <span>(2)</span></a></li>
+                        <li><a href="#">June 2018 <span>(7)</span></a></li>
+                        <li><a href="#">May 2018 <span>(5)</span></a></li>
+                    </ul>
+                </div>
 
-        <!-- loader -->
-        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.easing.1.3.js"></script>
-        <script src="js/jquery.waypoints.min.js"></script>
-        <script src="js/jquery.stellar.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/aos.js"></script>
-        <script src="js/jquery.animateNumber.min.js"></script>
-        <script src="js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="js/google-map.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+                <div class="sidebar-box ftco-animate">
+                    <h3 class="sidebar-heading">Paragraph</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem
+                        necessitatibus voluptate quod mollitia delectus aut.</p>
+                </div>-->
+                        </div><!-- END COL --> 
+                    </div>
+            </div>
+        </section>
+    </div><!-- END COLORLIB-MAIN -->
+
+</div><!-- END COLORLIB-PAGE -->
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-migrate-3.0.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/jquery.stellar.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/jquery.animateNumber.min.js"></script>
+<script src="js/scrollax.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<script src="js/google-map.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
