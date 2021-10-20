@@ -42,17 +42,18 @@
         <div id="colorlib-page">
             <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="js-fullheight img" style="background-image: url(images/sidebar-bg.jpg);">
-                <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fptblog</a></h1>
+                <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fpt blog</a></h1><br>
                 <nav id="colorlib-main-menu" role="navigation">
                     <ul>
-                        <li ><a href="home.jsp">Home</a></li>
-                        <li><a href="notification.jsp">Notification</a></li><br>
-                            <%
-                                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                                if (loginUser != null) {
-                            %>
+
+
+                        <%
+                            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                            if (loginUser != null) {
+                        %>
                         <li class="colorlib-active"><a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a></li>
                         <li><a href="addPost.jsp">Create New Post</a></li>
+                        <li><a href="notification.jsp">Notification</a></li>
                         <li ><a href="MainController?action=Logout">Logout</a></li>
                             <%
                                 }
@@ -75,6 +76,9 @@
                             </div>
                         </form>
                     </div>
+                    <p class="pfooter">
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
 
                 </div>
             </aside> <!-- END PAGE-ASIDE -->  
