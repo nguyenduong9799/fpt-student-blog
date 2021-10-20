@@ -41,17 +41,17 @@
         <div id="colorlib-page">
             <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="js-fullheight img" style="background-image: url(images/sidebar-bg.jpg);">
-                <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fptblog</a></h1>
+                <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fpt blog</a></h1><br>
                 <nav id="colorlib-main-menu" role="navigation">
                     <ul>
-                        <li class="colorlib-active"><a href="home.jsp">Home</a></li>
-                        <li><a href="notification.jsp">Notification</a></li><br>
-                            <%
-                                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                                if (loginUser != null) {
-                            %>
+
+                        <%
+                            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                            if (loginUser != null) {
+                        %>
                         <li><a href="MainController?action=Profile">Welcome: <%= loginUser.getUserName()%></a></li>
                         <li><a href="addPost.jsp">Create New Post</a></li>
+                        <li><a href="notification.jsp">Notification</a></li>
                         <li ><a href="MainController?action=Logout">Logout</a></li>
                             <%
                                 }
@@ -74,6 +74,9 @@
                             </div>
                         </form>
                     </div>
+                    <p class="pfooter">
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
 
                 </div>
             </aside> <!-- END COLORLIB-ASIDE -->  
@@ -82,7 +85,7 @@
                 <section class="ftco-section ftco-no-pt ftco-no-pb">
                     <div class="container px-0">
                         <div class="row d-flex no-gutters">
-                            <div class="col-lg-8 px-md-5 py-5">
+                            <div class="col-lg-9 px-md-5 py-5">
                                 <div class="row">
                                     <%
                                         PostDAO dao = new PostDAO();
@@ -101,31 +104,30 @@
                                                 }
                                             %>
                                         </div>
-                                    </div>
+                                    </div>                     
                                     <div class="about-author d-flex p-4 bg-light">
-                                        <div class="bio mr-5">              
+                                        <div class="bio mr-5">
+                                            <img width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                                        </div>
+                                        <div class="desc">
+                                            <h3><i class="icon-person"></i>  <%=post.getUserID()%></h3>
+                                            <p><i class="icon-folder-o"></i>  <%=post.getCategory()%>   <i class="icon-calendar"></i>  <%=dao.splitDate(post.getDate())%></p>
                                             <%
                                                 PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
                                                 if (voted != null) {
                                             %>
-                                            <a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
-                                                <i class="fa fa-thumbs-up">Voted  (<%=post.getVote()%>)</i>
-                                            </a>
-                                            <%
-                                            } else {
-                                            %>
-                                            <a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
-                                                <i class="fa fa-thumbs-up">Vote  (<%=post.getVote()%>)</i>
-                                            </a>
-                                            <%
-                                                }
-                                            %>
-                                        </div>
-                                        <div class="desc">
-                                            <h3>Written by : <%=post.getUserID()%></h3>
-                                            <h3>Category :<%=post.getCategory()%></h3>
-                                            <h3>Date Written :<%=dao.splitDate(post.getDate())%></h3>
-
+                                            <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
+                                                    <i class="icon-heart">  Voted(<%=post.getVote()%>)</i>
+                                                </a></h3>
+                                                <%
+                                                } else {
+                                                %>
+                                            <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
+                                                    <i class="icon-heart">  Vote(<%=post.getVote()%>)</i>
+                                                </a></h3>
+                                                <%
+                                                    }
+                                                %>
                                         </div>
                                     </div>
                                     <div class="pt-5 mt-5">
@@ -138,6 +140,9 @@
                                                         for (CommentDTO list : listComment) {
                                             %>
                                             <li class="comment">
+                                                <div class="vcard bio">
+                                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                                </div>
                                                 <div class="comment-body">
                                                     <h3><%=list.getUserID()%></h3>
                                                     <div class="meta"><%=dao.splitDate(list.getDate())%></div>
@@ -178,7 +183,7 @@
 
                                 </div><!-- END--> 
                             </div>
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                            <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
                                     <form action="#" class="search-form">
                                         <div class="form-group">
