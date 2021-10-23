@@ -53,17 +53,17 @@
         <div id="colorlib-page">
             <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="js-fullheight img" style="background-image: url(images/sidebar-bg.jpg);">
-                <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fptblog</a></h1>
+                <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fpt blog</a></h1><br>
                 <nav id="colorlib-main-menu" role="navigation">
                     <ul>
-                        <li><a href="home.jsp">Home</a></li>
-                        <li><a href="notification.jsp">Notification</a></li><br>
-                            <%
-                                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                                if (loginUser != null) {
-                            %>
+
+                        <%
+                            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                            if (loginUser != null) {
+                        %>
                         <li><a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a></li>
                         <li class="colorlib-active"><a href="addPost.jsp">Create New Post</a></li>
+                        <li><a href="notification.jsp">Notification</a></li>
                         <li ><a href="MainController?action=Logout">Logout</a></li>
                             <%
                                 }
@@ -78,7 +78,7 @@
                 </nav>
                 <div class="colorlib-footer">
                     <div class="mb-4">
-                        <h3>Send Feedback For System</h3>
+                        <h3>Send Feedback For FPT Blog</h3>
                         <form action="#" class="colorlib-subscribe-form">
                             <div class="form-group d-flex">
                                 <div class="icon"><span class="icon-paper-plane"></span></div>
@@ -86,6 +86,9 @@
                             </div>
                         </form>
                     </div>
+                    <p class="pfooter">
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
 
                 </div>
             </aside> <!-- END PAGE-ASIDE -->  
@@ -94,44 +97,46 @@
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
                     <div class="container px-0">
                         <div class="row no-gutters">
-                            <form style="margin-left: 30px;"action="MainController" method="POST" accept-charset="UTF-8">
-                                <textarea style="margin-top: 20px;" id="title" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>
-                                <!--Category-->       
-                                <select class="select" name="category">
-                                    <option selected disabled>Choose Category</option>
-                                    <%
-                                        ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
-                                        if (listCate != null) {
-                                            if (!listCate.isEmpty()) {
-                                                for (CategoryDTO category : listCate) {
-                                    %>
-                                    <option class="option"value="<%=category.getCategoryName()%>"><%=category.getCategoryName()%></option>
-                                    <%
+                            <form action="MainController" method="POST" accept-charset="UTF-8">
+                                <div class="col-lg-12 px-md-5 py-5">
+
+                                    <textarea style="margin-top: 20px;" class="form-control" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>   
+
+                                    <!--Category-->       
+                                    <select class="select" name="category">
+                                        <option selected disabled>Choose Category</option>
+                                        <%
+                                            ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
+                                            if (listCate != null) {
+                                                if (!listCate.isEmpty()) {
+                                                    for (CategoryDTO category : listCate) {
+                                        %>
+                                        <option class="option" value="<%=category.getCategoryName()%>"><%=category.getCategoryName()%></option>
+                                        <%
+                                                    }
                                                 }
                                             }
-                                        }
-                                    %>
-                                </select>
-                                <input style="width: 100%;" type="text" name="tagList">
-                                <!--Content-->
-                                <h2>Content of the post</h2>           
-                                <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
-                                <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
-                                <input style="margin-bottom: 20px;"class="button" type="submit" name="action" value="Submit Post">
-                                <input type="text" name="image" id="image-1">
-                                <div hidden="">
-                                    <label for="theme" >Theme:</label>
-                                    <select id="theme" >
-                                        <option value="default">Default</option>
-                                        <!--                                    <option value="defaultdark">Default dark</option>
-                                                                                <option value="modern">Modern</option>
-                                                                                <option value="office-toolbar">Office Toolbar</option>
-                                                                                <option value="office">Office</option>
-                                                                                <option value="square">Square</option>-->
                                     </select>
-                                </div>
+                                    <input class="form-control" placeholder="Tag" style="width: 100%;" type="text" name="tagList"><br>
+                                    <input class="form-control" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="img"><br>
+                                    <!--Content-->
+                                    <h3 class="mb-5">Content of the post...</h3>
+                                    <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
+                                    <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
+                                    <input style="margin-bottom: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Submit Post">
+                                    <div hidden="">
+                                        <label for="theme" >Theme:</label>
+                                        <select id="theme" >
+                                            <option value="default">Default</option>
+                                            <!--                                    <option value="defaultdark">Default dark</option>
+                                                                                    <option value="modern">Modern</option>
+                                                                                    <option value="office-toolbar">Office Toolbar</option>
+                                                                                    <option value="office">Office</option>
+                                                                                    <option value="square">Square</option>-->
+                                        </select>
+                                    </div>
+                                </div>                                 
                             </form>  
-
                         </div>
                     </div>
                 </section>
@@ -140,11 +145,11 @@
         </div><!-- END COLORLIB-PAGE -->
         <script>
             var textarea = document.getElementById('editor');
-//            sceditor.create(textarea, {
-//                format: 'xhtml',
-//                icons: 'monocons',
-//                style: 'minified/themes/content/default.min.css'
-//            });
+            //            sceditor.create(textarea, {
+            //                format: 'xhtml',
+            //                icons: 'monocons',
+            //                style: 'minified/themes/content/default.min.css'
+            //            });
             var themeInput = document.getElementById('theme');
             themeInput.onchange = function () {
                 var theme = 'minified/themes/' + themeInput.value + '.min.css';
