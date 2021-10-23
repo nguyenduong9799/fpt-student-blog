@@ -101,7 +101,6 @@ public class PostDAO {
         }
         return post;
     }
-    
 
     public List<PostDTO> getPostByUserID(String userID) throws SQLException {
         List<PostDTO> list = new ArrayList<>();
@@ -203,7 +202,8 @@ public class PostDAO {
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote));
+                    String image = rs.getString("image");
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, image, vote));
                 }
             }
         } catch (Exception e) {
@@ -295,8 +295,8 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date,vote ) "
-                        + " values(?,?,?,?,?,?,?)";
+                String sql = "Insert into tblPosts(userID,title,statusPID,categoryID,postContent,date,vote,image ) "
+                        + " values(?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, post.getUserID());
                 stm.setString(2, post.getTitle());
@@ -305,6 +305,7 @@ public class PostDAO {
                 stm.setString(5, post.getPostContent());
                 stm.setString(6, post.getDate());
                 stm.setInt(7, 0);
+                stm.setString(8, post.getImage());
                 check = stm.executeUpdate() > 0;
             }
         } catch (Exception e) {
@@ -827,7 +828,7 @@ public class PostDAO {
         }
         return total;
     }
-    
+
     public int getTotalNotification() throws SQLException {
         int total = 0;
         Connection conn = null;

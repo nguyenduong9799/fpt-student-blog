@@ -116,9 +116,10 @@
                                                     }
                                                 }
                                             }
+                                        %>
                                     </select>
                                     <input class="form-control" placeholder="Tag" style="width: 100%;" type="text" name="tagList"><br>
-                                    <input class="form-control" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="img"><br>
+                                    <input class="form-control" id="image-1" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="imageBackgound"><br>
                                     <!--Content-->
                                     <h3 class="mb-5">Content of the post...</h3>
                                     <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
@@ -172,7 +173,7 @@
                     return response.json();
                 }).then(function (result) {
                     if (result.success) {
-                        if (document.getElementById("image-1").value=="") {
+                        if (document.getElementById("image-1").value == "") {
                             document.getElementById("image-1").value = result.data.link;
                         }
                         console.log(result.data.link);
