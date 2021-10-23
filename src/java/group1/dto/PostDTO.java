@@ -16,6 +16,7 @@ public class PostDTO {
     private String date;
     private int vote;
     private String approveComment;
+    private String image;
 
     public PostDTO() {
     }
@@ -24,8 +25,6 @@ public class PostDTO {
         this.postID = postID;
         this.userID = userID;
     }
-    
-    
 
     public PostDTO(String userID, String status, String category, String title, String postContent, String date) {
         this.userID = userID;
@@ -57,6 +56,36 @@ public class PostDTO {
         this.date = date;
         this.vote = vote;
         this.approveComment = approveComment;
+    }
+
+    public PostDTO(String userID, String status, String category, String title, String postContent, String date, String image) {
+        this.userID = userID;
+        this.status = status;
+        this.category = category;
+        this.title = title;
+        this.postContent = postContent;
+        this.date = date;
+        this.image = image;
+    }
+
+    public PostDTO(int postID, String userID, String status, String category, String title, String postContent, String date, String image, int vote) {
+        this.postID = postID;
+        this.userID = userID;
+        this.status = status;
+        this.category = category;
+        this.title = title;
+        this.postContent = postContent;
+        this.date = date;
+        this.vote = vote;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getPostID() {

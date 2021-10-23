@@ -36,12 +36,13 @@ public class CreatePostController extends HttpServlet {
             String category = request.getParameter("category");
             String postContent = request.getParameter("postContent");
             String userID = request.getParameter("userID");
+            String image = request.getParameter("imageBackgound");
             String status = "Waiting";
             LocalDateTime currentDateTime = java.time.LocalDateTime.now();
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String date = currentDateTime.format(format);
 
-            PostDTO post = new PostDTO(userID, status, category, title, postContent, date);
+            PostDTO post = new PostDTO(userID, status, category, title, postContent, date, image);
             PostDAO dao = new PostDAO();
             boolean check = dao.insertPost(post);
             if (check) {
