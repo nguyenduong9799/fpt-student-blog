@@ -116,7 +116,6 @@
                                                     }
                                                 }
                                             }
-                                        %>
                                     </select>
                                     <input class="form-control" placeholder="Tag" style="width: 100%;" type="text" name="tagList"><br>
                                     <input class="form-control" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="img"><br>
@@ -173,6 +172,10 @@
                     return response.json();
                 }).then(function (result) {
                     if (result.success) {
+                        if (document.getElementById("image-1").value=="") {
+                            document.getElementById("image-1").value = result.data.link;
+                        }
+                        console.log(result.data.link);
                         return result.data.link;
                     }
 
