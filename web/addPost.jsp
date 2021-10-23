@@ -118,6 +118,7 @@
                                 <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
                                 <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
                                 <input style="margin-bottom: 20px;"class="button" type="submit" name="action" value="Submit Post">
+                                <input type="text" name="image" id="image-1">
                                 <div hidden="">
                                     <label for="theme" >Theme:</label>
                                     <select id="theme" >
@@ -166,6 +167,10 @@
                     return response.json();
                 }).then(function (result) {
                     if (result.success) {
+                        if (document.getElementById("image-1").value=="") {
+                            document.getElementById("image-1").value = result.data.link;
+                        }
+                        console.log(result.data.link);
                         return result.data.link;
                     }
 
