@@ -91,6 +91,7 @@
                                         PostDAO dao = new PostDAO();
                                         PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
                                         List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
+                                        String image = (String) request.getAttribute("USER_IMAGE");
                                     %>
                                     <h1 class="mb-3"><%=post.getTitle()%></h1>
                                     <p><%=post.getPostContent()%></p>
@@ -107,7 +108,7 @@
                                     </div>                     
                                     <div class="about-author d-flex p-4 bg-light">
                                         <div class="bio mr-5">
-                                            <img width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                                            <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
                                         </div>
                                         <div class="desc">
                                             <h3><i class="icon-person"></i>  <%=post.getUserID()%></h3>

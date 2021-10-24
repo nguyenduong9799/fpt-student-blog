@@ -8,6 +8,7 @@ package group1.controller;
 import group1.dao.CommentDAO;
 import group1.dao.PostDAO;
 import group1.dao.TagDAO;
+import group1.dao.UserDAO;
 import group1.dto.CommentDTO;
 import group1.dto.PostDTO;
 import group1.dto.TagDTO;
@@ -38,7 +39,8 @@ public class ViewPostController extends HttpServlet {
             PostDAO dao = new PostDAO();
             PostDTO post = dao.getPostByID(postID);
             TagDAO tagDAO = new TagDAO();
-            CommentDAO commentDao = new CommentDAO();
+            CommentDAO commentDao = new CommentDAO();            
+            UserDAO userDAO = new UserDAO();
             List<CommentDTO> comment = commentDao.getListCommentByPostID(postID);
             List<TagDTO> listTag = tagDAO.getListTagByPostID(postID);
             if (loginUser != null) {
@@ -51,6 +53,7 @@ public class ViewPostController extends HttpServlet {
                 }
             }
             if (post != null) {
+                request.setAttribute("USER_IMAGE", userDAO.getUserImageByID(loginUser.getUserID()));
                 request.setAttribute("POST_VIEW", post);
                 request.setAttribute("LIST_COMMENT", comment);
                 request.setAttribute("POST_TAGS", listTag);

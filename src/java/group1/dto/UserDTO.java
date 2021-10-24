@@ -19,6 +19,7 @@ public class UserDTO {
     private int totalVote;
     private int rankID;
     private Date date;
+    private String image;
 
     public UserDTO() {
     }
@@ -34,6 +35,14 @@ public class UserDTO {
         this.totalVote = totalVote;
         this.rankID = rankID;
         this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUserID() {
