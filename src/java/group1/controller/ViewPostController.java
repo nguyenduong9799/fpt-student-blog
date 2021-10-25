@@ -39,7 +39,7 @@ public class ViewPostController extends HttpServlet {
             PostDAO dao = new PostDAO();
             PostDTO post = dao.getPostByID(postID);
             TagDAO tagDAO = new TagDAO();
-            CommentDAO commentDao = new CommentDAO();            
+            CommentDAO commentDao = new CommentDAO();
             UserDAO userDAO = new UserDAO();
             List<CommentDTO> comment = commentDao.getListCommentByPostID(postID);
             List<TagDTO> listTag = tagDAO.getListTagByPostID(postID);
@@ -53,7 +53,8 @@ public class ViewPostController extends HttpServlet {
                 }
             }
             if (post != null) {
-                request.setAttribute("USER_IMAGE", userDAO.getUserImageByID(post.getUserID()));
+                request.setAttribute("AUTHOR_IMAGE", userDAO.getUserImageByID(post.getUserID()));
+                request.setAttribute("AUTHOR_NAME", UserDAO.getUserNameByID(post.getUserID()));
                 request.setAttribute("POST_VIEW", post);
                 request.setAttribute("LIST_COMMENT", comment);
                 request.setAttribute("POST_TAGS", listTag);

@@ -75,7 +75,7 @@ public class PostDAO {
                 stm.setInt(1, postID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
+                    String userID =rs.getString("userID");
                     String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
                     String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
                     String title = rs.getString("title");
