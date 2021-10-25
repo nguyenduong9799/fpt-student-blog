@@ -108,7 +108,7 @@
                                     </div>                     
                                     <div class="about-author d-flex p-4 bg-light">
                                         <div class="bio mr-5">
-                                            <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
+                                            <img width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
                                         </div>
                                         <div class="desc">
                                             <h3><i class="icon-person"></i>  <%=post.getUserID()%></h3>
