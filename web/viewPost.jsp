@@ -91,7 +91,8 @@
                                         PostDAO dao = new PostDAO();
                                         PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
                                         List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
-                                        String image = (String) request.getAttribute("USER_IMAGE");
+                                        String image = (String) request.getAttribute("AUTHOR_IMAGE");
+                                        String authorName = (String) request.getAttribute("AUTHOR_NAME");
                                     %>
                                     <h1 class="mb-3"><%=post.getTitle()%></h1>
                                     <p><%=post.getPostContent()%></p>
@@ -111,7 +112,7 @@
                                             <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
                                         </div>
                                         <div class="desc">
-                                            <h3><i class="icon-person"></i>  <%=post.getUserID()%></h3>
+                                            <h3><i class="icon-person"></i>  <%=authorName%></h3>
                                             <p><i class="icon-folder-o"></i>  <%=post.getCategory()%>   <i class="icon-calendar"></i>  <%=dao.splitDate(post.getDate())%></p>
                                             <%
                                                 PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
