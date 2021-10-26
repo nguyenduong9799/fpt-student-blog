@@ -35,7 +35,7 @@
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="home.jsp">FPT Blog</a>
+            <a class="navbar-brand ps-3" href="admin.jsp">FPT Blog</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><svg class="svg-inline--fa fa-bars fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg><!-- <i class="fas fa-bars"></i> Font Awesome fontawesome.com --></button>
             <!-- Navbar Search-->
@@ -47,8 +47,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="file:///D:/Study/SWP391/startbootstrap-sb-admin-gh-pages/index.html#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><svg class="svg-inline--fa fa-user fa-w-14 fa-fw" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg><!-- <i class="fas fa-user fa-fw"></i> Font Awesome fontawesome.com --></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a></li>
-                        
+                        <li><a class="dropdown-item" href="#">Welcome: <%= loginUser.getUserName()%></a></li>
+
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="MainController?action=Logout">Logout</a></li>
                     </ul>
@@ -67,6 +67,8 @@
                                 List User</a>
                             <a class="nav-link" href="listCategory.jsp"><div class="sb-nav-link-icon"><svg class="svg-inline--fa fa-table fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table"></i> Font Awesome fontawesome.com --></div>
                                 List Category</a>
+                            <a class="nav-link" href="listTag.jsp"><div class="sb-nav-link-icon"><svg class="svg-inline--fa fa-table fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table"></i> Font Awesome fontawesome.com --></div>
+                                List Tag</a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -76,18 +78,26 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <p></p>
+                        <h1 class="mt-4">List User</h1>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body" style="text-align: center; font-size: 20px;">New Post: <%=totalNewPost%></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body" style="text-align: center; font-size: 20px;">New User: <%=totalNewUser%></div>                                   
+                                </div>
+                            </div>                            
+                        </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com -->
                                 Data Table List User
                             </div>
                             <div class="card-body">
-                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    <div class="dataTable-top">
-                                        <a><p style="text-align: center; font-size: 20px;">New Post: <%=totalNewPost%></p></a>
-                                        <a><p style="text-align: center; font-size: 20px;">New User: <%=totalNewUser%></p></a>
-                                    </div>
+                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">  
                                     <div class="dataTable-container">
                                         <%
                                             UserDAO dao = new UserDAO();
@@ -98,14 +108,15 @@
                                         <table id="datatablesSimple" class="dataTable-table">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="" style="width: 20%;">User ID</th>
+                                                    <th data-sortable="" style="width: 15%;">User ID</th>
                                                     <th data-sortable="" style="width: 10%;">Role ID</a</th>
                                                     <th data-sortable="" style="width: 10%;">Status UID</th>
-                                                    <th data-sortable="" style="width: 20%;">User Name</th>
-                                                    <th data-sortable="" style="width: 20%;">Email</th>
-                                                    <th data-sortable="" style="width: 15%;">Phone</th>
+                                                    <th data-sortable="" style="width: 15%;">User Name</th>
+                                                    <th data-sortable="" style="width: 15%;">Email</th>
+                                                    <th data-sortable="" style="width: 10%;">Phone</th>
                                                     <th data-sortable="" style="width: 5%;">Total Vote</th>
-           
+                                                    <th data-sortable="" style="width: 20%;">Ban User</th>
+
                                                 </tr>
                                             </thead>
 
@@ -122,7 +133,9 @@
                                                     <td><%=user.getEmail()%></td>
                                                     <td><%=user.getPhone()%></td>
                                                     <td><%=user.getTotalVote()%></td>
-                                                    <td><input class="button" type="submit" name="action" value="Detail"></td>
+                                                    <td>
+                                                        <input class="form-control" type="text" name="addcategory" value="" /></td>
+                                                    <td><input class="btn btn-primary" type="submit" name="action" value="Ban"></td>
                                                 </tr>
                                                 <input type="hidden" name="postID" value="<%=user.getUserID()%>">
                                             </form>
