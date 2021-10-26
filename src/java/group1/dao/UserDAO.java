@@ -29,7 +29,7 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT roleID, statusUID, userName, email, phone, totalVote, rankID, date "
+                String sql = " SELECT roleID, statusUID, userName, email, phone, totalVote, rankID, date, image "
                         + " FROM tblUsers "
                         + " WHERE userID=? AND password=? AND statusUID='1'";
                 stm = conn.prepareStatement(sql);
@@ -45,7 +45,8 @@ public class UserDAO {
                     int totalVote = rs.getInt("totalVote");
                     int rankID = rs.getInt("rankID");
                     Date date = rs.getDate("date");
-                    user = new UserDTO(userID, roleID, statusID, userName, password, email, phone, totalVote, rankID, date);
+                    String image=rs.getString("image");
+                    user = new UserDTO(userID, roleID, statusID, userName, password, email, phone, totalVote, rankID, date, image);
                 }
             }
         } catch (Exception e) {

@@ -37,6 +37,20 @@ public class UserDTO {
         this.date = date;
     }
 
+    public UserDTO(String userID, String roleID, String statusUID, String userName, String password, String email, String phone, int totalVote, int rankID, Date date, String image) {
+        this.userID = userID;
+        this.roleID = roleID;
+        this.statusUID = statusUID;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.totalVote = totalVote;
+        this.rankID = rankID;
+        this.date = date;
+        this.image = image;
+    }
+
     public String getImage() {
         return image;
     }
