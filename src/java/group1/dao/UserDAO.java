@@ -64,7 +64,7 @@ public class UserDAO {
         return user;
     }
     
-    private int Rank(String userID) throws SQLException{
+    public int Rank(String userID) throws SQLException{
         int rank = 0;
         Connection conn = null;
         PreparedStatement stm = null;
