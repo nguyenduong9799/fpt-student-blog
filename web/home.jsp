@@ -105,15 +105,14 @@
                                                     <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span><br>
                                                     <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%></span>
                                                     <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
-
-
                                                 </p>
                                             </div>
                                             <p class="mb-4"><%=post.getPostContent().substring(0, 15)%></p>
                                             <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                         </div>
-                                    </div>
+                                    </div>      
                                 </div>
+                                        <div></div><br>
                                 <%
                                             }
                                         }
