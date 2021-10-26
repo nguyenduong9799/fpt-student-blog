@@ -1,4 +1,5 @@
 
+<%@page import="group1.dao.PostDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,6 +21,11 @@
     </head>
     <body class="sb-nav-fixed">
         <%
+            PostDAO postDAO = new PostDAO();
+            String startDay = postDAO.startDayOfMonth();
+            String endDay = postDAO.endDayOfMonth();
+            int totalNewPost = postDAO.totalNewPostPerMonth(startDay, endDay);
+            int totalNewUser = postDAO.totalNewUserPerMonth(startDay, endDay);
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser == null || !"AD".equals(loginUser.getRoleID())) {
                 response.sendRedirect("LogoutController");
@@ -78,10 +84,9 @@
                             </div>
                             <div class="card-body">
                                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    <div class="dataTable-top">       
-                                        <div class="dataTable-search">
-                                            <input class="dataTable-input" placeholder="Search..." type="text">
-                                        </div>
+                                    <div class="dataTable-top">
+                                        <a><p style="text-align: center; font-size: 20px;">New Post: <%=totalNewPost%></p></a>
+                                        <a><p style="text-align: center; font-size: 20px;">New User: <%=totalNewUser%></p></a>
                                     </div>
                                     <div class="dataTable-container">
                                         <%
