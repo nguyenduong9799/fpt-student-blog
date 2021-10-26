@@ -26,6 +26,19 @@ public class PostDTO {
         this.userID = userID;
     }
 
+    public PostDTO(int postID, String userID, String status, String category, String title, String postContent, String date, int vote, String approveComment, String image) {
+        this.postID = postID;
+        this.userID = userID;
+        this.status = status;
+        this.category = category;
+        this.title = title;
+        this.postContent = postContent;
+        this.date = date;
+        this.vote = vote;
+        this.approveComment = approveComment;
+        this.image = image;
+    }
+
     public PostDTO(String userID, String status, String category, String title, String postContent, String date) {
         this.userID = userID;
         this.status = status;
