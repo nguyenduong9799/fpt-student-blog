@@ -277,8 +277,8 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " INSERT INTO tblUsers(userID, roleID, statusUID, userName, password, email, phone, totalVote, rankID, date) "
-                        + " VALUES(?,?,?,?,?,?,?,?,?,?)";
+                String sql = " INSERT INTO tblUsers(userID, roleID, statusUID, userName, password, email, phone, totalVote, rankID, date, image) "
+                        + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, user.getUserID());
                 stm.setString(2, user.getRoleID());
@@ -290,6 +290,7 @@ public class UserDAO {
                 stm.setInt(8, user.getTotalVote());
                 stm.setInt(9, user.getRankID());
                 stm.setDate(10, user.getDate());
+                stm.setString(11, user.getImage());
                 check = stm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

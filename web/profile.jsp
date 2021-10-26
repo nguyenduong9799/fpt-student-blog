@@ -52,7 +52,7 @@
                             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
                             if (loginUser != null) {
                         %>
-                        <li class="colorlib-active"><a href="profile.jsp">Welcome: <%= loginUser.getUserName()%></a></li>
+                        <li class="colorlib-active"><a href="MainController?action=Profile">Welcome: <%= loginUser.getUserName()%></a></li>
                         <li><a href="addPost.jsp">Create New Post</a></li>
                         <li><a href="notification.jsp">Notification</a></li>
                         <li ><a href="MainController?action=Logout">Logout</a></li>
@@ -133,10 +133,10 @@
                                 %>
                             </div>
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <form action="MainController">
+                                <form action="MainController" method="Post">
                                     <div class="sidebar-box"  style="text-align: center;">
                                         <div style="position: relative;">
-                                            <img  style="border-radius: 999px;"width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                                            <img  style="border-radius: 999px;"width="200" height="200" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">
                                         </div>  
                                     </div>
                                     <div class="sidebar-box ftco-animate">
