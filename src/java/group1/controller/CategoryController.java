@@ -43,9 +43,11 @@ public class CategoryController extends HttpServlet {
             int categoryID = Integer.parseInt(request.getParameter("txtCategoryID"));
             ArrayList<PostDTO> listPost = null;
             listPost = PostDAO.getAllPostByCategory(categoryID);
- 
+            PostDAO dao = new PostDAO();
+            int total = dao.getTotalPostByCategory(categoryID);
             if(listPost == null) listPost = new ArrayList<>();
             session.setAttribute("LIST_POST", listPost);
+            request.setAttribute("TOTAL_POST_BY_CATE", total);
             url = USER;
                 
         } catch (Exception e) {
