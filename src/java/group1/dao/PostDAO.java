@@ -418,7 +418,8 @@ public class PostDAO {
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote));
+                    String image = rs.getString("image");
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, image,vote));
                 }
             }
         } catch (Exception e) {
@@ -462,7 +463,8 @@ public class PostDAO {
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote));
+                    String image = rs.getString("image");
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, image, vote));
                 }
             }
         } catch (Exception e) {
@@ -489,7 +491,7 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select postID, userID, statusPID, categoryID, title, postContent, date, vote "
+                String sql = "Select postID, userID, statusPID, categoryID, title, postContent, date, vote, image "
                         + "From tblPosts "
                         + "where title LIKE ? and statusPID = ?";
                 stm = conn.prepareStatement(sql);
@@ -504,7 +506,9 @@ public class PostDAO {
                             rs.getString("title"),
                             rs.getString("postContent"),
                             rs.getString("date"),
+                            rs.getString("image"),
                             rs.getInt("vote")));
+                            
                 }
             }
         } catch (Exception e) {
@@ -531,7 +535,7 @@ public class PostDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = "Select postID, userID, status, category, title, postContent, date, vote \n"
+                String sql = "Select postID, userID, status, category, title, postContent, date, vote, image \n"
                         + "From tblPosts\n"
                         + "Where title like ?";
                 stm = conn.prepareStatement(sql);
@@ -548,7 +552,9 @@ public class PostDAO {
                             rs.getString("title"),
                             rs.getString("postContent"),
                             rs.getString("date"),
+                            rs.getString("image"),
                             rs.getInt("vote")));
+                           
                 }
             }
         } catch (Exception e) {
