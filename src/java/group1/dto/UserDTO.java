@@ -7,21 +7,30 @@ package group1.dto;
 
 import java.sql.Date;
 
-
 public class UserDTO {
+
     private String userID;
     private String roleID;
     private String statusUID;
     private String userName;
     private String password;
     private String email;
-    private String phone;   
+    private String phone;
     private int totalVote;
     private int rankID;
     private Date date;
     private String image;
 
     public UserDTO() {
+    }
+
+    public UserDTO(String userID, String userName, String password, String email, String phone, String image) {
+        this.userID = userID;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.image = image;
     }
 
     public UserDTO(String userID, String roleID, String statusUID, String userName, String password, String email, String phone, int totalVote, int rankID, Date date) {
@@ -143,5 +152,5 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" + "userID=" + userID + ", roleID=" + roleID + ", statusUID=" + statusUID + ", userName=" + userName + ", password=" + password + ", email=" + email + ", phone=" + phone + ", totalVote=" + totalVote + ", rankID=" + rankID + ", date=" + date + '}';
     }
-    
+
 }

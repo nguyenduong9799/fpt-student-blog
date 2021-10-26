@@ -169,11 +169,14 @@
                                         <label>Email</label><br/>
                                         <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
                                         <label>Phone Number</label><br/>
-                                        <input type="text" name="phoneNumber" class="input" value="<%=loginUser.getPhone()%>"/><br/>
+                                        <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
                                         <label>Avatar image</label><br/>
                                         <input type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
-                                        <label>Password</label><br/>
-                                        <input type="password" name="password" class="input" value="<%=loginUser.getPassword()%>"/><br/>
+                                        <label>Change Password</label><br/>
+                                        <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
+                                        <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
+                                        <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
+                                        <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
                                         <div style="text-align: center;">
                                             <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
                                         </div>
