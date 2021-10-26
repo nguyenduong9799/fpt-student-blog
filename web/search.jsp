@@ -88,26 +88,29 @@
                         <div class="col-lg-8 px-md-5 py-5">
                             <jsp:useBean id="a" class="group1.dao.PostDAO"/>
                             <c:forEach items="${requestScope.POST_VIEW}" var="o">       
-                                <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                                    <a href="MainController?action=ViewPost&postID=${o.userID}" class="img" style="background-image: url(${o.image});"></a>
-                                    <div class="text p-4">
-                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
-                                        <div class="meta-wrap">
-                                            <p class="meta">
-                                                <span><i class="icon-person mr-2"></i>${o.userID}</a></span><br>
-                                                <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
-                                                <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)}</span>
-                                                <span><i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span>
+                                <div class="contentPage">
+                                    <div class="blog-entry ftco-animate d-md-flex align-items-center">
+                                        <a href="MainController?action=ViewPost&postID=${o.userID}" class="img" style="background-image: url(${o.image});"></a>
+                                        <div class="text p-4">
+                                            <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
+                                            <div class="meta-wrap">
+                                                <p class="meta">
+                                                    <span><i class="icon-person mr-2"></i>${o.userID}</a></span><br>
+                                                    <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
+                                                    <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)}</span>
+                                                    <span><i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span>
 
-                                            </p>
+                                                </p>
+                                            </div>
+                                            <p class="mb-4"></p>
+                                            <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
                                         </div>
-                                        <p class="mb-4"></p>
-                                        <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
-                                    </div>
 
-                                </div>
-                                <div></div><br>
+                                    </div>
+                                </div><br>
                             </c:forEach> 
+                            <!-- Hiên thị nút bấm -->
+                            <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                         </div>
                         <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                             <div class="sidebar-box pt-md-4">
@@ -184,5 +187,37 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+        <!-- JS tạo nút bấm di chuyển trang start -->
+        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <!-- JS tạo nút bấm di chuyển trang end -->
+        <script type="text/javascript">
+                            $(function () {
+                                var pageSize = 5; // Hiển thị 6 sản phẩm trên 1 trang
+                                showPage = function (page) {
+                                    $(".contentPage").hide();
+                                    $(".contentPage").each(function (n) {
+                                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                                            $(this).show();
+                                    });
+                                };
+                                showPage(1);
+                                ///** Cần truyền giá trị vào đây **///
+                                var totalRows = ${a.getTotalPostBySearch(param.search)}; // Tổng số sản phẩm hiển thị
+                                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
+                                var iTotalPages = Math.ceil(totalRows / pageSize);
+
+                                var obj = $('#pagination').twbsPagination({
+                                    totalPages: iTotalPages,
+                                    visiblePages: btnPage,
+                                    onPageClick: function (event, page) {
+                                        console.info(page);
+                                        showPage(page);
+                                    }
+                                });
+                                console.info(obj.data());
+                            });
+        </script>
     </body>
 </html>

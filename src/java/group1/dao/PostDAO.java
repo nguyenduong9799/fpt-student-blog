@@ -494,7 +494,7 @@ public class PostDAO {
             if (conn != null) {
                 String sql = "Select postID, userID, statusPID, categoryID, title, postContent, date, vote, image "
                         + "From tblPosts "
-                        + "where title LIKE ? and statusPID = ?";
+                        + "where title LIKE ? and statusPID = ? order by date desc";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%" + title + "%");
                 stm.setString(2, "1");
@@ -783,6 +783,41 @@ public class PostDAO {
             if (conn != null) {
                 String sql = "select count(*) from tblPosts where statusPID=1";
                 stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
+    
+    public int getTotalPostBySearch(String title) throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select count(*) "
+                        + "From tblPosts "
+                        + "where title LIKE ? and statusPID = ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%" + title + "%");
+                stm.setString(2, "1");
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     total = rs.getInt(1);
