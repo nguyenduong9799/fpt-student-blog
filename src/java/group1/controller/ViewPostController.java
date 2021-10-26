@@ -41,7 +41,7 @@ public class ViewPostController extends HttpServlet {
             TagDAO tagDAO = new TagDAO();
             CommentDAO commentDao = new CommentDAO();
             UserDAO userDAO = new UserDAO();
-            boolean checkRank = userDAO.checkRank(post.getUserID());
+            userDAO.checkRank(post.getUserID());
             List<CommentDTO> comment = commentDao.getListCommentByPostID(postID);
             List<TagDTO> listTag = tagDAO.getListTagByPostID(postID);
             if (loginUser != null) {

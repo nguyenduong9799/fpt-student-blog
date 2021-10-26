@@ -26,6 +26,11 @@
             String endDay = postDAO.endDayOfMonth();
             int totalNewPost = postDAO.totalNewPostPerMonth(startDay, endDay);
             int totalNewUser = postDAO.totalNewUserPerMonth(startDay, endDay);
+            int totalInteract = postDAO.totalVote();
+            if (session.isNew()) {
+                postDAO.updateView();
+            }
+            int totalAccessSystem = postDAO.totalAccessSystem();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser == null || !"AD".equals(loginUser.getRoleID())) {
                 response.sendRedirect("LogoutController");
@@ -89,7 +94,17 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body" style="text-align: center; font-size: 20px;">New User: <%=totalNewUser%></div>                                   
                                 </div>
-                            </div>                            
+                            </div> 
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body" style="text-align: center; font-size: 20px;">Total Interact: <%=totalInteract%></div>                                   
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body" style="text-align: center; font-size: 20px;">Total Access System: <%=totalAccessSystem%></div>                                   
+                                </div>
+                            </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
