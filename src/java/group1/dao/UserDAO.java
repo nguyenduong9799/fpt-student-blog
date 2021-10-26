@@ -63,6 +63,82 @@ public class UserDAO {
         }
         return user;
     }
+    
+    private int Rank(String userID) throws SQLException{
+        int rank = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select totalVote from tblUsers where userID = ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int total = rs.getInt("totalVote");
+                    if (total == 0){
+                        rank = 0;
+                    }
+                    if(total >= 150 && total < 250){
+                        rank = 1;
+                    }
+                    if(total >= 250 && total < 350){
+                        rank = 2;
+                    }
+                    if(total >= 350 && total < 500){
+                        rank = 3;
+                    }
+                    if(total >= 500 && total < 1000){
+                        rank = 4;
+                    }
+                    if(total >= 1000){
+                        rank = 5;
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return rank;
+    }
+    
+    public boolean checkRank(String userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                int rank = Rank(userID);
+                String sql = " Update tblUsers set rankID = ? where userID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, rank);
+                stm.setString(2, userID);
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
     public String getUserImageByID(String userID) throws SQLException {
         String userImage = null;
