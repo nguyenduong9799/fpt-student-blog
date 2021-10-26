@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>Admin of FPT Blog</div>
+                        <div class="small">FPT Blog:</div>Admin Page</div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
