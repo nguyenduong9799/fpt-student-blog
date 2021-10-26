@@ -107,9 +107,9 @@
 
                                     <!--Category-->       
                                     <select class="select" name="category">
-                                        <option selected disabled>Choose Category</option>
+                                        <option selected value="<%=post.getCategory()%>"><%=post.getCategory()%></option>
                                         <%
-                                            String tag=(String) request.getAttribute("POST_TAGS");
+                                            String tag = (String) request.getAttribute("POST_TAGS");
                                             ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
                                             if (listCate != null) {
                                                 if (!listCate.isEmpty()) {
@@ -128,7 +128,8 @@
                                     <h3 class="mb-5">Content of the post...</h3>
                                     <textarea rows="20" cols="5" id="editor" name="postContent"><%=post.getPostContent()%></textarea><br>
                                     <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
-                                    <input style="margin-bottom: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Submit Post">
+                                    <input type="hidden" name="postID" value="<%=post.getPostID()%>">
+                                    <input style="margin-bottom: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Submit Post Again">
                                     <div hidden="">
                                         <label for="theme" >Theme:</label>
                                         <select id="theme" >
