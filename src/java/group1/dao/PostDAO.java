@@ -874,6 +874,40 @@ public class PostDAO {
         }
         return total;
     }
+    
+    public int getTotalPostByCategory(int categoryID) throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select count(*) "
+                        + "From tblPosts "
+                        + "Where categoryID = ? AND statusPID=1";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, categoryID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
 
     public int getTotalComment(int postID) throws SQLException {
         int total = 0;
