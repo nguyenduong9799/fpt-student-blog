@@ -117,7 +117,7 @@
                                                     <td><%=post.getStatus()%></td>
                                                     <td><%=post.getDate()%></td>
                                                     <td><%=post.getCategory()%></td>   
-                                                    <td><input class="button" type="submit" name="action" value="Detail"></td>
+                                                    <td><input class="btn btn-primary" type="submit" name="action" value="Detail"></td>
                                                 </tr>
                                                 <input type="hidden" name="postID" value="<%=post.getPostID()%>">
                                             </form>

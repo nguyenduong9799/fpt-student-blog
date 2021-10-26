@@ -134,6 +134,41 @@ public class TagDAO {
         }
         return list;
     }
+    public static List<TagDTO> getListTag() throws SQLException {
+        List<TagDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "SELECT tagID,\n"
+                        + " COUNT(postID)\n"
+                        + "FROM tblTagBlog\n"
+                        + "GROUP BY  tagID\n"
+                        + "ORDER BY COUNT(postID) DESC ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int tagID = rs.getInt("tagID");
+                    String tagName = getTagNameByID(tagID);
+                    list.add(new TagDTO(tagID, tagName));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
 
     public static String getTagNameByID(int tagID) throws SQLException {
         String tagName = null;
