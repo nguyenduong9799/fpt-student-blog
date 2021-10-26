@@ -84,7 +84,7 @@
 
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
-                    <div class="container px-0">
+
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
@@ -171,7 +171,6 @@
                                 </div>
                             </div><!-- END COL --> 
                         </div>
-                    </div>
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 
