@@ -89,7 +89,7 @@
                             <jsp:useBean id="a" class="group1.dao.PostDAO"/>
                             <c:forEach items="${requestScope.POST_VIEW}" var="o">       
                                 <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                                    <a href="MainController?action=ViewPost&postID=${o.userID}" class="img" style="background-image: url(images/image_5.jpg);"></a>
+                                    <a href="MainController?action=ViewPost&postID=${o.userID}" class="img" style="background-image: url(${o.image});"></a>
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                         <div class="meta-wrap">
