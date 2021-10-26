@@ -114,7 +114,7 @@
                                         <%
                                             }
                                         %>
-                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" ><%=post.getTitle()%></a></h3>
+                                        <h3 class="mb-2"><a href="MainController?action=ViewYourPost&postID=<%=post.getPostID()%>" ><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
                                                 <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
@@ -123,7 +123,7 @@
                                             </p>
                                         </div>
                                         <p class="mb-4"></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>                                              
+                                        <p><a href="MainController?action=ViewYourPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail<span class="ion-ios-arrow-forward"></span></a></p>                                              
                                     </div>
                                 </div>
                                 <%
@@ -143,11 +143,11 @@
                                         <%
                                             if (loginUser.getRankID() == 1) {
                                         %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
                                         <%
                                         } else if (loginUser.getRankID() == 2) {
                                         %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
                                         <%
                                         } else if (loginUser.getRankID() == 3) {
                                         %>

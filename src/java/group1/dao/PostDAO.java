@@ -75,7 +75,7 @@ public class PostDAO {
                 stm.setInt(1, postID);
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    String userID =rs.getString("userID");
+                    String userID = rs.getString("userID");
                     String status = StatusDAO.getStatusByStatusID(rs.getInt("statusPID"));
                     String category = CategoryDAO.getCategoryNameByID(rs.getInt("categoryID"));
                     String title = rs.getString("title");
@@ -83,7 +83,8 @@ public class PostDAO {
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
                     String approveComment = rs.getString("approveComment");
-                    post = new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment);
+                    String image = rs.getString("image");
+                    post = new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment, image);
                 }
             }
         } catch (Exception e) {
@@ -419,7 +420,7 @@ public class PostDAO {
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
                     String image = rs.getString("image");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, image,vote));
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, image, vote));
                 }
             }
         } catch (Exception e) {
@@ -508,7 +509,7 @@ public class PostDAO {
                             rs.getString("date"),
                             rs.getString("image"),
                             rs.getInt("vote")));
-                            
+
                 }
             }
         } catch (Exception e) {
@@ -554,7 +555,7 @@ public class PostDAO {
                             rs.getString("date"),
                             rs.getString("image"),
                             rs.getInt("vote")));
-                           
+
                 }
             }
         } catch (Exception e) {

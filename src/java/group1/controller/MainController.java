@@ -35,6 +35,8 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CATEGORY = "UpdateCategory";
     private static final String GET_POST_BY_TAG = "GetPostByTagController";
     private static final String PROFILE = "ProfileController";
+    private static final String VIEW_YOUR_POST = "ViewYourPostController";
+    private static final String EDIT_POST = "EditPostController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -72,8 +74,12 @@ public class MainController extends HttpServlet {
                 url = UPDATE_CATEGORY;
             } else if ("GetPostByTag".equals(action)) {
                 url = GET_POST_BY_TAG;
-            }else if ("Profile".equals(action)) {
+            } else if ("Profile".equals(action)) {
                 url = PROFILE;
+            } else if ("ViewYourPost".equals(action)) {
+                url = VIEW_YOUR_POST;
+            } else if ("EditPost".equals(action)) {
+                url = EDIT_POST;
             }
 
         } catch (Exception e) {
