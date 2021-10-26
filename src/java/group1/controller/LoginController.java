@@ -27,6 +27,7 @@ public class LoginController extends HttpServlet {
     private static final String ADMIN = "admin.jsp";
     private static final String USER = "home.jsp";
     private static final String MENTOR = "mentor.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,25 +36,23 @@ public class LoginController extends HttpServlet {
             String userID = request.getParameter("userID");
             String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
-            boolean checkRank = dao.checkRank(userID);
-            if (checkRank) {
-                UserDTO user = dao.checkLogin(userID, password);
-                HttpSession session = request.getSession();
-                if (user != null) {
-                    session.setAttribute("LOGIN_USER", user);
-                    String roleID = user.getRoleID();
-                    if ("AD".equals(roleID)) {
-                        url = ADMIN;
-                    } else if ("US".equals(roleID)) {
-                        url = USER;
-                    } else if ("MT".equals(roleID)) {
-                        url = MENTOR;
-                    } else {
-                        session.setAttribute("ERROR_MESSAGE", "Your role is not support");
-                    }
+            dao.checkRank(userID);
+            UserDTO user = dao.checkLogin(userID, password);
+            HttpSession session = request.getSession();
+            if (user != null) {
+                session.setAttribute("LOGIN_USER", user);
+                String roleID = user.getRoleID();
+                if ("AD".equals(roleID)) {
+                    url = ADMIN;
+                } else if ("US".equals(roleID)) {
+                    url = USER;
+                } else if ("MT".equals(roleID)) {
+                    url = MENTOR;
                 } else {
-                    session.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password");
+                    session.setAttribute("ERROR_MESSAGE", "Your role is not support");
                 }
+            } else {
+                session.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password");
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());

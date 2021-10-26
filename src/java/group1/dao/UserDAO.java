@@ -114,8 +114,7 @@ public class UserDAO {
         return rank;
     }
 
-    public boolean checkRank(String userID) throws SQLException {
-        boolean check = false;
+    public void checkRank(String userID) throws SQLException {
         Connection conn = null;
         PreparedStatement stm = null;
         try {
@@ -126,7 +125,7 @@ public class UserDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, rank);
                 stm.setString(2, userID);
-                check = stm.executeUpdate() > 0 ? true : false;
+                stm.executeUpdate();
             }
         } catch (Exception e) {
         } finally {
@@ -137,7 +136,6 @@ public class UserDAO {
                 conn.close();
             }
         }
-        return check;
     }
 
     public String getUserImageByID(String userID) throws SQLException {
