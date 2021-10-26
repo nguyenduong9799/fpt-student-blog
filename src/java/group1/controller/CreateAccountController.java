@@ -55,7 +55,7 @@ public class CreateAccountController extends HttpServlet {
                 long millis = System.currentTimeMillis();
                 Date date = new Date(millis);
                 UserDAO dao = new UserDAO();
-                UserDTO user = new UserDTO(userID, role, "1", name, password, email, phone, 0, 0, date);
+                UserDTO user = new UserDTO(userID, role, "1", name, password, email, phone, 0, 0, date, "images/images.png");
                 boolean checkDuplicate = dao.checkDuplicate(userID);
                 if (checkDuplicate) {
                     userError.setUserIDError("Duplicate User ID " + userID + "!");
