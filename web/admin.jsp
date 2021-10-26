@@ -27,9 +27,6 @@
             int totalNewPost = postDAO.totalNewPostPerMonth(startDay, endDay);
             int totalNewUser = postDAO.totalNewUserPerMonth(startDay, endDay);
             int totalInteract = postDAO.totalVote();
-            if (session.isNew()) {
-                postDAO.updateView();
-            }
             int totalAccessSystem = postDAO.totalAccessSystem();
             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
             if (loginUser == null || !"AD".equals(loginUser.getRoleID())) {
