@@ -45,14 +45,15 @@ public class HomeController extends HttpServlet {
             ArrayList<PostDTO> listPost = PostDAO.getAvailablePost();
             ArrayList<CategoryDTO> listCategory = CategoryDAO.getAllCategory();
             List<TagDTO> listTag = TagDAO.getListMostTag();
-
+            HttpSession session = request.getSession();
+            PostDAO dao = new PostDAO();
+            if (session.isNew()) {
+                dao.updateView();
+            }
             if (listPost != null) {
-                HttpSession session = request.getSession();
-
                 session.setAttribute("LIST_CATEGORY", listCategory);
                 session.setAttribute("LIST_POST", listPost);
                 session.setAttribute("LIST_TAG", listTag);
-
             }
         } catch (Exception e) {
 
