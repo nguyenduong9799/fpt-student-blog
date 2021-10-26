@@ -1,3 +1,4 @@
+<%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CategoryDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -96,33 +97,33 @@
                                             for (PostDTO post : list) {
                                 %>
 
-                                <div class="blog-entry ftco-animate">
+                                <div class="blog-entry ftco-animate" style="margin-bottom: 20px;">
                                     <div class="text p-4">
-                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
+                                        <%
+                                            if ("Approved".equals(post.getStatus())) {
+                                        %>
+                                        <span class="badge badge-success">Approved</span>
+                                        <%
+                                        } else if ("Denied".equals(post.getStatus())) {
+                                        %>
+                                        <span class="badge badge-danger">Denied</span>
+                                        <%
+                                        } else {
+                                        %>
+                                        <span class="badge badge-primary">Waiting</span>
+                                        <%
+                                            }
+                                        %>
+                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" ><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
                                                 <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
-                                                <span><i class="icon-calendar mr-2"></i><%=post.getDate()%></span><br>
+                                                <span><i class="icon-calendar mr-2"></i><%=post.getDate().substring(0, 19)%></span><br>
                                                 <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%> Comment</span>
                                             </p>
                                         </div>
-                                        <p class="mb-4"><%=post.getUserID()%></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
-                                                <%
-                                                    if ("Approved".equals(post.getStatus())) {
-                                                %>
-                                        <p><a><img alt="" src="images/Accept.png"></a></p>
-                                                <%
-                                                } else if ("Denied".equals(post.getStatus())) {
-                                                %>
-                                        <p><a><img alt="" src="images/Deny.png"></a></p>
-                                                <%
-                                                } else {
-                                                %>
-                                        <p><a><img alt="" src="images/Pending.png"></a></p>
-                                                <%
-                                                    }
-                                                %>
+                                        <p class="mb-4"></p>
+                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>                                              
                                     </div>
                                 </div>
                                 <%
@@ -131,49 +132,60 @@
                                     }
                                 %>
                             </div>
-                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                 <div class="sidebar-box pt-md-4">
-                                   <div class="bio mr-5">
-                                            <img width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                                <form action="MainController">
+                                    <div class="sidebar-box"  style="text-align: center;">
+                                        <div style="position: relative;">
+                                            <img  style="border-radius: 999px;"width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
                                         </div>  
-                                 </div>
-                                 <div class="sidebar-box ftco-animate">
-                                     <h3 class="sidebar-heading">Categories</h3>
-                            <c:if test="${sessionScope.LIST_CATEGORY == null}">
-                                <c:redirect url="HomeController"></c:redirect>
-                            </c:if>
-                            <ul class="categories">                                       
-                            <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                                <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                            </c:forEach> 
-                    </ul>
-                </div>
-             
-                        </div><!-- END COL --> 
+                                    </div>
+                                    <div class="sidebar-box ftco-animate">
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
+                                        <br/>
+                                        <label style="margin-top: 5px;">Full Name</label><br/>
+                                        <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
+                                        <label>Email</label><br/>
+                                        <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
+                                        <label>Phone Number</label><br/>
+                                        <input type="text" name="phoneNumber" class="input" value="<%=loginUser.getPhone()%>"/><br/>
+                                        <label>Avatar image</label><br/>
+                                        <input type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
+                                        <label>Password</label><br/>
+                                        <input type="password" name="password" class="input" value="<%=loginUser.getPassword()%>"/><br/>
+                                        <div style="text-align: center;">
+                                            <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!-- END COL --> 
+                        </div>
                     </div>
-            </div>
-        </section>
-    </div><!-- END COLORLIB-MAIN -->
+                </section>
+            </div><!-- END COLORLIB-MAIN -->
 
-</div><!-- END COLORLIB-PAGE -->
+        </div><!-- END COLORLIB-PAGE -->
 
-<!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+        <!-- loader -->
+        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/jquery.animateNumber.min.js"></script>
-<script src="js/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="js/google-map.js"></script>
-<script src="js/main.js"></script>
-</body>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/jquery.waypoints.min.js"></script>
+        <script src="js/jquery.stellar.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/jquery.animateNumber.min.js"></script>
+        <script src="js/scrollax.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script src="js/google-map.js"></script>
+        <script src="js/main.js"></script>
+    </body>
 </html>
