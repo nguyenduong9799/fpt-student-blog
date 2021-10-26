@@ -45,7 +45,7 @@ public class UserDAO {
                     int totalVote = rs.getInt("totalVote");
                     int rankID = rs.getInt("rankID");
                     Date date = rs.getDate("date");
-                    String image=rs.getString("image");
+                    String image = rs.getString("image");
                     user = new UserDTO(userID, roleID, statusID, userName, password, email, phone, totalVote, rankID, date, image);
                 }
             }
@@ -63,8 +63,8 @@ public class UserDAO {
         }
         return user;
     }
-    
-    public int Rank(String userID) throws SQLException{
+
+    public int Rank(String userID) throws SQLException {
         int rank = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -78,22 +78,22 @@ public class UserDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int total = rs.getInt("totalVote");
-                    if (total == 0){
+                    if (total == 0) {
                         rank = 0;
                     }
-                    if(total >= 150 && total < 250){
+                    if (total >= 150 && total < 250) {
                         rank = 1;
                     }
-                    if(total >= 250 && total < 350){
+                    if (total >= 250 && total < 350) {
                         rank = 2;
                     }
-                    if(total >= 350 && total < 500){
+                    if (total >= 350 && total < 500) {
                         rank = 3;
                     }
-                    if(total >= 500 && total < 1000){
+                    if (total >= 500 && total < 1000) {
                         rank = 4;
                     }
-                    if(total >= 1000){
+                    if (total >= 1000) {
                         rank = 5;
                     }
                 }
@@ -113,7 +113,7 @@ public class UserDAO {
         }
         return rank;
     }
-    
+
     public boolean checkRank(String userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -230,6 +230,36 @@ public class UserDAO {
             if (rs != null) {
                 rs.close();
             }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean update(UserDTO user) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Update tblUsers set userName=?, password=?, email=?, phone=?, image=?  "
+                        + "Where userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, user.getUserName());
+                stm.setString(2, user.getPassword());
+                stm.setString(3, user.getEmail());
+                stm.setString(4, user.getPhone());
+                stm.setString(5, user.getImage());
+                stm.setString(6, user.getUserID());
+                check = stm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+        } finally {
             if (stm != null) {
                 stm.close();
             }

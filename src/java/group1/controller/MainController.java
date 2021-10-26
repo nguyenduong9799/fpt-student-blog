@@ -38,6 +38,7 @@ public class MainController extends HttpServlet {
     private static final String VIEW_YOUR_POST = "ViewYourPostController";
     private static final String EDIT_POST = "EditPostController";
     private static final String SUBMIT_AGAIN = "SubmitAgainController";
+    private static final String EDIT_PROFILE = "EditProfileController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -83,6 +84,8 @@ public class MainController extends HttpServlet {
                 url = EDIT_POST;
             } else if ("Submit Post Again".equals(action)) {
                 url = SUBMIT_AGAIN;
+            } else if ("Save Changes".equals(action)) {
+                url = EDIT_PROFILE;
             }
 
         } catch (Exception e) {
