@@ -289,6 +289,42 @@ public class PostDAO {
         return check;
     }
 
+    public boolean updatePost(PostDTO post) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Update tblPosts Set userID=?, title=?, statusPID=?, categoryID=?, "
+                        + "postContent=?, date=?, vote=?, image=?, approveComment=? Where postID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, post.getUserID());
+                stm.setString(2, post.getTitle());
+                stm.setInt(3, StatusDAO.getStatusIDByStatusName(post.getStatus()));
+                stm.setInt(4, CategoryDAO.getCategoryIDByName(post.getCategory()));
+                stm.setString(5, post.getPostContent());
+                stm.setString(6, post.getDate());
+                stm.setInt(7, 0);
+                stm.setString(8, post.getImage());
+                stm.setString(9, post.getApproveComment());
+                stm.setInt(10, post.getPostID());
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
     public boolean insertPost(PostDTO post) throws SQLException {
         boolean check = false;
         Connection conn = null;
@@ -803,7 +839,7 @@ public class PostDAO {
         }
         return total;
     }
-    
+
     public int getTotalPostBySearch(String title) throws SQLException {
         int total = 0;
         Connection conn = null;
@@ -907,8 +943,8 @@ public class PostDAO {
         String dateSplited = date.substring(0, index);
         return dateSplited;
     }
-    
-    public String startDayOfMonth() throws SQLException{
+
+    public String startDayOfMonth() throws SQLException {
         String startDay = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -940,8 +976,8 @@ public class PostDAO {
         }
         return startDay;
     }
-    
-    public String endDayOfMonth() throws SQLException{
+
+    public String endDayOfMonth() throws SQLException {
         String startDay = null;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -973,8 +1009,8 @@ public class PostDAO {
         }
         return startDay;
     }
-    
-    public int totalNewPostPerMonth(String startDay, String endDay) throws SQLException{
+
+    public int totalNewPostPerMonth(String startDay, String endDay) throws SQLException {
         int total = 0;
         Connection conn = null;
         PreparedStatement stm = null;
@@ -1006,8 +1042,8 @@ public class PostDAO {
         }
         return total;
     }
-    
-    public int totalNewUserPerMonth(String startDay, String endDay) throws SQLException{
+
+    public int totalNewUserPerMonth(String startDay, String endDay) throws SQLException {
         int total = 0;
         Connection conn = null;
         PreparedStatement stm = null;
