@@ -872,4 +872,136 @@ public class PostDAO {
         String dateSplited = date.substring(0, index);
         return dateSplited;
     }
+    
+    public String startDayOfMonth() throws SQLException{
+        String startDay = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "DECLARE @mydate DATETIME "
+                        + " SELECT @mydate = GETDATE() "
+                        + "SELECT CONVERT(VARCHAR(25),DATEADD(dd,-(DAY(@mydate)-1),@mydate),101) AS Start_Day";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    startDay = rs.getString("Start_Day");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return startDay;
+    }
+    
+    public String endDayOfMonth() throws SQLException{
+        String startDay = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "DECLARE @mydate DATETIME "
+                        + " SELECT @mydate = GETDATE() "
+                        + "SELECT CONVERT(VARCHAR(25),DATEADD(dd,-(DAY(DATEADD(mm,1,@mydate))),DATEADD(mm,1,@mydate)),101) AS End_Day";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    startDay = rs.getString("End_Day");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return startDay;
+    }
+    
+    public int totalNewPostPerMonth(String startDay, String endDay) throws SQLException{
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(postID) from tblPosts Where statusPID= 1 AND date >= ? AND date <= ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, startDay);
+                stm.setString(2, endDay);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
+    
+    public int totalNewUserPerMonth(String startDay, String endDay) throws SQLException{
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(userID) from tblUsers Where statusUID = 1  AND roleID = 'US' AND date >= ? AND date <= ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, startDay);
+                stm.setString(2, endDay);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
 }
