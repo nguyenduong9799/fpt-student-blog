@@ -140,11 +140,29 @@
                                         </div>  
                                     </div>
                                     <div class="sidebar-box ftco-animate">
+                                        <%
+                                            if (loginUser.getRankID() == 1) {
+                                        %>
                                         <img style="margin-left: 5px; box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                        <%
+                                        } else if (loginUser.getRankID() == 2) {
+                                        %>
                                         <img style="margin-left: 5px; box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                        <%
+                                        } else if (loginUser.getRankID() == 3) {
+                                        %>
                                         <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
+                                        <%
+                                        } else if (loginUser.getRankID() == 4) {
+                                        %>
                                         <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
+                                        <%
+                                        } else if (loginUser.getRankID() == 5) {
+                                        %>
                                         <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
+                                        <%
+                                            }
+                                        %>
                                         <br/>
                                         <label style="margin-top: 5px;">Full Name</label><br/>
                                         <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
