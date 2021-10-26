@@ -55,6 +55,7 @@ public class ViewPostController extends HttpServlet {
             if (post != null) {
                 request.setAttribute("AUTHOR_IMAGE", userDAO.getUserImageByID(post.getUserID()));
                 request.setAttribute("AUTHOR_NAME", UserDAO.getUserNameByID(post.getUserID()));
+                request.setAttribute("AUTHOR_RANK", userDAO.Rank(post.getUserID()));
                 request.setAttribute("POST_VIEW", post);
                 request.setAttribute("LIST_COMMENT", comment);
                 request.setAttribute("POST_TAGS", listTag);

@@ -93,6 +93,7 @@
                                         List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
                                         String image = (String) request.getAttribute("AUTHOR_IMAGE");
                                         String authorName = (String) request.getAttribute("AUTHOR_NAME");
+                                        int authorRank = (int) request.getAttribute("AUTHOR_RANK");
                                     %>
                                     <h1 class="mb-3"><%=post.getTitle()%></h1>
                                     <p><%=post.getPostContent()%></p>
@@ -129,7 +130,28 @@
                                                 </a></h3>
                                                 <%
                                                     }
+                                                    if (authorRank == 1) {
                                                 %>
+                                            <img style="margin-left: 5px; box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                            <%
+                                            } else if (authorRank == 2) {
+                                            %>
+                                            <img style="margin-left: 5px; box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                            <%
+                                            } else if (authorRank == 3) {
+                                            %>
+                                            <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
+                                            <%
+                                            } else if (authorRank == 4) {
+                                            %>
+                                            <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
+                                            <%
+                                            } else if (authorRank == 5) {
+                                            %>
+                                            <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
                                     <div class="pt-5 mt-5">
