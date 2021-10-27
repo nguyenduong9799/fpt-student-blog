@@ -97,7 +97,6 @@
                                 %>
 
                                 <div class="blog-entry ftco-animate d-md-flex align-items-center" style="margin-bottom: 20px;">
-                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%=post.getImage()%>);"></a>
                                     <div class="text p-4">
                                         <%
                                             if ("Approved".equals(post.getStatus())) {

@@ -81,7 +81,8 @@ public class TagDAO {
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
                     String approveComment = rs.getString("approveComment");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment));
+                    String image=rs.getString("image");
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment,image));
                 }
             }
         } catch (Exception e) {
