@@ -46,14 +46,13 @@
                 <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">fptblog</a></h1>
                 <nav id="colorlib-main-menu" role="navigation">
                     <ul>
-                        <li class="colorlib-active"><a href="home.jsp">Home</a></li>
-                        <li><a href="notification.jsp">Notification</a></li><br>
-                            <%
-                                UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
-                                if (loginUser != null) {
-                            %>
+                        <%
+                            UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+                            if (loginUser != null) {
+                        %>
                         <li><a href="MainController?action=Profile">Welcome: <%= loginUser.getUserName()%></a></li>
                         <li><a href="addPost.jsp">Create New Post</a></li>
+                        <li><a href="notification.jsp">Notification</a></li>
                         <li ><a href="MainController?action=Logout">Logout</a></li>
                             <%
                                 }
@@ -67,15 +66,9 @@
                     </ul>
                 </nav>
                 <div class="colorlib-footer">
-                    <div class="mb-4">
-                        <h3>Send Feedback For System</h3>
-                        <form action="#" class="colorlib-subscribe-form">
-                            <div class="form-group d-flex">
-                                <div class="icon"><span class="icon-paper-plane"></span></div>
-                                <input type="text" class="form-control" placeholder="Enter Feedback Here">
-                            </div>
-                        </form>
-                    </div>
+                   <p class="pfooter">
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
+                    <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
 
                 </div>
             </aside> <!-- END PAGE-ASIDE -->  
