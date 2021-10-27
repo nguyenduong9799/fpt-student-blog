@@ -83,100 +83,110 @@
 
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
-                   
-                        <div class="row no-gutters">
-                            <div class="col-lg-8 px-md-5 py-5">
-                                <%
-                                    PostDAO dao = new PostDAO();
-                                    int total = dao.getTotalPost();
-                                    List<PostDTO> list = dao.getApprovedPost();
-                                    if (list != null) {
-                                        if (!list.isEmpty()) {
-                                            for (PostDTO post : list) {
-                                %>
-                                <div class="contentPage">
-                                    <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                                        <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%=post.getImage()%>);"></a>
-                                        <div class="text p-4">
-                                            <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
-                                            <div class="meta-wrap">
-                                                <p class="meta">
-                                                    <span><i class="icon-person mr-2"></i><%=post.getUserID()%></span><br>
-                                                    <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span><br>
-                                                    <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%></span>
-                                                    <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
-                                                </p>
-                                            </div>
-                                            <p class="mb-4"><%=post.getPostContent().substring(0, 15)%></p>
-                                            <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-8 px-md-5 py-5">
+                            <%
+                                PostDAO dao = new PostDAO();
+                                int total = dao.getTotalPost();
+                                List<PostDTO> list = dao.getApprovedPost();
+                                if (list != null) {
+                                    if (!list.isEmpty()) {
+                                        for (PostDTO post : list) {
+                            %>
+                            <div class="contentPage">
+                                <div class="blog-entry ftco-animate d-md-flex align-items-center">
+                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%=post.getImage()%>);"></a>
+                                    <div class="text p-4">
+                                        <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
+                                        <div class="meta-wrap">
+                                            <p class="meta">
+                                                <span><i class="icon-person mr-2"></i><%=post.getUserID()%></span><br>
+                                                <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span><br>
+                                                <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%></span>
+                                                <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
+                                            </p>
                                         </div>
-                                    </div>      
+                                        <p class="mb-4"><%=post.getPostContent().substring(0, 15)%></p>
+                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                    </div>
+                                </div>      
+                            </div>
+                            <div></div><br>
+                            <%
+                                        }
+                                    }
+                                }
+                            %>
+                            <!-- Hiên thị nút bấm -->
+                            <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
+                        </div>
+                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                            <div class="sidebar-box pt-md-4">
+                                <form action="SearchController" class="search-form">
+                                    <div class="form-group">
+                                        <!--<input name="action" type="submit" class="icon icon-search">-->
+                                        <a href="#" class="icon icon-search"></a>
+                                        <input name="search" type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </form>
+                                <h4>${requestScope.ERRORSTRING}</h4>
+                            </div>
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Categories</h3>
+                                <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                                    <c:redirect url="HomeController"></c:redirect>
+                                </c:if>
+                                <ul class="categories">                                       
+                                    <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                                        <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
+                                        </c:forEach> 
+                                </ul>
+                            </div>
+
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Popular Articles</h3>
+                                <%
+                                    List<PostDTO> listCommonPost = PostDAO.getListMostPost();
+                                    if (listCommonPost != null) {
+                                        if (!listCommonPost.isEmpty()) {
+                                            for (PostDTO postCommon : listCommonPost) {
+                                %>
+                                <div class="block-21 mb-4 d-flex">
+                                    <a class="blog-img mr-4" style="background-image: url(<%=postCommon.getImage()%>);"></a>
+                                    <div class="text">
+                                        <h3 class="heading"><a href="MainController?action=ViewPost&postID=<%=postCommon.getPostID()%>"><%=postCommon.getTitle()%></a></h3>
+                                        <div class="meta">
+                                            <div><a href="MainController?action=ViewPost&postID=<%=postCommon.getPostID()%>"><span class="icon-calendar"></span> <%=postCommon.getDate()%></a>
+                                            </div>
+                                            <div><a href="MainController?action=ViewPost&postID=<%=postCommon.getPostID()%>"><span class="icon-person"></span> <%=postCommon.getUserID()%></a></div>
+                                            <!--<div><a href="#"><span class="icon-chat"></span> 19</a></div>-->
+                                        </div>
+                                    </div>
                                 </div>
-                                        <div></div><br>
                                 <%
                                             }
                                         }
                                     }
-                                %>
-                                <!-- Hiên thị nút bấm -->
-                                <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
+                                %> 
                             </div>
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <div class="sidebar-box pt-md-4">
-                                    <form action="SearchController" class="search-form">
-                                        <div class="form-group">
-                                            <!--<input name="action" type="submit" class="icon icon-search">-->
-                                            <a href="#" class="icon icon-search"></a>
-                                            <input name="search" type="text" class="form-control" placeholder="Search">
-                                        </div>
-                                    </form>
-                                    <h4>${requestScope.ERRORSTRING}</h4>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Categories</h3>
-                                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="categories">                                       
-                                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                                            <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                                            </c:forEach> 
-                                    </ul>
-                                </div>
 
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Articles</h3>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Tag</h3>
-                                    <c:if test="${sessionScope.LIST_TAG == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="tagcloud">
-                                        <c:forEach items="${sessionScope.LIST_TAG}" var="o">
-                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
-                                        </c:forEach> 
-                                    </ul>
-                                </div>
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Popular Tag</h3>
+                                <c:if test="${sessionScope.LIST_TAG == null}">
+                                    <c:redirect url="HomeController"></c:redirect>
+                                </c:if>
+                                <ul class="tagcloud">
+                                    <c:forEach items="${sessionScope.LIST_TAG}" var="o">
+                                        <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
+                                    </c:forEach> 
+                                </ul>
+                            </div>
 
 
-                            </div><!-- END COL --> 
-                        </div>
-                    
+                        </div><!-- END COL --> 
+                    </div>
+
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 

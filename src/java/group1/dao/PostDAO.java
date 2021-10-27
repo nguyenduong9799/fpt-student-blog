@@ -185,6 +185,41 @@ public class PostDAO {
         return list;
     }
 
+    public static List<PostDTO> getListMostPost() throws SQLException {
+        List<PostDTO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " select top 3 * from tblPosts order by vote desc ";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    int postID = rs.getInt("postID");
+                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
+                    String title = rs.getString("title");
+                    String image = rs.getString("image");
+                    String date = rs.getString("date").substring(0, 19);
+                    list.add(new PostDTO(postID, userID, title, date, image));
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return list;
+    }
+
     public List<PostDTO> getApprovedPost() throws SQLException {
         List<PostDTO> list = new ArrayList<>();
         Connection conn = null;
