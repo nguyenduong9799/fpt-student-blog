@@ -63,7 +63,7 @@ public class CommentDAO {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     int commentID = rs.getInt("commentID");
-                    String userID = UserDAO.getUserNameByID(rs.getString("userID"));
+                    String userID = rs.getString("userID");
                     String date = rs.getString("date");
                     String commentContent = rs.getString("commentContent");                
                     list.add(new CommentDTO(commentID, postID, userID, date, commentContent));

@@ -1,3 +1,4 @@
+<%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CommentDTO"%>
 <%@page import="group1.dto.TagDTO"%>
@@ -83,210 +84,212 @@
 
             <div id="colorlib-main">
                 <section class="ftco-section ftco-no-pt ftco-no-pb">
-                    
-                        <div class="row d-flex no-gutters">
-                            <div class="col-lg-8 px-md-5 py-5">
-                                <div class="row">
-                                    <%
-                                        PostDAO dao = new PostDAO();
-                                        PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
-                                        List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
-                                        String image = (String) request.getAttribute("AUTHOR_IMAGE");
-                                        String authorName = (String) request.getAttribute("AUTHOR_NAME");
-                                        int authorRank = (int) request.getAttribute("AUTHOR_RANK");
-                                    %>
-                                    <h1 class="mb-3"><%=post.getTitle()%></h1>
-                                    <p><%=post.getPostContent()%></p>
-                                    <div class="tag-widget post-tag-container mb-5 mt-5">
-                                        <div class="tagcloud">
+
+                    <div class="row d-flex no-gutters">
+                        <div class="col-lg-8 px-md-5 py-5">
+                            <div class="row">
+                                <%
+                                    PostDAO dao = new PostDAO();
+                                    PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
+                                    List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
+                                    String image = (String) request.getAttribute("AUTHOR_IMAGE");
+                                    String authorName = (String) request.getAttribute("AUTHOR_NAME");
+                                    int authorRank = (int) request.getAttribute("AUTHOR_RANK");
+                                %>
+                                <h1 class="mb-3"><%=post.getTitle()%></h1>
+                                <p><%=post.getPostContent()%></p>
+                                <div class="tag-widget post-tag-container mb-5 mt-5">
+                                    <div class="tagcloud">
+                                        <%
+                                            for (TagDTO tag : listTag) {
+                                        %>
+                                        <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" class="tag-cloud-link"><%=tag.getTagName()%></a>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                </div>                     
+                                <div style="
+                                     height: 250px;
+                                     width: 100%;" class="about-author d-flex p-4 bg-light">
+                                     <div class="bio mr-5">
+                                        <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
+                                    </div>
+                                    <div class="desc">
+                                        <h3><i class="icon-person"></i>  <%=authorName%></h3>
+                                        <p><i class="icon-folder-o"></i>  <%=post.getCategory()%>   <i class="icon-calendar"></i>  <%=dao.splitDate(post.getDate())%></p>
+                                        <%
+                                            PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
+                                            if (voted != null) {
+                                        %>
+                                        <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
+                                                <i class="icon-heart">  Voted(<%=post.getVote()%>)</i>
+                                            </a></h3>
                                             <%
-                                                for (TagDTO tag : listTag) {
+                                            } else {
                                             %>
-                                            <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" class="tag-cloud-link"><%=tag.getTagName()%></a>
+                                        <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
+                                                <i class="icon-heart">  Vote(<%=post.getVote()%>)</i>
+                                            </a></h3>
                                             <%
                                                 }
+                                                if (authorRank == 1) {
                                             %>
-                                        </div>
-                                    </div>                     
-                                    <div class="about-author d-flex p-4 bg-light">
-                                        <div class="bio mr-5">
-                                            <img width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-                                        </div>
-                                        <div class="desc">
-                                            <h3><i class="icon-person"></i>  <%=authorName%></h3>
-                                            <p><i class="icon-folder-o"></i>  <%=post.getCategory()%>   <i class="icon-calendar"></i>  <%=dao.splitDate(post.getDate())%></p>
-                                            <%
-                                                PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
-                                                if (voted != null) {
-                                            %>
-                                            <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
-                                                    <i class="icon-heart">  Voted(<%=post.getVote()%>)</i>
-                                                </a></h3>
-                                                <%
-                                                } else {
-                                                %>
-                                            <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
-                                                    <i class="icon-heart">  Vote(<%=post.getVote()%>)</i>
-                                                </a></h3>
-                                                <%
+                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                        <%
+                                        } else if (authorRank == 2) {
+                                        %>
+                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                        <%
+                                        } else if (authorRank == 3) {
+                                        %>
+                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
+                                        <%
+                                        } else if (authorRank == 4) {
+                                        %>
+                                        <img style="margin-left: 5px;border-radius: initial; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
+                                        <%
+                                        } else if (authorRank == 5) {
+                                        %>
+                                        <img style="margin-left: 5px;border-radius: initial; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                                <div class="pt-5 mt-5">
+                                    <h3 class="mb-5 font-weight-bold"><%=dao.getTotalComment(post.getPostID())%> Comments</h3>
+                                    <ul class="comment-list">
+                                        <%
+                                            List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
+                                            if (listComment != null) {
+                                                if (!listComment.isEmpty()) {
+                                                    for (CommentDTO list : listComment) {
+                                        %>
+                                        <li class="comment">
+                                            <div class="vcard bio">
+                                                <img src="<%=UserDAO.getUserImageByID(list.getUserID())%>" alt="Image placeholder">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3><%=UserDAO.getUserNameByID(list.getUserID())%></h3>
+                                                <div class="meta"><%=dao.splitDate(list.getDate())%></div>
+                                                <p><%=list.getCommentContent()%></p>
+                                            </div>
+                                        </li>
+                                        <%
                                                     }
-                                                    if (authorRank == 1) {
-                                                %>
-                                            <img style="margin-left: 5px; box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank == 2) {
-                                            %>
-                                            <img style="margin-left: 5px; box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank == 3) {
-                                            %>
-                                            <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank == 4) {
-                                            %>
-                                            <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank == 5) {
-                                            %>
-                                            <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
-                                            <%
                                                 }
-                                            %>
-                                        </div>
-                                    </div>
-                                    <div class="pt-5 mt-5">
-                                        <h3 class="mb-5 font-weight-bold"><%=dao.getTotalComment(post.getPostID())%> Comments</h3>
-                                        <ul class="comment-list">
-                                            <%
-                                                List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
-                                                if (listComment != null) {
-                                                    if (!listComment.isEmpty()) {
-                                                        for (CommentDTO list : listComment) {
-                                            %>
-                                            <li class="comment">
-                                                <div class="vcard bio">
-                                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                    <h3><%=list.getUserID()%></h3>
-                                                    <div class="meta"><%=dao.splitDate(list.getDate())%></div>
-                                                    <p><%=list.getCommentContent()%></p>
-                                                </div>
-                                            </li>
-                                            <%
-                                                        }
-                                                    }
-                                                }
-                                            %>  
-                                        </ul>
-                                        <!-- END comment-list -->
-
-                                        <!-- START post comment -->
-                                        <div class="comment-form-wrap pt-5">
-                                            <%
-                                                if (loginUser != null) {
-                                            %>
-                                            <h3 class="mb-5">Leave a comment</h3>
-                                            <form action="MainController" method="POST" class="p-3 p-md-4 bg-light">
-                                                <div class="form-group">
-                                                    <label for="message">Message</label>
-                                                    <textarea id="message" rows="10" cols="100" name="commentContent" class="form-control"></textarea><br>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>"/>
-                                                    <input type="hidden" name="postID" value="<%=post.getPostID()%>"/>
-                                                    <input type="submit" name="action" value="Comment" class="btn py-3 px-4 btn-primary"><br>
-                                                </div>
-
-                                            </form>
-                                            <%
-                                                }
-                                            %>
-                                        </div> <!-- END post comment -->
-                                    </div>
-
-                                </div><!-- END--> 
-                            </div>
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <div class="sidebar-box pt-md-4">
-                                    <form action="SearchController" class="search-form">
-                                        <div class="form-group">
-                                            <!--<input name="action" type="submit" class="icon icon-search">-->
-                                            <a href="#" class="icon icon-search"></a>
-                                            <input name="search" type="text" class="form-control" placeholder="Search">
-                                        </div>
-                                    </form>
-                                    <h4>${requestScope.ERRORSTRING}</h4>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Categories</h3>
-                                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="categories">                                       
-                                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                                            <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                                            </c:forEach> 
+                                            }
+                                        %>  
                                     </ul>
+                                    <!-- END comment-list -->
+
+                                    <!-- START post comment -->
+                                    <div class="comment-form-wrap pt-5">
+                                        <%
+                                            if (loginUser != null) {
+                                        %>
+                                        <h3 class="mb-5">Leave a comment</h3>
+                                        <form action="MainController" method="POST" class="p-3 p-md-4 bg-light">
+                                            <div class="form-group">
+                                                <label for="message">Message</label>
+                                                <textarea id="message" rows="10" cols="100" name="commentContent" class="form-control"></textarea><br>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>"/>
+                                                <input type="hidden" name="postID" value="<%=post.getPostID()%>"/>
+                                                <input type="submit" name="action" value="Comment" class="btn py-3 px-4 btn-primary"><br>
+                                            </div>
+
+                                        </form>
+                                        <%
+                                            }
+                                        %>
+                                    </div> <!-- END post comment -->
                                 </div>
 
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Articles</h3>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Tag</h3>
-                                    <c:if test="${sessionScope.LIST_TAG == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="tagcloud">
-                                        <c:forEach items="${sessionScope.LIST_TAG}" var="o">
-                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
-                                        </c:forEach> 
-                                    </ul>
-                                </div>
-                            </div><!-- END COL --> 
+                            </div><!-- END--> 
                         </div>
-                   
+                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                            <div class="sidebar-box pt-md-4">
+                                <form action="SearchController" class="search-form">
+                                    <div class="form-group">
+                                        <!--<input name="action" type="submit" class="icon icon-search">-->
+                                        <a href="#" class="icon icon-search"></a>
+                                        <input name="search" type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </form>
+                                <h4>${requestScope.ERRORSTRING}</h4>
+                            </div>
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Categories</h3>
+                                <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                                    <c:redirect url="HomeController"></c:redirect>
+                                </c:if>
+                                <ul class="categories">                                       
+                                    <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                                        <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
+                                        </c:forEach> 
+                                </ul>
+                            </div>
+
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Popular Articles</h3>
+                                <div class="block-21 mb-4 d-flex">
+                                    <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                                    <div class="text">
+                                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                                control</a></h3>
+                                        <div class="meta">
+                                            <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
+                                            </div>
+                                            <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block-21 mb-4 d-flex">
+                                    <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+                                    <div class="text">
+                                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                                control</a></h3>
+                                        <div class="meta">
+                                            <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
+                                            </div>
+                                            <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block-21 mb-4 d-flex">
+                                    <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+                                    <div class="text">
+                                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                                control</a></h3>
+                                        <div class="meta">
+                                            <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
+                                            </div>
+                                            <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Popular Tag</h3>
+                                <c:if test="${sessionScope.LIST_TAG == null}">
+                                    <c:redirect url="HomeController"></c:redirect>
+                                </c:if>
+                                <ul class="tagcloud">
+                                    <c:forEach items="${sessionScope.LIST_TAG}" var="o">
+                                        <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
+                                    </c:forEach> 
+                                </ul>
+                            </div>
+                        </div><!-- END COL --> 
+                    </div>
+
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 

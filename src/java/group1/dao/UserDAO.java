@@ -139,7 +139,7 @@ public class UserDAO {
         }
     }
 
-    public String getUserImageByID(String userID) throws SQLException {
+    public static String getUserImageByID(String userID) throws SQLException {
         String userImage = null;
         Connection conn = null;
         PreparedStatement stm = null;
