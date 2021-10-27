@@ -90,20 +90,25 @@
                                         <table id="datatablesSimple" class="dataTable-table">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="" style="width: 20%;">User ID</th>
+                                                    <th data-sortable="" style="width: 15;">User ID</th>
                                                     <th data-sortable="" style="width: 10%;">Role ID</a</th>
                                                     <th data-sortable="" style="width: 10%;">Status UID</th>
-                                                    <th data-sortable="" style="width: 20%;">User Name</th>
+                                                    <th data-sortable="" style="width: 15%;">User Name</th>
                                                     <th data-sortable="" style="width: 20%;">Email</th>
-                                                    <th data-sortable="" style="width: 20%;">Phone</th>
+                                                    <th data-sortable="" style="width: 15%;">Phone</th>
+                                                    <th data-sortable="" style="width: 15%;">Reason</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
                                                 <%
                                                     for (UserDTO user : list) {
+                                                        String banReason = (String)user.getBanReason();
+                                                        if(banReason == null){
+                                                            banReason = "";
+                                                        }
                                                 %>
-                                            <form action="MainController">
+                                            <form action="MainController" method="POST">
                                                 <tr>
                                                     <td><%=user.getUserID()%></td>
                                                     <td><%=user.getRoleID()%></td>
@@ -124,7 +129,24 @@
                                                     <td><%=user.getEmail()%></td>
                                                     <td><%=user.getPhone()%></td>
       
-                                                    <td><input class="btn btn-primary" type="submit" name="action" value="Detail"></td>
+                                                    <td>
+                                                        <input class="form-control" type="text" name="banReason" value="<%=banReason%>" />
+                                                    </td>
+                                                    <td>
+                                                        <%
+                                                            if ("1".equals(user.getStatusUID())) {
+                                                        %>
+                                                        <input class="btn btn-primary" type="submit" name="action" value="Ban">
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <input type="hidden" name="userID" value="<%= user.getUserID()%>"/>
+                                                        <input type="hidden" name="statusUID" value="<%= user.getStatusUID()%>"/>
+                                                    </td>
                                                 </tr>
                                                 <input type="hidden" name="postID" value="<%=user.getUserID()%>">
                                             </form>
