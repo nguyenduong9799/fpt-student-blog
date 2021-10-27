@@ -39,6 +39,7 @@ public class MainController extends HttpServlet {
     private static final String EDIT_POST = "EditPostController";
     private static final String SUBMIT_AGAIN = "SubmitAgainController";
     private static final String EDIT_PROFILE = "EditProfileController";
+    private static final String HIDE_USER = "HideUserController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -86,6 +87,10 @@ public class MainController extends HttpServlet {
                 url = SUBMIT_AGAIN;
             } else if ("Save Changes".equals(action)) {
                 url = EDIT_PROFILE;
+            }else if ("Ban".equals(action)) {
+                url = HIDE_USER;
+            }else if ("Unbanned".equals(action)) {
+                url = HIDE_USER;
             }
 
         } catch (Exception e) {

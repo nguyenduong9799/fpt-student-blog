@@ -20,7 +20,7 @@ public class UserDTO {
     private int rankID;
     private Date date;
     private String image;
-
+    private String banReason;
     public UserDTO() {
     }
 
@@ -58,6 +58,21 @@ public class UserDTO {
         this.rankID = rankID;
         this.date = date;
         this.image = image;
+    }
+    
+    public UserDTO(String userID, String roleID, String statusUID, String userName, String password, String email, String phone, int totalVote, int rankID, Date date, String image, String banReason) {
+        this.userID = userID;
+        this.roleID = roleID;
+        this.statusUID = statusUID;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.totalVote = totalVote;
+        this.rankID = rankID;
+        this.date = date;
+        this.image = image;
+        this.banReason = banReason;
     }
 
     public String getImage() {
@@ -146,6 +161,14 @@ public class UserDTO {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+    
+    public String getBanReason() {
+        return banReason;
+    }
+
+    public void setBanReason(String banReason) {
+        this.banReason = banReason;
     }
 
     @Override

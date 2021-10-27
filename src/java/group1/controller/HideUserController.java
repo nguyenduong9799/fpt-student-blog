@@ -6,7 +6,6 @@
 package group1.controller;
 
 import group1.dao.UserDAO;
-import group1.dto.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,50 +17,41 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author khoala
+ * @author lakho
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "HideUserController", urlPatterns = {"/HideUserController"})
+public class HideUserController extends HttpServlet {
 
-    private static final String ERROR = "login.jsp";
-    private static final String ADMIN = "admin.jsp";
-    private static final String USER = "home.jsp";
-    private static final String MENTOR = "mentor.jsp";
-
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "admin.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
-            String password = request.getParameter("password");
-            UserDAO dao = new UserDAO();
-            dao.checkRank(userID);
-            UserDTO user = dao.checkLogin(userID, password);
+            String statusUID = request.getParameter("statusUID");
+            String banReason = request.getParameter("banReason");
             HttpSession session = request.getSession();
-            if (user != null) {
-                if ("1".equals(user.getStatusUID())) {
-                    session.setAttribute("LOGIN_USER", user);
-                    String roleID = user.getRoleID();
-                    if ("AD".equals(roleID)) {
-                        url = ADMIN;
-                    } else if ("US".equals(roleID)) {
-                        url = USER;
-                    } else if ("MT".equals(roleID)) {
-                        url = MENTOR;
-                    } else {
-                        session.setAttribute("ERROR_MESSAGE", "Your role is not support");
-                    }
-                } else {
-                    session.setAttribute("ERROR_MESSAGE", "Your account is banned because: " + user.getBanReason());
+            if ("admin".equals(userID)) {
+                session.setAttribute("ERROR_MESSAGE", "Admin can not be hide!");
+            } else if("1".equals(statusUID)){
+                UserDAO dao = new UserDAO();
+                boolean check = dao.hideUser(userID, banReason);
+                if (check) {
+                    url = SUCCESS;
                 }
-            } else {
-                session.setAttribute("ERROR_MESSAGE", "Incorrect UserID or Password");
+            }else{
+                UserDAO dao = new UserDAO();
+                boolean check = dao.unHideUser(userID);
+                if (check) {
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
+            log("Error at AdminEditBookController: " + e.toString());
         } finally {
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

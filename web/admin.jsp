@@ -134,6 +134,10 @@
                                             <tbody>
                                                 <%
                                                     for (UserDTO user : list) {
+                                                        String banReason = (String)user.getBanReason();
+                                                        if(banReason == null){
+                                                            banReason = "";
+                                                        }
                                                 %>
                                             <form action="MainController">
                                                 <tr>
@@ -157,8 +161,22 @@
                                                     <td><%=user.getPhone()%></td>
                                                     <td><%=user.getTotalVote()%></td>
                                                     <td>
-                                                        <input class="form-control" type="text" name="addcategory" value="" /></td>
-                                                    <td><input class="btn btn-primary" type="submit" name="action" value="Ban"></td>
+                                                        <input class="form-control" type="text" name="banReason" value="<%=banReason%>" /></td>
+                                                    <td>
+                                                        <%
+                                                            if ("1".equals(user.getStatusUID())) {
+                                                        %>
+                                                        <input class="btn btn-primary" type="submit" name="action" value="Ban">
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <input type="hidden" name="userID" value="<%= user.getUserID()%>"/>
+                                                        <input type="hidden" name="statusUID" value="<%= user.getStatusUID()%>"/>
+                                                    </td>
                                                 </tr>
                                                 <input type="hidden" name="postID" value="<%=user.getUserID()%>">
                                             </form>
