@@ -103,8 +103,8 @@
                                     <textarea style="margin-top: 20px;" class="form-control" rows="2" cols="55" type="text" name="title" required="" placeholder="Title of the post ..."></textarea><br>   
 
                                     <!--Category-->       
-                                    <select class="select" name="category">
-                                        <option selected disabled>Choose Category</option>
+                                    <select class="select" name="category" required>
+                                        <option selected disabled value="">Choose Category</option>
                                         <%
                                             ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
                                             if (listCate != null) {
@@ -119,7 +119,7 @@
                                         %>
                                     </select>
                                     <input class="form-control" placeholder="Tag" style="width: 100%;" type="text" name="tagList"><br>
-                                    <input class="form-control" id="image-1" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="imageBackgound"><br>
+                                    <input class="form-control" id="image-1" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="imageBackgound" required=""><br>
                                     <!--Content-->
                                     <h3 class="mb-5">Content of the post...</h3>
                                     <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>

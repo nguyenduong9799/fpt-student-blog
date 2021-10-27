@@ -39,8 +39,8 @@ public class CreateAccountController extends HttpServlet {
             String role = request.getParameter("role");
             boolean check = true;
             UserError userError = new UserError();
-            if (userID.length() > 20 || userID.length() < 3) {
-                userError.setUserIDError("UserID length must be [3,20]");
+            if (userID.length() > 50 || userID.length() < 3) {
+                userError.setUserIDError("UserID length must be [3,50]");
                 check = false;
             }
             if (name.length() > 50 || name.length() < 5) {
