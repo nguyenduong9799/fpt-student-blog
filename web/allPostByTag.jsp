@@ -82,7 +82,6 @@
 
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
-                    <div class="container px-0">
                         <div class="row d-flex no-gutters">
                             <div class="col-lg-8 px-md-5 py-5">
                                 <%
@@ -94,7 +93,8 @@
                                             for (PostDTO post : list) {
                                 %>
 
-                                <div class="blog-entry ftco-animate contentPage">
+                                <div class="blog-entry ftco-animate d-md-flex align-items-center contentPage" style="margin-bottom: 20px;">
+                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%=post.getImage()%>);"></a>
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
@@ -172,7 +172,6 @@
 
                             </div><!-- END COL --> 
                         </div>
-                    </div>
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 

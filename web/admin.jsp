@@ -16,7 +16,6 @@
         <script src="./Mentor_files/all.min.js.download" crossorigin="anonymous"></script>
         <style type="text/css">/* Chart.js */
             @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>
-
         <title>Admin Page</title>
     </head>
     <body class="sb-nav-fixed">
@@ -93,12 +92,12 @@
                                 </div>
                             </div> 
                             <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
+                                <div class="card bg-success text-white mb-4">
                                     <div class="card-body" style="text-align: center; font-size: 20px;">Total Interact: <%=totalInteract%></div>                                   
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
+                                <div class="card bg-danger text-white mb-4">
                                     <div class="card-body" style="text-align: center; font-size: 20px;">Total Access System: <%=totalAccessSystem%></div>                                   
                                 </div>
                             </div>
@@ -120,13 +119,13 @@
                                         <table id="datatablesSimple" class="dataTable-table">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="" style="width: 15%;">User ID</th>
+                                                    <th data-sortable="" style="width: 10%;">User ID</th>
                                                     <th data-sortable="" style="width: 10%;">Role ID</a</th>
                                                     <th data-sortable="" style="width: 10%;">Status UID</th>
                                                     <th data-sortable="" style="width: 15%;">User Name</th>
                                                     <th data-sortable="" style="width: 15%;">Email</th>
                                                     <th data-sortable="" style="width: 10%;">Phone</th>
-                                                    <th data-sortable="" style="width: 5%;">Total Vote</th>
+                                                    <th data-sortable="" style="width: 10%;">Total Vote</th>
                                                     <th data-sortable="" style="width: 20%;">Ban User</th>
 
                                                 </tr>
@@ -140,7 +139,19 @@
                                                 <tr>
                                                     <td><%=user.getUserID()%></td>
                                                     <td><%=user.getRoleID()%></td>
-                                                    <td><%=user.getStatusUID()%></td>
+                                                    <td>
+                                                        <%
+                                                            if ("1".equals(user.getStatusUID())) {
+                                                        %>
+                                                        <span class="badge badge-success">Activated</span>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <span class="badge badge-primary">Banned</span>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </td>
                                                     <td><%=user.getUserName()%></td>
                                                     <td><%=user.getEmail()%></td>
                                                     <td><%=user.getPhone()%></td>

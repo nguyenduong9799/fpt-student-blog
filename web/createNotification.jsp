@@ -102,7 +102,7 @@
                                             <h2>Content of the notification</h2>           
                                             <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
                                             <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
-                                            <input style="margin-bottom: 20px;"class="button" type="submit" name="action" value="Create Notification">
+                                            <input style="margin-bottom: 20px;"class="btn btn-primary" type="submit" name="action" value="Create Notification">
                                             <div hidden="">
                                                 <label for="theme" >Theme:</label>
                                                 <select id="theme" >

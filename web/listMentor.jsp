@@ -107,7 +107,19 @@
                                                 <tr>
                                                     <td><%=user.getUserID()%></td>
                                                     <td><%=user.getRoleID()%></td>
-                                                    <td><%=user.getStatusUID()%></td>
+                                                    <td>
+                                                        <%
+                                                            if ("1".equals(user.getStatusUID())) {
+                                                        %>
+                                                        <span class="badge badge-success">Activated</span>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <span class="badge badge-primary">Inactived</span>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </td>
                                                     <td><%=user.getUserName()%></td>
                                                     <td><%=user.getEmail()%></td>
                                                     <td><%=user.getPhone()%></td>
