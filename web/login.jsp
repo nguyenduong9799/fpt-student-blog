@@ -77,7 +77,8 @@
                         </div>
 
                         <div class="flex-c-m">
-                            <a href="#" class="login100-social-item bg3">
+                            <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/fpt-student-blog/login-google&response_type=code
+		&client_id=695662211660-amed2ubedam4ppvavi64t0ghhb033crb.apps.googleusercontent.com&approval_prompt=force" class="login100-social-item bg3">
                                 <i class="fa fa-google"></i>
                             </a>
                         </div>
