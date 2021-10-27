@@ -34,11 +34,12 @@ public class ProfileController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             String userID = ((UserDTO) session.getAttribute("LOGIN_USER")).getUserID();
-            PostDAO dao=new PostDAO();
-            List<PostDTO> list=dao.getPostByUserID(userID);
-            if (list!=null) {
+            PostDAO dao = new PostDAO();
+            List<PostDTO> list = dao.getPostByUserID(userID);
+            if (list != null) {
                 request.setAttribute("LIST_POST_BY_USERID", list);
-                url=SUCCESS;
+                request.setAttribute("TOTAL_POST_BY_USER", dao.getTotalPostByUserID(userID));
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at ProfileController:" + e.toString());
