@@ -1,5 +1,5 @@
 /*!
- * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Bootstrap v4.3.1 colorlib-logos://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -8241,9 +8241,9 @@ h1, h2, h3, h4, h5,
     display: block;
     width: 100%;
     font-weight: normal;
-    font-size: 74px;
+    font-size: 85px;
     line-height: .8;
-    font-family: "Abril Fatface", cursive; }
+    font-family: "Cursive", cursive; }
     @media (max-width: 1199.98px) {
       #colorlib-aside #colorlib-logo {
         font-size: 62px; } }
