@@ -105,12 +105,11 @@
                                                 %>
                                                 <tr>
                                                     <td><%=tag.getTagID()%></td>
-                                                    <td><%=tag.getTagName()%></td>
-                                                    
- 
+                                                    <td><span class="badge badge-success"><%=tag.getTagName()%></span></td>
                                                 </tr>
+                                                <%    }%>
                                             </tbody>
-                                            <%    }%>
+                                            
                                         </table>
                                         <%
                                         } else {

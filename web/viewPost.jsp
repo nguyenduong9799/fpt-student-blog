@@ -83,9 +83,9 @@
 
             <div id="colorlib-main">
                 <section class="ftco-section ftco-no-pt ftco-no-pb">
-                    <div class="container px-0">
+                    
                         <div class="row d-flex no-gutters">
-                            <div class="col-lg-9 px-md-5 py-5">
+                            <div class="col-lg-8 px-md-5 py-5">
                                 <div class="row">
                                     <%
                                         PostDAO dao = new PostDAO();
@@ -207,14 +207,16 @@
 
                                 </div><!-- END--> 
                             </div>
-                            <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
+                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                                 <div class="sidebar-box pt-md-4">
-                                    <form action="#" class="search-form">
+                                    <form action="SearchController" class="search-form">
                                         <div class="form-group">
-                                            <a href="search.jsp" class="icon icon-search"></a>
-                                            <input type="text" class="form-control" placeholder="Search">
+                                            <!--<input name="action" type="submit" class="icon icon-search">-->
+                                            <a href="#" class="icon icon-search"></a>
+                                            <input name="search" type="text" class="form-control" placeholder="Search">
                                         </div>
                                     </form>
+                                    <h4>${requestScope.ERRORSTRING}</h4>
                                 </div>
                                 <div class="sidebar-box ftco-animate">
                                     <h3 class="sidebar-heading">Categories</h3>
@@ -284,7 +286,7 @@
                                 </div>
                             </div><!-- END COL --> 
                         </div>
-                    </div>
+                   
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 

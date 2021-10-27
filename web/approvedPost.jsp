@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>Mentor of FPT Blog</div>
+                        <div class="small">FPT Blog:</div>Mentor Page</div>
                 </nav>
             </div>
             <div id="layoutSidenav_content">
@@ -81,11 +81,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    <div class="dataTable-top">       
-                                        <div class="dataTable-search">
-                                            <input class="dataTable-input" placeholder="Search..." type="text">
-                                        </div>
-                                    </div>
                                     <div class="dataTable-container">
                                         <%
                                             PostDAO dao = new PostDAO();
@@ -113,7 +108,7 @@
                                                 <tr>
                                                     <td><%=post.getTitle()%></td>
                                                     <td><%=post.getUserID()%></td>
-                                                    <td><%=post.getStatus()%></td>
+                                                    <td> <span class="badge badge-success"><%=post.getStatus()%></span></td>
                                                     <td><%=post.getDate()%></td>
                                                     <td><%=post.getCategory()%></td>   
                                                     <td><input class="btn btn-primary" type="submit" name="action" value="Detail"></td>
