@@ -29,9 +29,9 @@ public class UserDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                String sql = " SELECT roleID, statusUID, userName, email, phone, totalVote, rankID, date, image "
+                String sql = " SELECT roleID, statusUID, userName, email, phone, totalVote, rankID, date, image, banReason "
                         + " FROM tblUsers "
-                        + " WHERE userID=? AND password=? AND statusUID='1'";
+                        + " WHERE userID=? AND password=? ";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 stm.setString(2, password);
@@ -46,7 +46,8 @@ public class UserDAO {
                     int rankID = rs.getInt("rankID");
                     Date date = rs.getDate("date");
                     String image = rs.getString("image");
-                    user = new UserDTO(userID, roleID, statusID, userName, password, email, phone, totalVote, rankID, date, image);
+                    String banReason = rs.getString("banReason");
+                    user = new UserDTO(userID, roleID, statusID, userName, password, email, phone, totalVote, rankID, date, image, banReason);
                 }
             }
         } catch (Exception e) {
@@ -326,7 +327,8 @@ public class UserDAO {
                     String phone = rs.getString("phone");
                     int totalVote = rs.getInt("totalVote");
                     Date date = rs.getDate("date");
-                    list.add(new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date));
+                    String banReason = rs.getString("banReason");
+                    list.add(new UserDTO(userID, roleID, statusUID, userName, "", email, phone, totalVote, 0, date, "", banReason));
                 }
             }
         } catch (Exception e) {
@@ -383,6 +385,57 @@ public class UserDAO {
             }
         }
         return list;
+    }
+    
+    public boolean hideUser(String userID, String banReason) throws Exception {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblUsers SET statusUID='0', banReason = ? "
+                        + " WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, banReason);
+                stm.setString(2, userID);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean unHideUser(String userID) throws Exception {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE tblUsers SET statusUID='1', banReason = '' "
+                        + " WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 //    public static void main(String[] args) throws SQLException {
 //        UserDAO dao = new UserDAO();
