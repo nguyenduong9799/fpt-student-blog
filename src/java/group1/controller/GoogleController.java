@@ -47,20 +47,26 @@ public class GoogleController extends HttpServlet {
                 GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
                 String userID = googlePojo.getId();
                 UserDAO dao = new UserDAO();
-                UserDTO user = dao.checkLoginID(userID);                
+                UserDTO user = dao.checkLoginID(userID);
                 HttpSession session = request.getSession();
                 if (user != null) {
-                    session.setAttribute("LOGIN_USER", user);
-                    url = SUCCESS;
+                    if ("1".equals(user.getStatusUID())) {
+                        session.setAttribute("LOGIN_USER", user);
+                        url = SUCCESS;
+                    } else {
+                        url= ERROR;
+                        session.setAttribute("ERROR_MESSAGE", "Your account is banned because: " + user.getBanReason());
+                    }
+                    
                 } else {
                     long millis = System.currentTimeMillis();
                     Date date = new Date(millis);
                     UserDTO create = new UserDTO(userID, "US", "1", "Google User", "", googlePojo.getEmail(),
                             "", 0, 0, date, googlePojo.getPicture());
-                    dao.insert(create);                                        
-                session.setAttribute("LOGIN_USER", create);
-                url = SUCCESS;
-                } 
+                    dao.insert(create);
+                    session.setAttribute("LOGIN_USER", create);
+                    url = SUCCESS;
+                }
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());

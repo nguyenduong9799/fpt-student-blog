@@ -54,7 +54,7 @@
                             <span class="focus-input100" data-symbol="&#xf190;"></span>
 
                         </div>
-                        <p class="label-input100"><%= errorMessage%></p>
+                        <span class="badge badge-danger"><%= errorMessage%></span>
                         <div class="text-right p-t-8 p-b-31">
                             <a href="createAccount.jsp">
                                 Do not have an account ? Sign up 
