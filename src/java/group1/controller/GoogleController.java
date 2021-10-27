@@ -12,6 +12,9 @@ import group1.google.GoogleUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,45 +32,40 @@ public class GoogleController extends HttpServlet {
     public GoogleController() {
         super();
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-         String url = ERROR;
+        String url = ERROR;
         try {
-        String code = request.getParameter("code");
-        
-        
+            String code = request.getParameter("code");
             if (code == null || code.isEmpty()) {
                 RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
                 dis.forward(request, response);
             } else {
-
                 String accessToken = GoogleUtils.getToken(code);
                 GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-
                 String userID = googlePojo.getId();
-
                 UserDAO dao = new UserDAO();
-                long millis = System.currentTimeMillis();
-                Date date = new Date(millis);
-
-                UserDTO user = new UserDTO("123", "US", "1","Google User", "", googlePojo.getEmail()
-                        , "", 0, 0, date, googlePojo.getPicture());
-
-                if (dao.checkDuplicate(userID) == false) {
-                    dao.insert(user);
-
-                }
-                url = SUCCESS;
+                UserDTO user = dao.checkLoginID(userID);                
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", user);
-
-                
+                if (user != null) {
+                    session.setAttribute("LOGIN_USER", user);
+                    url = SUCCESS;
+                } else {
+                    long millis = System.currentTimeMillis();
+                    Date date = new Date(millis);
+                    UserDTO create = new UserDTO(userID, "US", "1", "Google User", "", googlePojo.getEmail(),
+                            "", 0, 0, date, googlePojo.getPicture());
+                    dao.insert(create);                                        
+                session.setAttribute("LOGIN_USER", create);
+                url = SUCCESS;
+                } 
             }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());
         } finally {
-             request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
@@ -83,7 +81,11 @@ public class GoogleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(GoogleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -97,7 +99,11 @@ public class GoogleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(GoogleController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

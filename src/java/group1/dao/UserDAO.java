@@ -64,6 +64,50 @@ public class UserDAO {
         }
         return user;
     }
+    public UserDTO checkLoginID(String userID) throws SQLException {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = " SELECT roleID, statusUID, userName, password, email, phone, totalVote, rankID, date, image, banReason "
+                        + " FROM tblUsers "
+                        + " WHERE userID=? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+               
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String roleID = rs.getString("roleID");
+                    String statusID = rs.getString("statusUID");
+                    String userName = rs.getString("userName");
+                    String password = rs.getString("password");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    int totalVote = rs.getInt("totalVote");
+                    int rankID = rs.getInt("rankID");
+                    Date date = rs.getDate("date");
+                    String image = rs.getString("image");
+                    String banReason = rs.getString("banReason");
+                    user = new UserDTO(userID, roleID, statusID, userName, password, email, phone, totalVote, rankID, date, image, banReason);
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return user;
+    }
 
     public int Rank(String userID) throws SQLException {
         int rank = 0;
