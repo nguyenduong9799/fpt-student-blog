@@ -135,11 +135,11 @@
                                                 }
                                                 if (authorRank == 1) {
                                             %>
-                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px green; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
                                         <%
                                         } else if (authorRank == 2) {
                                         %>
-                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px green;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
                                         <%
                                         } else if (authorRank == 3) {
                                         %>
@@ -168,7 +168,7 @@
                                         %>
                                         <li class="comment">
                                             <div class="vcard bio">
-                                                <img src="<%=UserDAO.getUserImageByID(list.getUserID())%>" alt="Image placeholder">
+                                                <img style="height: 48px;" src="<%=UserDAO.getUserImageByID(list.getUserID())%>" alt="Image placeholder">
                                             </div>
                                             <div class="comment-body">
                                                 <h3><%=UserDAO.getUserNameByID(list.getUserID())%></h3>
