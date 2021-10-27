@@ -1,3 +1,5 @@
+<%@page import="group1.dto.RankDTO"%>
+<%@page import="group1.dao.RankDAO"%>
 <%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CategoryDTO"%>
@@ -131,33 +133,14 @@
                             <form action="MainController" method="Post">
                                 <div class="sidebar-box"  style="text-align: center;">
                                     <div style="position: relative;">
-                                        <img  style="border-radius: 999px;"width="200" height="200" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">
+                                        <img  style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
                                     </div>  
                                 </div>
                                 <div class="sidebar-box ftco-animate">
                                     <%
-                                        if (loginUser.getRankID() == 1) {
+                                        RankDAO rank = new RankDAO();
                                     %>
-                                    <img style="margin-left: 5px; box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
-                                    <%
-                                    } else if (loginUser.getRankID() == 2) {
-                                    %>
-                                    <img style="margin-left: 5px; box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
-                                    <%
-                                    } else if (loginUser.getRankID() == 3) {
-                                    %>
-                                    <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
-                                    <%
-                                    } else if (loginUser.getRankID() == 4) {
-                                    %>
-                                    <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
-                                    <%
-                                    } else if (loginUser.getRankID() == 5) {
-                                    %>
-                                    <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
-                                    <%
-                                        }
-                                    %>
+                                    <img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
                                     <br/>
                                     <label style="margin-top: 5px;">Full Name</label><br/>
                                     <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>

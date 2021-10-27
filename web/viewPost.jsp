@@ -1,3 +1,4 @@
+<%@page import="group1.dao.RankDAO"%>
 <%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CommentDTO"%>
@@ -66,7 +67,7 @@
                     </ul>
                 </nav>
                 <div class="colorlib-footer">
-  
+
                     <p class="pfooter">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                     <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
@@ -109,47 +110,31 @@
                                     </div>
                                     <div class="desc">
                                         <h3><i class="icon-person"></i>  <%=authorName%></h3>
-                                        <p><i class="icon-folder-o"></i>  <%=post.getCategory()%>   <i class="icon-calendar"></i>  <%=dao.splitDate(post.getDate())%></p>
+                                        <p><i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p>
+                                        <% RankDAO rank = new RankDAO();
+                                        %>
+                                        <img style="display: block; margin-left: 10px; " width="70px" height="50px" src="<%=rank.getRankImage(authorRank)%>" alt=""/>
+                                        <br>
                                         <%
                                             PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
                                             if (voted != null) {
                                         %>
                                         <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
-                                                <i class="icon-heart">  Voted(<%=post.getVote()%>)</i>
+                                                <span class="badge badge-success">Voted(<%=post.getVote()%>)</span>
                                             </a></h3>
                                             <%
                                             } else {
                                             %>
                                         <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
-                                                <i class="icon-heart">  Vote(<%=post.getVote()%>)</i>
+                                                <span class="badge badge-success">Vote(<%=post.getVote()%>)</span>
                                             </a></h3>
                                             <%
                                                 }
-                                                if (authorRank == 1) {
                                             %>
-                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
-                                        <%
-                                        } else if (authorRank == 2) {
-                                        %>
-                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
-                                        <%
-                                        } else if (authorRank == 3) {
-                                        %>
-                                        <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
-                                        <%
-                                        } else if (authorRank == 4) {
-                                        %>
-                                        <img style="margin-left: 5px;border-radius: initial; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
-                                        <%
-                                        } else if (authorRank == 5) {
-                                        %>
-                                        <img style="margin-left: 5px;border-radius: initial; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
-                                        <%
-                                            }
-                                        %>
-                                    </div>
-                                </div>
-                                <div class="pt-5 mt-5">
+                                    </div> 
+                                </div> 
+                                <div 
+                                    class="pt-5 mt-5">
                                     <h3 class="mb-5 font-weight-bold"><%=dao.getTotalComment(post.getPostID())%> Comments</h3>
                                     <ul class="comment-list">
                                         <%

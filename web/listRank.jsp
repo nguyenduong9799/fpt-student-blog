@@ -1,4 +1,7 @@
 
+<%@page import="group1.dto.RankDTO"%>
+<%@page import="group1.dao.RankDAO"%>
+<%@page import="group1.dao.PostDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,8 +18,7 @@
         <script src="./Mentor_files/all.min.js.download" crossorigin="anonymous"></script>
         <style type="text/css">/* Chart.js */
             @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>
-
-        <title>List Mentor Page</title>
+        <title>Rank Page</title>
     </head>
     <body class="sb-nav-fixed">
         <%
@@ -74,84 +76,48 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">List Mentor</h1>
+                        <h1 class="mt-4">List Rank</h1>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com -->
-                                Data Table List Mentor
+                                Data Table List Rank
                             </div>
                             <div class="card-body">
-                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">  
                                     <div class="dataTable-container">
                                         <%
-                                            UserDAO dao = new UserDAO();
-                                            List<UserDTO> list = dao.getListMentor();
+                                            RankDAO dao = new RankDAO();
+                                            List<RankDTO> list = dao.getListRank();
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
                                         %>
                                         <table id="datatablesSimple" class="dataTable-table">
                                             <thead>
                                                 <tr>
-                                                    <th data-sortable="" style="width: 15;">User ID</th>
-                                                    <th data-sortable="" style="width: 10%;">Role ID</a</th>
-                                                    <th data-sortable="" style="width: 10%;">Status UID</th>
-                                                    <th data-sortable="" style="width: 15%;">User Name</th>
-                                                    <th data-sortable="" style="width: 20%;">Email</th>
-                                                    <th data-sortable="" style="width: 15%;">Phone</th>
-                                                    <th data-sortable="" style="width: 15%;">Reason</th>
+                                                    <th data-sortable="" style="width: 10%;">Rank ID</th>
+                                                    <th data-sortable="" style="width: 20%;">Rank Name</th>
+                                                    <th data-sortable="" style="width: 10%;">Vote</th>
+                                                    <th data-sortable="" style="width: 50%;">image</th>
+
                                                 </tr>
                                             </thead>
 
                                             <tbody>
                                                 <%
-                                                    for (UserDTO user : list) {
-                                                        String banReason = (String)user.getBanReason();
-                                                        if(banReason == null){
-                                                            banReason = "";
-                                                        }
+                                                    for (RankDTO rank : list) {
                                                 %>
-                                            <form action="MainController" method="POST">
+
                                                 <tr>
-                                                    <td><%=user.getUserID()%></td>
-                                                    <td><%=user.getRoleID()%></td>
+                                                    <td><%=rank.getRankID()%></td>
                                                     <td>
-                                                        <%
-                                                            if ("1".equals(user.getStatusUID())) {
-                                                        %>
-                                                        <span class="badge badge-success">Activated</span>
-                                                        <%
-                                                        } else {
-                                                        %>
-                                                        <span class="badge badge-primary">Inactived</span>
-                                                        <%
-                                                            }
-                                                        %>
+                                                        <span class="badge badge-success"><%=rank.getRankName()%></span>              
                                                     </td>
-                                                    <td><%=user.getUserName()%></td>
-                                                    <td><%=user.getEmail()%></td>
-                                                    <td><%=user.getPhone()%></td>
-      
-                                                    <td>
-                                                        <input class="form-control" type="text" name="banReason" value="<%=banReason%>" />
+                                                    <td><%=rank.getVote()%></td>
+                                                    <td><img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getImage()%>" alt=""/>
                                                     </td>
-                                                    <td>
-                                                        <%
-                                                            if ("1".equals(user.getStatusUID())) {
-                                                        %>
-                                                        <input class="btn btn-primary" type="submit" name="action" value="Ban">
-                                                        <%
-                                                        } else {
-                                                        %>
-                                                        <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
-                                                        <%
-                                                            }
-                                                        %>
-                                                        <input type="hidden" name="userID" value="<%= user.getUserID()%>"/>
-                                                        <input type="hidden" name="statusUID" value="<%= user.getStatusUID()%>"/>
-                                                    </td>
+
                                                 </tr>
-                                                <input type="hidden" name="postID" value="<%=user.getUserID()%>">
-                                            </form>
+
                                             </tbody>
                                             <%    }%>
                                         </table>
@@ -183,4 +149,3 @@
         <script src="./Mentor_files/datatables-simple-demo.js.download"></script>
     </body>  
 </html>
-
