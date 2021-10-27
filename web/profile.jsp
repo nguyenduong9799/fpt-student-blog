@@ -86,16 +86,17 @@
 
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
-                        <div class="row d-flex no-gutters">
-                            <div class="col-lg-8 px-md-5 py-5">
-                                <%
-                                    PostDAO dao = new PostDAO();
-                                    List<PostDTO> list = (List<PostDTO>) request.getAttribute("LIST_POST_BY_USERID");
-                                    if (list != null) {
-                                        if (!list.isEmpty()) {
-                                            for (PostDTO post : list) {
-                                %>
-
+                    <div class="row d-flex no-gutters">
+                        <div class="col-lg-8 px-md-5 py-5">
+                            <%
+                                PostDAO dao = new PostDAO();
+                                List<PostDTO> list = (List<PostDTO>) request.getAttribute("LIST_POST_BY_USERID");
+                                int totalPost = (int) request.getAttribute("TOTAL_POST_BY_USER");
+                                if (list != null) {
+                                    if (!list.isEmpty()) {
+                                        for (PostDTO post : list) {
+                            %>
+                            <div class="contentPage">
                                 <div class="blog-entry ftco-animate d-md-flex align-items-center" style="margin-bottom: 20px;">
                                     <div class="text p-4">
                                         <%
@@ -125,64 +126,67 @@
                                         <p><a href="MainController?action=ViewYourPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail<span class="ion-ios-arrow-forward"></span></a></p>                                              
                                     </div>
                                 </div>
-                                <%
-                                            }
+                            </div>
+                            <%
                                         }
                                     }
-                                %>
-                            </div>
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <form action="MainController" method="Post">
-                                    <div class="sidebar-box"  style="text-align: center;">
-                                        <div style="position: relative;">
-                                            <img  style="border-radius: 999px;"width="200" height="200" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">
-                                        </div>  
-                                    </div>
-                                    <div class="sidebar-box ftco-animate">
-                                        <%
-                                            if (loginUser.getRankID() == 1) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 2) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 3) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 4) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 5) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
-                                        <%
-                                            }
-                                        %>
-                                        <br/>
-                                        <label style="margin-top: 5px;">Full Name</label><br/>
-                                        <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
-                                        <label>Email</label><br/>
-                                        <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
-                                        <label>Phone Number</label><br/>
-                                        <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
-                                        <label>Avatar image</label><br/>
-                                        <input type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
-                                        <label>Change Password</label><br/>
-                                        <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
-                                        <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
-                                        <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
-                                        <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
-                                        <div style="text-align: center;">
-                                            <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div><!-- END COL --> 
+                                }
+                            %>
+                            <!-- Hiên thị nút bấm -->
+                            <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                         </div>
+                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                            <form action="MainController" method="Post">
+                                <div class="sidebar-box"  style="text-align: center;">
+                                    <div style="position: relative;">
+                                        <img  style="border-radius: 999px;"width="200" height="200" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">
+                                    </div>  
+                                </div>
+                                <div class="sidebar-box ftco-animate">
+                                    <%
+                                        if (loginUser.getRankID() == 1) {
+                                    %>
+                                    <img style="margin-left: 5px; box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
+                                    <%
+                                    } else if (loginUser.getRankID() == 2) {
+                                    %>
+                                    <img style="margin-left: 5px; box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
+                                    <%
+                                    } else if (loginUser.getRankID() == 3) {
+                                    %>
+                                    <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
+                                    <%
+                                    } else if (loginUser.getRankID() == 4) {
+                                    %>
+                                    <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
+                                    <%
+                                    } else if (loginUser.getRankID() == 5) {
+                                    %>
+                                    <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
+                                    <%
+                                        }
+                                    %>
+                                    <br/>
+                                    <label style="margin-top: 5px;">Full Name</label><br/>
+                                    <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
+                                    <label>Email</label><br/>
+                                    <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
+                                    <label>Phone Number</label><br/>
+                                    <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
+                                    <label>Avatar image</label><br/>
+                                    <input type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
+                                    <label>Change Password</label><br/>
+                                    <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
+                                    <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
+                                    <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
+                                    <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
+                                    <div style="text-align: center;">
+                                        <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!-- END COL --> 
+                    </div>
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 
@@ -206,5 +210,36 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
         <script src="js/google-map.js"></script>
         <script src="js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+        <!-- JS tạo nút bấm di chuyển trang start -->
+        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <!-- JS tạo nút bấm di chuyển trang end -->
+        <script type="text/javascript">
+                            $(function () {
+                                var pageSize = 5; // Hiển thị 5 sản phẩm trên 1 trang
+                                showPage = function (page) {
+                                    $(".contentPage").hide();
+                                    $(".contentPage").each(function (n) {
+                                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                                            $(this).show();
+                                    });
+                                }
+                                showPage(1);
+                                ///** Cần truyền giá trị vào đây **///
+                                var totalRows = <%=totalPost%>; // Tổng số sản phẩm hiển thị
+                                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
+                                var iTotalPages = Math.ceil(totalRows / pageSize);
+
+                                var obj = $('#pagination').twbsPagination({
+                                    totalPages: iTotalPages,
+                                    visiblePages: btnPage,
+                                    onPageClick: function (event, page) {
+                                        console.info(page);
+                                        showPage(page);
+                                    }
+                                });
+                                console.info(obj.data());
+                            });
+        </script>
     </body>
 </html>
