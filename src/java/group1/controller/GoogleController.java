@@ -51,7 +51,7 @@ public class GoogleController extends HttpServlet {
                 long millis = System.currentTimeMillis();
                 Date date = new Date(millis);
 
-                UserDTO user = new UserDTO("123", "US", "1","Google User", "", googlePojo.getEmail()
+                UserDTO user = new UserDTO(userID, "US", "1","Google User", "", googlePojo.getEmail()
                         , "", 0, 0, date, googlePojo.getPicture());
 
                 if (dao.checkDuplicate(userID) == false) {

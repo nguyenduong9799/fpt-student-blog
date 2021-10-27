@@ -476,7 +476,7 @@ public class PostDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 String sql = "select * from tblPosts\n"
-                        + "Where categoryID = ? AND statusPID=1";
+                        + "Where categoryID = ? AND statusPID=1 order by date desc";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, categoryID);
                 rs = stm.executeQuery();

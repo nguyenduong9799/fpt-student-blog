@@ -67,7 +67,7 @@ public class TagDAO {
             if (conn != null) {
                 String sql = "select p.*, tagID  "
                         + " from tblPosts p join tblTagBlog tb on tb.postID=p.postID\n"
-                        + " where tb.tagID=? and statusPID=1";
+                        + " where tb.tagID=? and statusPID=1 order by date desc";
                 stm = conn.prepareStatement(sql);
                 stm.setInt(1, tagID);
                 rs = stm.executeQuery();
