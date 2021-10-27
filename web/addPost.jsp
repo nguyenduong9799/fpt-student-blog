@@ -104,7 +104,7 @@
 
                                     <!--Category-->       
                                     <select class="select" name="category" required>
-                                        <option selected disabled>Choose Category</option>
+                                        <option selected disabled value="">Choose Category</option>
                                         <%
                                             ArrayList<CategoryDTO> listCate = CategoryDAO.getAllCategory();
                                             if (listCate != null) {
