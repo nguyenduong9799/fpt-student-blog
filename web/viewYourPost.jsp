@@ -1,3 +1,4 @@
+<%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CommentDTO"%>
 <%@page import="group1.dto.TagDTO"%>
@@ -115,9 +116,11 @@
                                             %>
                                         </div>
                                     </div>                     
-                                    <div class="about-author d-flex p-4 bg-light">
+                                    <div style="
+                                         height: 250px;
+                                         width: 100%;"class="about-author d-flex p-4 bg-light">
                                         <div class="bio mr-5">
-                                            <img width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                                            <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
                                         </div>
                                         <div class="desc">
                                             <h3><i class="icon-person"></i>  <%=authorName%></h3>
@@ -179,10 +182,10 @@
                                             %>
                                             <li class="comment">
                                                 <div class="vcard bio">
-                                                    <img src="images/person_1.jpg" alt="Image placeholder">
+                                                    <img src="<%=UserDAO.getUserImageByID(list.getUserID())%>" alt="Image placeholder">
                                                 </div>
                                                 <div class="comment-body">
-                                                    <h3><%=list.getUserID()%></h3>
+                                                    <h3><%=UserDAO.getUserNameByID(list.getUserID())%></h3>
                                                     <div class="meta"><%=dao.splitDate(list.getDate())%></div>
                                                     <p><%=list.getCommentContent()%></p>
                                                 </div>
