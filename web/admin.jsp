@@ -85,12 +85,12 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body" style="text-align: center; font-size: 20px;">New Post: <%=totalNewPost%></div>
+                                    <div class="card-body" style="text-align: center; font-size: 20px;">New Post(Nearest month): <%=totalNewPost%></div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body" style="text-align: center; font-size: 20px;">New User: <%=totalNewUser%></div>                                   
+                                    <div class="card-body" style="text-align: center; font-size: 20px;">New User(Nearest month): <%=totalNewUser%></div>                                   
                                 </div>
                             </div> 
                             <div class="col-xl-3 col-md-6">
@@ -153,7 +153,7 @@
                                                         <%
                                                         } else {
                                                         %>
-                                                        <span class="badge badge-primary">Banned</span>
+                                                        <span class="badge badge-danger">Banned</span>
                                                         <%
                                                             }
                                                         %>

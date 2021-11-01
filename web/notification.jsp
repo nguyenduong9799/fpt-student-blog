@@ -102,7 +102,7 @@
                                             </p>
                                         </div>
                                         <p class="mb-4"></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
                                 </div>
                                 <%

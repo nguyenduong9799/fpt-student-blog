@@ -72,7 +72,7 @@
 
                         <div class="txt1 text-center p-t-54 p-b-20">
                             <span>
-                                Or Sign Up Using
+                                Or Sign In Using
                             </span>
                         </div>
 
