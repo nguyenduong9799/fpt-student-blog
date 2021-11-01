@@ -87,13 +87,15 @@
                                             <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                             <div class="meta-wrap">
                                                 <p class="meta">
+                                                    <span><i class="icon-person mr-2"></i>${o.userID}</a></span><br>
                                                     <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
+                                                     <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)}</span>
                                                     <span><i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span><br>
-                                                    <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)} Comments</span>
+                                                   
                                                 </p>
                                             </div>
-                                            <p class="mb-4">${o.userID}</p>
-                                            <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                           
+                                            <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                         </div>
 
                                     </div>

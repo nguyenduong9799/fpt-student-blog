@@ -98,8 +98,8 @@
                                                 <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
                                             </p>
                                         </div>
-                                        <p class="mb-4"><%=post.getPostContent().substring(0, 15)%></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+                   
+                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
                                 </div>      
                             </div>

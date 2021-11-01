@@ -66,7 +66,7 @@
                     </ul>
                 </nav>
                 <div class="colorlib-footer">
-                   <p class="pfooter">
+                    <p class="pfooter">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                     <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
 
@@ -92,13 +92,14 @@
                                     <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                     <div class="meta-wrap">
                                         <p class="meta">
-                                            <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
-                                            <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span><br>
-                                            <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%> Comments</span>
+                                            <span><i class="icon-person mr-2"></i><%=post.getUserID()%></span><br>
+                                            <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span><br>
+                                            <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%></span>
+                                            <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
                                         </p>
                                     </div>
-                                    <p class="mb-4"><%=post.getUserID()%></p>
-                                    <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+
+                                    <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                 </div>
 
                             </div>
@@ -204,31 +205,31 @@
         <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
         <!-- JS tạo nút bấm di chuyển trang end -->
         <script type="text/javascript">
-            $(function () {
-                var pageSize = 5; // Hiển thị 6 sản phẩm trên 1 trang
-                showPage = function (page) {
-                    $(".contentPage").hide();
-                    $(".contentPage").each(function (n) {
-                        if (n >= pageSize * (page - 1) && n < pageSize * page)
-                            $(this).show();
-                    });
-                };
-                showPage(1);
-                ///** Cần truyền giá trị vào đây **///
-                var totalRows = <%=total%>; // Tổng số sản phẩm hiển thị
-                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
-                var iTotalPages = Math.ceil(totalRows / pageSize);
+                            $(function () {
+                                var pageSize = 5; // Hiển thị 6 sản phẩm trên 1 trang
+                                showPage = function (page) {
+                                    $(".contentPage").hide();
+                                    $(".contentPage").each(function (n) {
+                                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                                            $(this).show();
+                                    });
+                                };
+                                showPage(1);
+                                ///** Cần truyền giá trị vào đây **///
+                                var totalRows = <%=total%>; // Tổng số sản phẩm hiển thị
+                                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
+                                var iTotalPages = Math.ceil(totalRows / pageSize);
 
-                var obj = $('#pagination').twbsPagination({
-                    totalPages: iTotalPages,
-                    visiblePages: btnPage,
-                    onPageClick: function (event, page) {
-                        console.info(page);
-                        showPage(page);
-                    }
-                });
-                console.info(obj.data());
-            });
+                                var obj = $('#pagination').twbsPagination({
+                                    totalPages: iTotalPages,
+                                    visiblePages: btnPage,
+                                    onPageClick: function (event, page) {
+                                        console.info(page);
+                                        showPage(page);
+                                    }
+                                });
+                                console.info(obj.data());
+                            });
         </script>
     </body>
 </html>
