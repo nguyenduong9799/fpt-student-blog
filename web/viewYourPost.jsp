@@ -219,7 +219,7 @@
                                 <form action="MainController">
                                     <div class="sidebar-box"  style="text-align: center;">
                                         <div style="position: relative;">
-                                            <img  style="border-radius: 999px;"width="200" height="200" src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                                            <img  style="border-radius: 999px;"width="200" height="200" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="img-fluid mb-4">
                                         </div>  
                                     </div>
                                     <div class="sidebar-box ftco-animate">
