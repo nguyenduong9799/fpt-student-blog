@@ -20,6 +20,8 @@
     </head>
     <body class="sb-nav-fixed">
         <%
+            UserDAO dao = new UserDAO();
+            int total = dao.getTotalUser();
             PostDAO postDAO = new PostDAO();
             String startDay = postDAO.startDayOfMonth();
             String endDay = postDAO.endDayOfMonth();
@@ -113,7 +115,6 @@
                                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">  
                                     <div class="dataTable-container">
                                         <%
-                                            UserDAO dao = new UserDAO();
                                             List<UserDTO> list = dao.getListUser();
                                             if (list != null) {
                                                 if (!list.isEmpty()) {
@@ -142,7 +143,7 @@
                                                         }
                                                 %>
                                             <form action="MainController">
-                                                <tr>
+                                                <tr class="contentPage">
                                                     <td><%=user.getUserID()%></td>
                                                     <td><%=user.getRoleID()%></td>
                                                     <td>
@@ -185,6 +186,8 @@
                                             </tbody>
                                             <%    }%>
                                         </table>
+                                        <!-- Hiên thị nút bấm -->
+                                        <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                                         <%
                                         } else {
                                         %>
@@ -211,5 +214,37 @@
         <script src="./Mentor_files/chart-bar-demo.js.download"></script>
         <script src="./Mentor_files/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="./Mentor_files/datatables-simple-demo.js.download"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+        <!-- JS tạo nút bấm di chuyển trang start -->
+        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <!-- JS tạo nút bấm di chuyển trang end -->
+        <script type="text/javascript">
+            $(function () {
+                var pageSize = 5; // Hiển thị 5 sản phẩm trên 1 trang
+                showPage = function (page) {
+                    $(".contentPage").hide();
+                    $(".contentPage").each(function (n) {
+                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                            $(this).show();
+                    });
+                };
+                showPage(1);
+                ///** Cần truyền giá trị vào đây **///
+                var totalRows = <%=total%>; // Tổng số sản phẩm hiển thị
+                var btnPage = 4; // Số nút bấm hiển thị di chuyển trang
+                var iTotalPages = Math.ceil(totalRows / pageSize);
+
+                var obj = $('#pagination').twbsPagination({
+                    totalPages: iTotalPages,
+                    visiblePages: btnPage,
+                    onPageClick: function (event, page) {
+                        console.info(page);
+                        showPage(page);
+                    }
+                });
+                console.info(obj.data());
+            });
+        </script>
     </body>  
 </html>

@@ -431,6 +431,68 @@ public class UserDAO {
         return list;
     }
     
+    public int getTotalMentor() throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(*) from tblUsers where roleID= 'MT'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
+    
+    public int getTotalUser() throws SQLException {
+        int total = 0;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "select count(*) from tblUsers where roleID= 'US'";
+                stm = conn.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    total = rs.getInt(1);
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return total;
+    }
+    
     public boolean hideUser(String userID, String banReason) throws Exception {
         boolean check = false;
         Connection conn = null;

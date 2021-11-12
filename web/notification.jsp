@@ -66,7 +66,7 @@
                     </ul>
                 </nav>
                 <div class="colorlib-footer">
-                 
+
                     <p class="pfooter">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                     <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
@@ -77,17 +77,17 @@
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
 
-                        <div class="row d-flex no-gutters">
-                            <div class="col-lg-8 px-md-5 py-5">
-                                <%
-                                    PostDAO dao = new PostDAO();
-                                    int total = dao.getTotalNotification();
-                                    List<PostDTO> list = dao.getNotification();
-                                    if (list != null) {
-                                        if (!list.isEmpty()) {
-                                            for (PostDTO post : list) {
-                                %>
-
+                    <div class="row d-flex no-gutters">
+                        <div class="col-lg-8 px-md-5 py-5">
+                            <%
+                                PostDAO dao = new PostDAO();
+                                int total = dao.getTotalNotification();
+                                List<PostDTO> list = dao.getNotification();
+                                if (list != null) {
+                                    if (!list.isEmpty()) {
+                                        for (PostDTO post : list) {
+                            %>
+                            <div class="contentPage">
                                 <div class="blog-entry ftco-animate d-md-flex align-items-center">
                                     <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(images/image_5.jpg);"></a>
                                     <div class="text p-4">
@@ -105,64 +105,65 @@
                                         <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
                                 </div>
-                                <%
-                                            }
+                            </div>
+                            <%
                                         }
                                     }
-                                %>
-                                <!-- Hiên thị nút bấm -->
-                                <ul id="pagination"></ul>
+                                }
+                            %>
+                            <!-- Hiên thị nút bấm -->
+                            <ul id="pagination"></ul>
+                        </div>
+                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                            <div class="sidebar-box pt-md-4">
+                                <form action="#" class="search-form">
+                                    <div class="form-group">
+                                        <a href="search.jsp" class="icon icon-search"></a>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </form>
                             </div>
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <div class="sidebar-box pt-md-4">
-                                    <form action="#" class="search-form">
-                                        <div class="form-group">
-                                            <a href="search.jsp" class="icon icon-search"></a>
-                                            <input type="text" class="form-control" placeholder="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Categories</h3>
-                                    <c:if test="${sessionScope.LIST_CATEGORY == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="categories">                                       
-                                        <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
-                                            <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
-                                            </c:forEach> 
-                                    </ul>
-                                </div>
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Categories</h3>
+                                <c:if test="${sessionScope.LIST_CATEGORY == null}">
+                                    <c:redirect url="HomeController"></c:redirect>
+                                </c:if>
+                                <ul class="categories">                                       
+                                    <c:forEach items="${sessionScope.LIST_CATEGORY}" var="o">
+                                        <li><a href="CategoryController?txtCategoryID=${o.categoryID}">${o.categoryName}</a></li>
+                                        </c:forEach> 
+                                </ul>
+                            </div>
 
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Articles</h3>
-                                    <div class="block-21 mb-4 d-flex">
-                                        <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                                        <div class="text">
-                                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                    control</a></h3>
-                                            <div class="meta">
-                                                <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
-                                                </div>
-                                                <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Popular Articles</h3>
+                                <div class="block-21 mb-4 d-flex">
+                                    <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                                    <div class="text">
+                                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
+                                                control</a></h3>
+                                        <div class="meta">
+                                            <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
                                             </div>
+                                            <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
+                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sidebar-box ftco-animate">
-                                    <h3 class="sidebar-heading">Popular Tag</h3>
-                                    <c:if test="${sessionScope.LIST_TAG == null}">
-                                        <c:redirect url="HomeController"></c:redirect>
-                                    </c:if>
-                                    <ul class="tagcloud">
-                                        <c:forEach items="${sessionScope.LIST_TAG}" var="o">
-                                            <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
-                                        </c:forEach> 
-                                    </ul>
-                                </div>
-                            </div><!-- END COL --> 
-                        </div>
+                            </div>
+                            <div class="sidebar-box ftco-animate">
+                                <h3 class="sidebar-heading">Popular Tag</h3>
+                                <c:if test="${sessionScope.LIST_TAG == null}">
+                                    <c:redirect url="HomeController"></c:redirect>
+                                </c:if>
+                                <ul class="tagcloud">
+                                    <c:forEach items="${sessionScope.LIST_TAG}" var="o">
+                                        <a href="MainController?action=GetPostByTag&tagID=${o.tagID}">${o.tagName}</a>
+                                    </c:forEach> 
+                                </ul>
+                            </div>
+                        </div><!-- END COL --> 
+                    </div>
                 </section>
             </div><!-- END COLORLIB-MAIN -->
 
