@@ -1,3 +1,4 @@
+<%@page import="group1.dao.RankDAO"%>
 <%@page import="group1.dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="group1.dto.CommentDTO"%>
@@ -10,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="referrer" content="no-referrer">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <title>ViewPost Page</title>
@@ -33,6 +35,8 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
+
+        <script src="https://dl.dropboxusercontent.com/s/nvklmhq3kw4j9pq/jquerylasted.js?dl=0"></script>
     </head>
     <body>
         <div id="colorlib-page">
@@ -216,53 +220,38 @@
                                 </div>
                             </div><!-- END--> 
                             <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <form action="MainController">
+                                <form action="MainController" method="Post">
                                     <div class="sidebar-box"  style="text-align: center;">
                                         <div style="position: relative;">
-                                            <img  style="border-radius: 999px;"width="200" height="200" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="img-fluid mb-4">
+                                            <img id="image" style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
                                         </div>  
                                     </div>
                                     <div class="sidebar-box ftco-animate">
                                         <%
-                                            if (loginUser.getRankID() == 1) {
+                                            RankDAO rank = new RankDAO();
                                         %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px ; " width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 2) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 3) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 4) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
-                                        <%
-                                        } else if (loginUser.getRankID() == 5) {
-                                        %>
-                                        <img style="margin-left: 5px; box-shadow: 2px 4px;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
-                                        <%
-                                            }
-                                        %>
+                                        <img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
                                         <br/>
                                         <label style="margin-top: 5px;">Full Name</label><br/>
                                         <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
                                         <label>Email</label><br/>
                                         <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
                                         <label>Phone Number</label><br/>
-                                        <input type="text" name="phoneNumber" class="input" value="<%=loginUser.getPhone()%>"/><br/>
+                                        <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
                                         <label>Avatar image</label><br/>
-                                        <input type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
-                                        <label>Password</label><br/>
-                                        <input type="password" name="password" class="input" value="<%=loginUser.getPassword()%>"/><br/>
+                                        <input type="file" accept="image/*">
+                                        <input id="link" type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
+                                        <label>Change Password</label><br/>
+                                        <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
+                                        <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
+                                        <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
+                                        <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
                                         <div style="text-align: center;">
                                             <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                            </div><!-- END COL --> 
                         </div>
                     </div>
             </div><!-- END COL --> 
@@ -291,5 +280,43 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
+<script>
+                            $('document').ready(function () {
+                                $('input[type=file]').on('change', function () {
+                                    var $files = $(this).get(0).files;
+                                    if ($files.length) {
+                                        if ($files[0].size > $(this).data('max-size') * 1024) {
+                                            console.log('Vui lòng chọn file có dung lượng nhỏ hơn!');
+                                            return false;
+                                        }
+
+                                        console.log('Đang upload hình ảnh lên imgur...');
+                                        var apiUrl = 'https://api.imgur.com/3/image';
+                                        var apiKey = '7911328dd6c64c1';
+                                        var settings = {
+                                            async: false,
+                                            crossDomain: true,
+                                            processData: false,
+                                            contentType: false,
+                                            type: 'POST',
+                                            url: apiUrl,
+                                            headers: {
+                                                Authorization: 'Client-ID ' + apiKey,
+                                                Accept: 'application/json',
+                                            },
+                                            mimeType: 'multipart/form-data',
+                                        };
+                                        var formData = new FormData();
+                                        formData.append('image', $files[0]);
+                                        settings.data = formData;
+                                        $.ajax(settings).done(function (response) {
+                                            var obj = JSON.parse(response);
+                                            document.getElementById("link").value = obj.data.link;
+                                            document.getElementById("image").src = obj.data.link;
+                                        });
+                                    }
+                                });
+                            });
+</script>
 </body>
 </html>
