@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="referrer" content="no-referrer">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/home.css">
         <title>Profile Page</title>
@@ -40,6 +41,8 @@
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
+
+        <script src="https://dl.dropboxusercontent.com/s/nvklmhq3kw4j9pq/jquerylasted.js?dl=0"></script>
     </head>
     <body>
         <div id="colorlib-page">
@@ -70,7 +73,7 @@
                     </ul>
                 </nav>
                 <div class="colorlib-footer">
-       
+
                     <p class="pfooter">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                     <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
@@ -133,7 +136,7 @@
                             <form action="MainController" method="Post">
                                 <div class="sidebar-box"  style="text-align: center;">
                                     <div style="position: relative;">
-                                        <img  style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
+                                        <img id="image" style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
                                     </div>  
                                 </div>
                                 <div class="sidebar-box ftco-animate">
@@ -149,7 +152,8 @@
                                     <label>Phone Number</label><br/>
                                     <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
                                     <label>Avatar image</label><br/>
-                                    <input type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
+                                    <input type="file" accept="image/*">
+                                    <input id="link" type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
                                     <label>Change Password</label><br/>
                                     <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
                                     <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
@@ -215,6 +219,44 @@
                                 });
                                 console.info(obj.data());
                             });
+        </script>
+        <script>
+            $('document').ready(function () {
+                $('input[type=file]').on('change', function () {
+                    var $files = $(this).get(0).files;
+                    if ($files.length) {
+                        if ($files[0].size > $(this).data('max-size') * 1024) {
+                            console.log('Vui lòng chọn file có dung lượng nhỏ hơn!');
+                            return false;
+                        }
+
+                        console.log('Đang upload hình ảnh lên imgur...');
+                        var apiUrl = 'https://api.imgur.com/3/image';
+                        var apiKey = '7911328dd6c64c1';
+                        var settings = {
+                            async: false,
+                            crossDomain: true,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            url: apiUrl,
+                            headers: {
+                                Authorization: 'Client-ID ' + apiKey,
+                                Accept: 'application/json',
+                            },
+                            mimeType: 'multipart/form-data',
+                        };
+                        var formData = new FormData();
+                        formData.append('image', $files[0]);
+                        settings.data = formData;
+                        $.ajax(settings).done(function (response) {
+                            var obj = JSON.parse(response);
+                            document.getElementById("link").value = obj.data.link;
+                            document.getElementById("image").src = obj.data.link;
+                        });
+                    }
+                });
+            });
         </script>
     </body>
 </html>
