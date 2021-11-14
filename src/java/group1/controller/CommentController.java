@@ -8,7 +8,6 @@ package group1.controller;
 import group1.dao.CommentDAO;
 import group1.dto.CommentDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;

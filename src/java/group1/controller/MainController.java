@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SHOW_DETAIL_POST = "showDetailPostController";
+    private static final String SHOW_DETAIL_POST = "ShowDetailPostController";
     private static final String APPROVE_DENY_POST = "ApproveDenyPostController";
     private static final String LOGIN = "LoginController";
     private static final String LOGOUT = "LogoutController";

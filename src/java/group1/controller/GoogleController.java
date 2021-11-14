@@ -10,7 +10,6 @@ import group1.dto.UserDTO;
 import group1.google.GooglePojo;
 import group1.google.GoogleUtils;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;

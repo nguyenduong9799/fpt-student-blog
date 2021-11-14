@@ -9,7 +9,6 @@ import group1.dao.UserDAO;
 import group1.dto.UserDTO;
 import group1.dto.UserError;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

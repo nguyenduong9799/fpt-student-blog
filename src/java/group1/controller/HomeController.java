@@ -12,7 +12,6 @@ import group1.dto.CategoryDTO;
 import group1.dto.PostDTO;
 import group1.dto.TagDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
