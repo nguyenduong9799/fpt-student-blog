@@ -9,7 +9,6 @@ import group1.dao.PostDAO;
 import group1.dao.TagDAO;
 import group1.dto.PostDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;

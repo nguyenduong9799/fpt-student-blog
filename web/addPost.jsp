@@ -47,6 +47,7 @@
         <script src="minified/plugins/dragdrop.js" type="text/javascript"></script>
         <script src="./minified/icons/monocons.js"></script>
         <script src="./minified/formats/xhtml.js"></script>
+        <script src="https://dl.dropboxusercontent.com/s/nvklmhq3kw4j9pq/jquerylasted.js?dl=0"></script>
         <title>Create Post Page</title>
     </head>
     <body>
@@ -110,7 +111,10 @@
                                         %>
                                     </select>
                                     <input class="form-control" placeholder="Tag" style="width: 100%;" type="text" name="tagList"><br>
-                                    <input class="form-control" id="image-1" placeholder="BackGround Images Link" style="width: 100%;" type="text" name="imageBackgound" required=""><br>
+                                    <div style="display: flex;">
+                                        <input style="margin-top: 10px;"type="file" accept="image/*">
+                                        <input class="form-control" id="image-1" placeholder="Background Image Link" style="width: 100%;" type="text" name="imageBackgound" required="">
+                                    </div><br>
                                     <!--Content-->
                                     <h3 class="mb-5">Content of the post...</h3>
                                     <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
@@ -203,6 +207,43 @@
                 icons: 'monocons',
                 autofocus: true,
                 style: 'minified/themes/content/default.min.css'
+            });
+        </script>
+        <script>
+            $('document').ready(function () {
+                $('input[type=file]').on('change', function () {
+                    var $files = $(this).get(0).files;
+                    if ($files.length) {
+                        if ($files[0].size > $(this).data('max-size') * 1024) {
+                            console.log('Vui lòng chọn file có dung lượng nhỏ hơn!');
+                            return false;
+                        }
+
+                        console.log('Đang upload hình ảnh lên imgur...');
+                        var apiUrl = 'https://api.imgur.com/3/image';
+                        var apiKey = '7911328dd6c64c1';
+                        var settings = {
+                            async: false,
+                            crossDomain: true,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            url: apiUrl,
+                            headers: {
+                                Authorization: 'Client-ID ' + apiKey,
+                                Accept: 'application/json',
+                            },
+                            mimeType: 'multipart/form-data',
+                        };
+                        var formData = new FormData();
+                        formData.append('image', $files[0]);
+                        settings.data = formData;
+                        $.ajax(settings).done(function (response) {
+                            var obj = JSON.parse(response);
+                            document.getElementById("image-1").value = obj.data.link;
+                        });
+                    }
+                });
             });
         </script>
         <!-- loader -->

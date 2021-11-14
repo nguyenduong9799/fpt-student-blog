@@ -6,10 +6,8 @@
 package group1.controller;
 
 import group1.dao.PostDAO;
-import group1.dao.TagDAO;
 import group1.dto.PostDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.servlet.ServletException;
@@ -24,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CreateNoficationController", urlPatterns = {"/CreateNoficationController"})
 public class CreateNoficationController extends HttpServlet {
-
+    
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "mentor.jsp";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,7 +39,8 @@ public class CreateNoficationController extends HttpServlet {
             LocalDateTime currentDateTime = java.time.LocalDateTime.now();
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String date = currentDateTime.format(format);
-            PostDTO post = new PostDTO(userID, status, category, title, postContent, date);
+            String image = request.getParameter("imageBackgound");
+            PostDTO post = new PostDTO(userID, status, category, title, postContent, date, image);
             PostDAO dao = new PostDAO();
             boolean check = dao.insertPost(post);
             if (check) {

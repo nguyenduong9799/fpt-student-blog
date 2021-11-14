@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author ACER
  */
 @WebServlet(name = "showDetailPostController", urlPatterns = {"/showDetailPostController"})
-public class showDetailPostController extends HttpServlet {
+public class ShowDetailPostController extends HttpServlet {
 
     private static final String ERROR = "error";
     private static final String SUCCESS = "detailPost.jsp";

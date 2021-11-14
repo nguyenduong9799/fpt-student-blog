@@ -5,16 +5,11 @@
  */
 package group1.controller;
 
-import group1.dao.CommentDAO;
 import group1.dao.PostDAO;
 import group1.dao.TagDAO;
-import group1.dao.UserDAO;
-import group1.dto.CommentDTO;
 import group1.dto.PostDTO;
 import group1.dto.TagDTO;
-import group1.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

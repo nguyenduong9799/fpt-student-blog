@@ -8,7 +8,6 @@ package group1.controller;
 import group1.dao.UserDAO;
 import group1.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

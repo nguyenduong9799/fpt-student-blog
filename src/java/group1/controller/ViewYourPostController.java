@@ -14,7 +14,6 @@ import group1.dto.PostDTO;
 import group1.dto.TagDTO;
 import group1.dto.UserDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

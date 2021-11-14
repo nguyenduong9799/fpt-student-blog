@@ -10,7 +10,6 @@ import group1.dao.PostDAO;
 import group1.dto.CategoryDTO;
 import group1.dto.PostDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

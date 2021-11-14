@@ -8,7 +8,6 @@ package group1.controller;
 import group1.dao.CategoryDAO;
 import group1.dto.CategoryDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
