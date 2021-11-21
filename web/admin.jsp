@@ -173,20 +173,26 @@
                                                     }
                                                 %>
                                                 <form action="MainController">
-                                                    <input class="form-control" type="text" name="banReason" value="<%=banReason%>" placeholder="Ban Reason">
-                                                    <%
-                                                        if ("1".equals(user.getStatusUID())) {
-                                                    %>
-                                                    <input class="btn btn-primary" type="submit" name="action" value="Ban">
-                                                    <%
-                                                    } else {
-                                                    %>
-                                                    <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
-                                                    <%
-                                                        }
-                                                    %>
-                                                    <input type="hidden" name="userID" value="<%= user.getUserID()%>">
-                                                    <input type="hidden" name="statusUID" value="<%= user.getStatusUID()%>">
+                                                    <div style="display: flex;">
+                                                        <div style="width: 80%;">
+                                                            <input class="form-control" type="text" name="banReason" value="<%=banReason%>" placeholder="Ban Reason">
+                                                        </div>
+                                                        <div style="width: 20%; margin-left: 5px;">
+                                                            <%
+                                                                if ("1".equals(user.getStatusUID())) {
+                                                            %>
+                                                            <input class="btn btn-primary" type="submit" name="action" value="Ban">
+                                                            <%
+                                                            } else {
+                                                            %>
+                                                            <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
+                                                            <%
+                                                                }
+                                                            %>
+                                                            <input type="hidden" name="userID" value="<%= user.getUserID()%>">
+                                                            <input type="hidden" name="statusUID" value="<%= user.getStatusUID()%>">
+                                                        </div>
+                                                    </div>
                                                 </form>
                                             </td>
                                         </tr>

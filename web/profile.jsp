@@ -123,7 +123,11 @@
                                 </div>
                             </div>
                             <%
-                                        }
+                                }
+                            } else {
+                            %>
+                            <h2>You don't have any posts. Let's <a style="color: blue;" href="addPost.jsp">Create a new post.</a></h2>
+                            <%
                                     }
                                 }
                             %>
