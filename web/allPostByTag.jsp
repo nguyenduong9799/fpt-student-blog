@@ -98,10 +98,7 @@
                                                 <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
                                             </p>
                                         </div>
-
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
-
                                 </div>
                             </div>
                             <%
@@ -112,7 +109,7 @@
                             <!-- Hiên thị nút bấm -->
                             <ul style="margin-top: 15px;margin-left: 180px;" id="pagination"></ul>
                         </div>
-                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                        <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
                             <div class="sidebar-box pt-md-4">
                                 <form action="SearchController" class="search-form">
                                     <div class="form-group">
