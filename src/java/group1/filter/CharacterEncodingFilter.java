@@ -21,7 +21,7 @@ import javax.servlet.annotation.WebFilter;
  *
  * @author ACER
  */
-@WebFilter(filterName = "CharacterEncodingFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "CharacterEncodingFilter", urlPatterns = {"/MainController"})
 public class CharacterEncodingFilter implements Filter {
     
     private static final boolean debug = true;

@@ -1,3 +1,4 @@
+<%@page import="group1.dto.UserError"%>
 <%@page import="group1.dto.RankDTO"%>
 <%@page import="group1.dao.RankDAO"%>
 <%@page import="group1.dao.UserDAO"%>
@@ -135,7 +136,7 @@
                             <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                         </div>
                         <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                            <form action="MainController" method="Post">
+                            <form action="MainController" method="Post" accept-charset="UTF-8">
                                 <div class="sidebar-box"  style="text-align: center;">
                                     <div style="position: relative;">
                                         <img id="image" style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
@@ -144,11 +145,15 @@
                                 <div class="sidebar-box ftco-animate">
                                     <%
                                         RankDAO rank = new RankDAO();
+                                        UserError errorString = (UserError) request.getAttribute("USER_ERROR");
+                                        if (errorString == null) {
+                                            errorString = new UserError();
+                                        }
                                     %>
                                     <img style="display: block; margin-left: auto; margin-right:auto; " width="80px" height="60px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
                                     <br/>
                                     <label style="margin-top: 5px;">Full Name</label><br/>
-                                    <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
+                                    <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/><p style="color: red;"><%=errorString.getNameError()%></p>
                                     <label>Email</label><br/>
                                     <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
                                     <label>Phone Number</label><br/>
@@ -158,7 +163,7 @@
                                     <input id="link" type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
                                     <label>Change Password</label><br/>
                                     <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
-                                    <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
+                                    <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/><p style="color: red;"><%=errorString.getConfirmError()%></p>
                                     <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
                                     <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
                                     <div style="text-align: center;">

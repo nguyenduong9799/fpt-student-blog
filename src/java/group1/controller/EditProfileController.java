@@ -32,7 +32,7 @@ public class EditProfileController extends HttpServlet {
         String url = ERROR;
         try {
             String userID = request.getParameter("userID");
-            String name = new String(request.getParameter("userName").getBytes("iso-8859-1"), "UTF-8");
+            String name = request.getParameter("userName");
             String password = request.getParameter("newPassword");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
@@ -59,9 +59,9 @@ public class EditProfileController extends HttpServlet {
                 boolean checkUpdate = dao.update(user);
                 if (checkUpdate) {
                     url = SUCCESS;
-                    HttpSession session=request.getSession();
+                    HttpSession session = request.getSession();
                     session.setAttribute("LOGIN_USER", dao.checkLogin(userID, password));
-                    
+
                 } else {
                     userError.setMessageError("Can not insert, unknow error!");
                     request.setAttribute("USER_ERROR", userError);
