@@ -96,7 +96,7 @@
                                     <tbody>
                                         <tr>
                                     <form action="MainController" method="POST">
-                                        <td><input class="form-control" type="text" name="addcategory" value="" /></td> 
+                                        <td><input class="form-control" type="text" name="addcategory" value="" placeholder="Create new category..."/></td> 
                                         <td><input class="btn btn-primary" type="submit" name="action" value="Add Category"/></td>  
                                     </form>
                                     </tr>
