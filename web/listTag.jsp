@@ -84,44 +84,29 @@
                             </div>
                             <div class="card-body">
                                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                    <%
+                                        TagDAO dao = new TagDAO();
+                                        List<TagDTO> list = dao.getListTag();
+                                        if (list != null) {
+                                            if (!list.isEmpty()) {
+                                    %>
                                     <div class="dataTable-container">
                                         <%
-                                            TagDAO dao = new TagDAO();
-                                            List<TagDTO> list = dao.getListTag();
-                                            if (list != null) {
-                                                if (!list.isEmpty()) {
+                                            for (TagDTO tag : list) {
                                         %>
-                                        <table id="datatablesSimple" class="dataTable-table">
-                                            <thead>
-                                                <tr>
-                                                    <th data-sortable="" style="width: 10%;">Tag ID</th>
-                                                    <th data-sortable="" style="width: 20%;">Tag Name</a</th>
-                                                     
-             
-                                                </tr>
-                                            </thead>
 
-                                            <tbody>
-                                                <%
-                                                    for (TagDTO tag : list) {
-                                                %>
-                                                <tr>
-                                                    <td><%=tag.getTagID()%></td>
-                                                    <td><span class="badge badge-success"><%=tag.getTagName()%></span></td>
-                                                </tr>
-                                                <%    }%>
-                                            </tbody>
-                                            
-                                        </table>
-                                        <%
-                                        } else {
-                                        %>
-                                        <h1>No information</h1>
-                                        <%
-                                                }
-                                            }
-                                        %>
+                                        <span class="badge badge-success"><%=tag.getTagName()%></span>
+
+                                        <%    } %>
                                     </div>
+                                    <%
+                                    } else {
+                                    %>
+                                    <h1>No information</h1>
+                                    <%
+                                            }
+                                        }
+                                    %>
                                 </div>
                             </div>
                         </div>

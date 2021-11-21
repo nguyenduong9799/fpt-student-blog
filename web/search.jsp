@@ -21,19 +21,13 @@
 
         <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" href="css/animate.css">
-
         <link rel="stylesheet" href="css/owl.carousel.min.css">
         <link rel="stylesheet" href="css/owl.theme.default.min.css">
         <link rel="stylesheet" href="css/magnific-popup.css">
-
         <link rel="stylesheet" href="css/aos.css">
-
         <link rel="stylesheet" href="css/ionicons.min.css">
-
         <link rel="stylesheet" href="css/bootstrap-datepicker.css">
         <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-
         <link rel="stylesheet" href="css/flaticon.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/style.css">
@@ -65,46 +59,37 @@
                             %>
                     </ul>
                 </nav>
-                <div class="colorlib-footer">
-      
+                <div class="colorlib-footer">     
                     <p class="pfooter">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                     <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
-
                 </div>
             </aside> <!-- END PAGE-ASIDE -->   
-
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
-                    <div class="row d-flex no-gutters">
-                        <div class="col-lg-8 px-md-5 py-5">
+                    <div class="row no-gutters">
+                        <div class="col-lg-9 px-md-5 py-5">
                             <jsp:useBean id="a" class="group1.dao.PostDAO"/>
                             <c:forEach items="${requestScope.POST_VIEW}" var="o">       
                                 <div class="contentPage">
-                                    <div class="blog-entry ftco-animate d-md-flex align-items-center">
+                                    <div class="blog-entry ftco-animate d-md-flex " style="margin-bottom:15px;" >
                                         <a href="MainController?action=ViewPost&postID=${o.userID}" class="img" style="background-image: url(${o.image});"></a>
                                         <div class="text p-4">
                                             <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                             <div class="meta-wrap">
                                                 <p class="meta">
-                                                    <span><i class="icon-person mr-2"></i>${o.userID}</a></span><br>
-                                                    <span><i class="icon-folder-o mr-2"></i>${o.category}</a></span><br>
-                                                    <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)}</span>
-                                                    <span><i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span>
-
+                                                    <span><i class="icon-person mr-2"></i>${o.userID} |<i class="icon-folder-o mr-2"></i>${o.category}</span><br>
+                                                    <span><i class="icon-comment2 mr-2"></i>${a.getTotalComment(o.postID)} | <i class="icon-calendar mr-2"></i>${a.splitDate(o.date)}</span>
                                                 </p>
                                             </div>
-                                            <p class="mb-4"></p>
-                                            <p><a href="MainController?action=ViewPost&postID=${o.postID}" class="btn-custom">Detail<span class="ion-ios-arrow-forward"></span></a></p>
                                         </div>
-
                                     </div>
-                                </div><br>
+                                </div>
                             </c:forEach> 
                             <!-- Hiên thị nút bấm -->
                             <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                         </div>
-                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                        <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
                             <div class="sidebar-box pt-md-4">
                                 <c:set var="searchValue" scope="page" value="${param.search}"/>
                                 <form action="SearchController" class="search-form">
@@ -128,7 +113,7 @@
                             </div>
                             <div class="sidebar-box ftco-animate">
                                 <h3 class="sidebar-heading">Popular Articles</h3>
-                               <%
+                                <%
                                     List<PostDTO> listCommonPost = PostDAO.getListMostPost();
                                     if (listCommonPost != null) {
                                         if (!listCommonPost.isEmpty()) {
@@ -152,7 +137,6 @@
                                     }
                                 %>  
                             </div>
-
                             <div class="sidebar-box ftco-animate">
                                 <h3 class="sidebar-heading">Popular Tag</h3>
                                 <c:if test="${sessionScope.LIST_TAG == null}">
@@ -168,7 +152,6 @@
                     </div>
                 </section>
             </div><!-- END COLORLIB-MAIN -->
-
         </div><!-- END COLORLIB-PAGE -->
 
         <!-- loader -->

@@ -75,62 +75,65 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <p></p>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <svg class="svg-inline--fa fa-table fa-w-16 me-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="table" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg><!-- <i class="fas fa-table me-1"></i> Font Awesome fontawesome.com -->
+                                <i class="fas fa-table me-1"></i>
                                 Data Table Approved Post
                             </div>
                             <div class="card-body">
-                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    <div class="dataTable-container">
+                                <%
+                                    List<PostDTO> list = dao.getApprovedPost();
+                                    if (list != null) {
+                                        if (!list.isEmpty()) {
+                                %>
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th >Title</th>
+                                            <th >Author</a</th>
+                                            <th>Status</th>
+                                            <th >Create Date</th>
+                                            <th >Category</th>
+                                            <th >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th >Title</th>
+                                            <th >Author</a</th>
+                                            <th>Status</th>
+                                            <th >Create Date</th>
+                                            <th >Category</th>
+                                            <th >Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
                                         <%
-                                            List<PostDTO> list = dao.getApprovedPost();
-                                            if (list != null) {
-                                                if (!list.isEmpty()) {
+                                            for (PostDTO post : list) {
                                         %>
-                                        <table id="datatablesSimple" class="dataTable-table">
-                                            <thead>
-                                                <tr>
-                                                    <th data-sortable="" style="width: 35%;">Post Title</th>
-                                                    <th data-sortable="" style="width: 15%;">Post's Author ID</a</th>
-                                                    <th data-sortable="" style="width: 5%;">Status</th>
-                                                    <th data-sortable="" style="width: 20%;">Create Date</th>
-                                                    <th data-sortable="" style="width: 20%;">Category</th>
-                                                    <th data-sortable="" style="width: 5%;">Action</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <%
-                                                    for (PostDTO post : list) {
-                                                %>
-                                            <form action="MainController">
-                                                <tr class="contentPage">
-                                                    <td><%=post.getTitle()%></td>
-                                                    <td><%=post.getUserID()%></td>
-                                                    <td> <span class="badge badge-success"><%=post.getStatus()%></span></td>
-                                                    <td><%=post.getDate()%></td>
-                                                    <td><%=post.getCategory()%></td>   
-                                                    <td><input class="btn btn-primary" type="submit" name="action" value="Detail"></td>
-                                                </tr>
-                                                <input type="hidden" name="postID" value="<%=post.getPostID()%>">
-                                            </form>
-                                            </tbody>
-                                            <%    }%>
-                                        </table>
-                                        <!-- Hiên thị nút bấm -->
-                                        <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
-                                        <%
-                                        } else {
-                                        %>
-                                        <h1>No information</h1>
-                                        <%
-                                                }
-                                            }
-                                        %>
-                                    </div>
-                                </div>
+                                        <tr>
+                                            <td><%=post.getTitle()%></td>
+                                            <td><%=post.getUserID()%></td>
+                                            <td>
+                                                <span class="badge badge-success"><%=post.getStatus()%></span>
+                                            </td>
+                                            <td><%=post.getDate()%></td>
+                                            <td><%=post.getCategory()%></td> 
+                                            <td>
+                                                <a href="MainController?action=Detail&postID=<%=post.getPostID()%>">Detail</a></td>
+                                        </tr>                           
+                                        <%    }%>
+                                    </tbody>
+                                </table>
+                                <!-- Hiên thị nút bấm -->
+                                <%
+                                } else {
+                                %>
+                                <h1>No information</h1>
+                                <%
+                                        }
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>
@@ -147,7 +150,7 @@
         <script src="./Mentor_files/chart-bar-demo.js.download"></script>
         <script src="./Mentor_files/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="./Mentor_files/datatables-simple-demo.js.download"></script>
-        
+
         <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
         <!-- JS tạo nút bấm di chuyển trang start -->
         <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>

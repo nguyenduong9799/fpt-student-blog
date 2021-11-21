@@ -68,15 +68,12 @@
                     <p class="pfooter">
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p>
                     <p class="pfooter">FPT Blog is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://www.facebook.com/nguyenduong971999/" target="_blank">Group 1</a> Class SE1504 of FPT University</p>
-
                 </div>
             </aside> <!-- END PAGE-ASIDE -->  
-
             <div id="colorlib-main"> <!-- START MAIN-PAGE -->
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
-
                     <div class="row no-gutters">
-                        <div class="col-lg-8 px-md-5 py-5">
+                        <div class="col-lg-9 px-md-5 py-5">
                             <%
                                 PostDAO dao = new PostDAO();
                                 int total = dao.getTotalPost();
@@ -84,26 +81,21 @@
                                 if (list != null) {
                                     if (!list.isEmpty()) {
                                         for (PostDTO post : list) {
-                            %>
+                            %>  
                             <div class="contentPage">
-                                <div class="blog-entry ftco-animate d-md-flex align-items-center">
+                                <div class="blog-entry ftco-animate d-md-flex" style="margin-bottom:15px;" >
                                     <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%=post.getImage()%>);"></a>
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
-                                                <span><i class="icon-person mr-2"></i><%=post.getUserID()%></span><br>
-                                                <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span><br>
-                                                <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%></span>
-                                                <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
+                                                <span><i class="icon-person mr-2"></i><%=post.getUserID()%> | <i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span> <br>     
+                                                <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%>   | <i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
                                             </p>
-                                        </div>
-                   
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
+                                        </div>                             
                                     </div>
-                                </div>      
+                                </div> 
                             </div>
-                            <div></div><br>
                             <%
                                         }
                                     }
@@ -112,7 +104,7 @@
                             <!-- Hiên thị nút bấm -->
                             <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                         </div>
-                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                        <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
                             <div class="sidebar-box pt-md-4">
                                 <form action="SearchController" class="search-form">
                                     <div class="form-group">
@@ -161,7 +153,6 @@
                                     }
                                 %> 
                             </div>
-
                             <div class="sidebar-box ftco-animate">
                                 <h3 class="sidebar-heading">Popular Tag</h3>
                                 <c:if test="${sessionScope.LIST_TAG == null}">
@@ -173,16 +164,11 @@
                                     </c:forEach> 
                                 </ul>
                             </div>
-
-
                         </div><!-- END COL --> 
                     </div>
-
                 </section>
             </div><!-- END COLORLIB-MAIN -->
-
         </div><!-- END COLORLIB-PAGE -->
-
         <!-- loader -->
         <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 

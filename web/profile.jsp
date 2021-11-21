@@ -118,9 +118,7 @@
                                                 <span><i class="icon-calendar mr-2"></i><%=post.getDate().substring(0, 19)%></span><br>
                                                 <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%> Comment</span>
                                             </p>
-                                        </div>
-                                        <p class="mb-4"></p>
-                                        <p><a href="MainController?action=ViewYourPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail<span class="ion-ios-arrow-forward"></span></a></p>                                              
+                                        </div>                                             
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +141,7 @@
                                     <%
                                         RankDAO rank = new RankDAO();
                                     %>
-                                    <img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
+                                    <img style="display: block; margin-left: auto; margin-right:auto; " width="80px" height="60px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
                                     <br/>
                                     <label style="margin-top: 5px;">Full Name</label><br/>
                                     <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
