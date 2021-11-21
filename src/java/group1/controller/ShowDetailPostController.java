@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-@WebServlet(name = "showDetailPostController", urlPatterns = {"/showDetailPostController"})
+@WebServlet(name = "ShowDetailPostController", urlPatterns = {"/ShowDetailPostController"})
 public class ShowDetailPostController extends HttpServlet {
 
     private static final String ERROR = "error";

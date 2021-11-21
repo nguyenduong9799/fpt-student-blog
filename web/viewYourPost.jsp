@@ -45,7 +45,6 @@
                 <h1 id="colorlib-logo" class="mb-4"><a href="home.jsp">FPT Blog</a></h1><br>
                 <nav id="colorlib-main-menu" role="navigation">
                     <ul>
-
                         <%
                             UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
                             if (loginUser != null) {
@@ -72,188 +71,160 @@
 
                 </div>
             </aside> <!-- END COLORLIB-ASIDE -->  
-
             <div id="colorlib-main">
                 <section class="ftco-section ftco-no-pt ftco-no-pb">
-                    <div class="container px-0">
-                        <div class="row d-flex no-gutters">
-                            <div class="col-lg-8 px-md-5 py-5">
-                                <div class="row">
-                                    <%
-                                        PostDAO dao = new PostDAO();
-                                        PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
-                                        List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
-                                        String image = (String) request.getAttribute("AUTHOR_IMAGE");
-                                        String authorName = (String) request.getAttribute("AUTHOR_NAME");
-                                        int authorRank = (int) request.getAttribute("AUTHOR_RANK");
-                                    %>
-                                    <%
-                                        if ("Denied".equals(post.getStatus())) {
-                                    %>
-                                    <div class="alert" style=" padding: 20px;
-                                         background-color: #f44336;
-                                         color: white; width: 100%;">
-                                        <strong>Denied!</strong> <br/> Mentor comment:
-                                        <p> <%=post.getApproveComment()%></p>
-                                        <a style="color: white;" href="MainController?action=EditPost&postID=<%=post.getPostID()%>" >>>Go to edit this post</a>
+                    <div class="row d-flex no-gutters">
+                        <div class="col-lg-8 px-md-5 py-5">
+                            <div class="row">
+                                <%
+                                    PostDAO dao = new PostDAO();
+                                    PostDTO post = (PostDTO) request.getAttribute("POST_VIEW");
+                                    List<TagDTO> listTag = (List<TagDTO>) request.getAttribute("POST_TAGS");
+                                    String image = (String) request.getAttribute("AUTHOR_IMAGE");
+                                    String authorName = (String) request.getAttribute("AUTHOR_NAME");
+                                    int authorRank = (int) request.getAttribute("AUTHOR_RANK");
+                                %>
+                                <%
+                                    if ("Denied".equals(post.getStatus())) {
+                                %>
+                                <div class="alert" style=" padding: 20px;
+                                     background-color: #f44336;
+                                     color: white; width: 100%;">
+                                    <strong>Denied!</strong> <br/> Mentor comment:
+                                    <p> <%=post.getApproveComment()%></p>
+                                    <a style="color: white;" href="MainController?action=EditPost&postID=<%=post.getPostID()%>" >>>Go to edit this post</a>
+                                </div>
+                                <%}%>
+                                <h4><%=post.getTitle()%></h4><br>
+                                 <p><i class="icon-person"></i><%=authorName%>  |  <i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p><br>
+                                <p><%=post.getPostContent()%></p><br>
+                                <div style="margin:0 0 0 0;" class="tag-widget post-tag-container mb-5 mt-5">
+                                    <div class="tagcloud">
+                                        <%
+                                            for (TagDTO tag : listTag) {
+                                        %>
+                                        <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" class="tag-cloud-link"><%=tag.getTagName()%></a>
+                                        <%
+                                            }
+                                        %>
                                     </div>
-                                    <%}%>
-                                    <h1 class="mb-3"><%=post.getTitle()%></h1>
-                                    <p><%=post.getPostContent()%></p>
-                                    <div class="tag-widget post-tag-container mb-5 mt-5">
-                                        <div class="tagcloud">
-                                            <%
-                                                for (TagDTO tag : listTag) {
-                                            %>
-                                            <a href="MainController?action=GetPostByTag&tagID=<%=tag.getTagID()%>" class="tag-cloud-link"><%=tag.getTagName()%></a>
-                                            <%
-                                                }
-                                            %>
-                                        </div>
-                                    </div>                     
-                                    <div style="
-                                         height: 250px;
-                                         width: 100%;"class="about-author d-flex p-4 bg-light">
-                                        <div class="bio mr-5">
-                                            <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
-                                        </div>
-                                        <div class="desc">
-                                            <h3><i class="icon-person"></i>  <%=authorName%></h3>
-                                            <p><i class="icon-folder-o"></i>  <%=post.getCategory()%>   <i class="icon-calendar"></i>  <%=dao.splitDate(post.getDate())%></p>
-                                            <%
-                                                PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
-                                                if (voted != null) {
-                                            %>
-                                            <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
-                                                    <i class="icon-heart">  Voted(<%=post.getVote()%>)</i>
-                                                </a></h3>
-                                                <%
-                                                } else {
-                                                %>
-                                            <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
-                                                    <i class="icon-heart">  Vote(<%=post.getVote()%>)</i>
-                                                </a></h3>
-                                                <%
-                                                    }
-                                                %>
-                                                <%
-                                                    if (authorRank == 1) {
-                                                %>
-                                            <img style="margin-left: 5px;border-radius: initial; box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/bronze-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank
-                                                    == 2) {
-                                            %>
-                                            <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/silver-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank
-                                                    == 3) {
-                                            %>
-                                            <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/gold-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank
-                                                    == 4) {
-                                            %>
-                                            <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/platinum-rank.png" alt=""/>
-                                            <%
-                                            } else if (authorRank
-                                                    == 5) {
-                                            %>
-                                            <img style="margin-left: 5px; border-radius: initial;box-shadow: 2px 4px ;" width="35px" height="30px" src="images/rank/diamond-rank.png" alt=""/>
-                                            <%
-                                                }
-                                            %>
-                                        </div>
+                                </div><br>                     
+                                <div style="
+                                     height: 250px;
+                                     width: 100%;"class="about-author d-flex p-4 bg-light">
+                                    <div class="bio mr-5">
+                                        <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
                                     </div>
-                                    <div class="pt-5 mt-5">
-                                        <h3 class="mb-5 font-weight-bold"><%=dao.getTotalComment(post.getPostID())%> Comments</h3>
-                                        <ul class="comment-list">
+                                    <div class="desc">
+                                        <h3><i class="icon-person"></i>  <%=authorName%></h3>
+                                        <% RankDAO rank = new RankDAO();
+                                        %>
+                                        <img style="border-radius:0;" width="80px" height="60px" src="<%=rank.getRankImage(authorRank)%>" alt=""/>
+                                         <%
+                                            PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
+                                            if (voted != null) {
+                                        %>
+                                        <h2><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
+                                                <span class="badge badge-success">Voted(<%=post.getVote()%>)</span>
+                                            </a></h2>
                                             <%
-                                                List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
-                                                if (listComment
-                                                        != null) {
-                                                    if (!listComment.isEmpty()) {
-                                                        for (CommentDTO list : listComment) {
+                                            } else {
                                             %>
-                                            <li class="comment">
-                                                <div class="vcard bio">
-                                                    <img src="<%=UserDAO.getUserImageByID(list.getUserID())%>" alt="Image placeholder">
-                                                </div>
-                                                <div class="comment-body">
-                                                    <h3><%=UserDAO.getUserNameByID(list.getUserID())%></h3>
-                                                    <div class="meta"><%=dao.splitDate(list.getDate())%></div>
-                                                    <p><%=list.getCommentContent()%></p>
-                                                </div>
-                                            </li>
-                                            <%
-                                                        }
-                                                    }
-                                                }
-                                            %>  
-                                        </ul>
-                                        <!-- END comment-list -->
-
-                                        <!-- START post comment -->
-                                        <div class="comment-form-wrap pt-5">
-                                            <%
-                                                if (loginUser
-                                                        != null) {
-                                            %>
-                                            <h3 class="mb-5">Leave a comment</h3>
-                                            <form action="MainController" method="POST" class="p-3 p-md-4 bg-light">
-                                                <div class="form-group">
-                                                    <label for="message">Message</label>
-                                                    <textarea id="message" rows="10" cols="100" name="commentContent" class="form-control"></textarea><br>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>"/>
-                                                    <input type="hidden" name="postID" value="<%=post.getPostID()%>"/>
-                                                    <input type="submit" name="action" value="Comment" class="btn py-3 px-4 btn-primary"><br>
-                                                </div>
-
-                                            </form>
+                                        <h2><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
+                                                <span class="badge badge-success">Vote Post(<%=post.getVote()%>)</span>
+                                            </a></h2>
                                             <%
                                                 }
-                                            %>
-                                        </div> <!-- END post comment -->
+                                            %> 
+                
                                     </div>
                                 </div>
-                            </div><!-- END--> 
-                            <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
-                                <form action="MainController" method="Post">
-                                    <div class="sidebar-box"  style="text-align: center;">
-                                        <div style="position: relative;">
-                                            <img id="image" style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
-                                        </div>  
-                                    </div>
-                                    <div class="sidebar-box ftco-animate">
+                                <div class="pt-5 mt-5">
+                                    <h3 class="mb-5 font-weight-bold"><%=dao.getTotalComment(post.getPostID())%> Comments</h3>
+                                    <ul class="comment-list">
                                         <%
-                                            RankDAO rank = new RankDAO();
+                                            List<CommentDTO> listComment = (List<CommentDTO>) request.getAttribute("LIST_COMMENT");
+                                            if (listComment
+                                                    != null) {
+                                                if (!listComment.isEmpty()) {
+                                                    for (CommentDTO list : listComment) {
                                         %>
-                                        <img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
-                                        <br/>
-                                        <label style="margin-top: 5px;">Full Name</label><br/>
-                                        <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
-                                        <label>Email</label><br/>
-                                        <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
-                                        <label>Phone Number</label><br/>
-                                        <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
-                                        <label>Avatar image</label><br/>
-                                        <input type="file" accept="image/*">
-                                        <input id="link" type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
-                                        <label>Change Password</label><br/>
-                                        <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
-                                        <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
-                                        <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
-                                        <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
-                                        <div style="text-align: center;">
-                                            <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
-                                        </div>
+                                        <li class="comment">
+                                            <div class="vcard bio">
+                                                <img src="<%=UserDAO.getUserImageByID(list.getUserID())%>" alt="Image placeholder">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3><%=UserDAO.getUserNameByID(list.getUserID())%></h3>
+                                                <div class="meta"><%=dao.splitDate(list.getDate())%></div>
+                                                <p><%=list.getCommentContent()%></p>
+                                            </div>
+                                        </li>
+                                        <%
+                                                    }
+                                                }
+                                            }
+                                        %>  
+                                    </ul>
+                                    <!-- END comment-list -->
+
+                                    <!-- START post comment -->
+                                    <div class="comment-form-wrap pt-5">
+                                        <%
+                                            if (loginUser
+                                                    != null) {
+                                        %>
+                                        <h3 class="mb-5">Leave a comment</h3>
+                                        <form action="MainController" method="POST" class="p-3 p-md-4 bg-light">
+                                            <div class="form-group">
+                                                <label for="message">Message</label>
+                                                <textarea id="message" rows="10" cols="100" name="commentContent" class="form-control"></textarea><br>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>"/>
+                                                <input type="hidden" name="postID" value="<%=post.getPostID()%>"/>
+                                                <input type="submit" name="action" value="Comment" class="btn py-3 px-4 btn-primary"><br>
+                                            </div>
+
+                                        </form>
+                                        <%
+                                            }
+                                        %>
+                                    </div> <!-- END post comment -->
+                                </div>
+                            </div>
+                        </div><!-- END--> 
+                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                            <form action="MainController" method="Post">
+                                <div class="sidebar-box"  style="text-align: center;">
+                                    <div style="position: relative;">
+                                        <img id="image" style="border-radius: 999px;"width="250" height="250" src="<%=loginUser.getImage()%>" alt="Image placeholder" class="mb-4">                                   
+                                    </div>  
+                                </div>
+                                <div class="sidebar-box ftco-animate">
+                                    <img style="display: block; margin-left: auto; margin-right:auto; " width="80px" height="60px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
+                                    <br/>
+                                    <label style="margin-top: 5px;">Full Name</label><br/>
+                                    <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/>
+                                    <label>Email</label><br/>
+                                    <input type="text" name="email" class="input" value="<%=loginUser.getEmail()%>"/><br/>
+                                    <label>Phone Number</label><br/>
+                                    <input type="text" name="phone" class="input" value="<%=loginUser.getPhone()%>"/><br/>
+                                    <label>Avatar image</label><br/>
+                                    <input type="file" accept="image/*">
+                                    <input id="link" type="text" name="image" class="input" value="<%=loginUser.getImage()%>"/><br/>
+                                    <label>Change Password</label><br/>
+                                    <input type="password" name="newPassword" class="input" placeholder="New password..."/><br/>
+                                    <input type="password" name="confirm" class="input" placeholder="Confirm new password..."/><br/>
+                                    <input type="hidden" name="password" class="input" value="<%=loginUser.getPassword()%>"/>
+                                    <input type="hidden" name="userID" class="input" value="<%=loginUser.getUserID()%>"/>
+                                    <div style="text-align: center;">
+                                        <input style="margin-bottom: 20px; margin-top: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Save Changes">
                                     </div>
-                                </form>
-                            </div><!-- END COL --> 
-                        </div>
+                                </div>
+                            </form>
+                        </div><!-- END COL --> 
                     </div>
+                </section>
             </div><!-- END COL --> 
         </div>
     </div>

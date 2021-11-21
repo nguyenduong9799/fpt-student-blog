@@ -79,7 +79,7 @@
                 <section class="ftco-section ftco-no-pt ftco-no-pb">
 
                     <div class="row d-flex no-gutters">
-                        <div class="col-lg-8 px-md-5 py-5">
+                        <div class="col-lg-9 px-md-5 py-5">
                             <div class="row">
                                 <%
                                     PostDAO dao = new PostDAO();
@@ -89,9 +89,10 @@
                                     String authorName = (String) request.getAttribute("AUTHOR_NAME");
                                     int authorRank = (int) request.getAttribute("AUTHOR_RANK");
                                 %>
-                                <h1 class="mb-3"><%=post.getTitle()%></h1>
-                                <p><%=post.getPostContent()%></p>
-                                <div class="tag-widget post-tag-container mb-5 mt-5">
+                                <h4 ><%=post.getTitle()%></h4>
+                                <p><i class="icon-person"></i><%=authorName%>  |  <i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p><br>     
+                                <p><%=post.getPostContent()%></p><br> 
+                                <div style="margin:0 0 0 0;" class="tag-widget post-tag-container mb-5 mt-5">
                                     <div class="tagcloud">
                                         <%
                                             for (TagDTO tag : listTag) {
@@ -101,7 +102,7 @@
                                             }
                                         %>
                                     </div>
-                                </div>                     
+                                </div>
                                 <div style="
                                      height: 250px;
                                      width: 100%;" class="about-author d-flex p-4 bg-light">
@@ -109,28 +110,27 @@
                                         <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
                                     </div>
                                     <div class="desc">
-                                        <h3><i class="icon-person"></i>  <%=authorName%></h3>
-                                        <p><i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p>
+                                        <h2><i class="icon-person"></i>  <%=authorName%></h2>
+<!--                                        <p><i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p>-->
                                         <% RankDAO rank = new RankDAO();
                                         %>
-                                        <img style="display: block; margin-left: 10px; " width="70px" height="50px" src="<%=rank.getRankImage(authorRank)%>" alt=""/>
-                                        <br>
+                                        <img style="border-radius:0;" width="80px" height="60px" src="<%=rank.getRankImage(authorRank)%>" alt=""/>
                                         <%
                                             PostDTO voted = (PostDTO) request.getAttribute("USER_VOTED");
                                             if (voted != null) {
                                         %>
-                                        <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
+                                        <h2><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Voted">
                                                 <span class="badge badge-success">Voted(<%=post.getVote()%>)</span>
-                                            </a></h3>
+                                            </a></h2>
                                             <%
                                             } else {
                                             %>
-                                        <h3><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
-                                                <span class="badge badge-success">Vote(<%=post.getVote()%>)</span>
-                                            </a></h3>
+                                        <h2><a href="MainController?action=Vote&postID=<%=post.getPostID()%>&vote=Notyet">
+                                                <span class="badge badge-success">Vote Post(<%=post.getVote()%>)</span>
+                                            </a></h2>
                                             <%
                                                 }
-                                            %>
+                                            %>                  
                                     </div> 
                                 </div> 
                                 <div 
@@ -187,7 +187,7 @@
 
                             </div><!-- END--> 
                         </div>
-                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                        <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
                             <div class="sidebar-box pt-md-4">
                                 <form action="SearchController" class="search-form">
                                     <div class="form-group">
