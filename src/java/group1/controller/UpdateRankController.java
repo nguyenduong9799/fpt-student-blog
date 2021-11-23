@@ -5,53 +5,35 @@
  */
 package group1.controller;
 
-import group1.dao.CategoryDAO;
-import group1.dto.CategoryDTO;
+import group1.dao.RankDAO;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author buili
+ * @author ACER
  */
-@WebServlet(name = "UpdateCategory", urlPatterns = {"/UpdateCategory"})
-public class UpdateCategory extends HttpServlet {
+@WebServlet(name = "UpdateRankController", urlPatterns = {"/UpdateRankController"})
+public class UpdateRankController extends HttpServlet {
 
-    private static final String ADMIN = "listCategory.jsp";
+    private static final String ADMIN = "listRank.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ADMIN;
         try {
-            String categoryName = request.getParameter("categoryName");
-            int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-            CategoryDAO dao = new CategoryDAO();
-            boolean valid = false;
-            valid = dao.UpdateCategory(categoryName, categoryID);
+            int rankID = Integer.parseInt(request.getParameter("rankID"));
+            int rankVote = Integer.parseInt(request.getParameter("rankVote"));
+            RankDAO dao = new RankDAO();
+            boolean check = false;
+            check = dao.UpdateRank(rankID, rankVote);
 
-            if (valid) {
-                request.setAttribute("STATUSD", "Update successful!");
-                HttpSession session = request.getSession();
-                ArrayList<CategoryDTO> list = dao.getAllCategory();
-                session.setAttribute("LIST_CATEGORY", list);
-            } else {
-                request.setAttribute("STATUSD", "Update failed!");
-            }
         } catch (Exception e) {
             log(e.getMessage());
         } finally {

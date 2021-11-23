@@ -152,6 +152,7 @@
                                     %>
                                     <img style="display: block; margin-left: auto; margin-right:auto; " width="80px" height="60px" src="<%=rank.getRankImage(loginUser.getRankID())%>" alt=""/>
                                     <br/>
+                                    <label style="margin-top: 5px;">Your total vote: <%=loginUser.getTotalVote()%> votes</label><br/>
                                     <label style="margin-top: 5px;">Full Name</label><br/>
                                     <input type="text" name="userName" class="input" value="<%=loginUser.getUserName()%>"/><br/><p style="color: red;"><%=errorString.getNameError()%></p>
                                     <label>Email</label><br/>

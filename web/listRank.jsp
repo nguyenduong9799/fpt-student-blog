@@ -95,15 +95,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>Rank Name</th>
+                                                    <th>Image</th>
                                                     <th>Vote</th>
-                                                    <th >image</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
                                                     <th>Rank Name</th>
+                                                    <th>Image</th>
                                                     <th>Vote</th>
-                                                    <th >image</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
@@ -115,11 +115,26 @@
                                                     <td>
                                                         <span class="badge badge-success"><%=rank.getRankName()%></span>              
                                                     </td>
-                                                    <td><%=rank.getVote()%></td>
-                                                    <td><img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getImage()%>" alt=""/>
+                                                    <td>
+                                                        <img style="display: block; margin-left: auto; margin-right:auto; " width="150px" height="120px" src="<%=rank.getImage()%>" alt=""/>
+                                                    </td>
+                                                    <td style="width: 40%;">
+                                                        <form action="MainController">
+                                                            <div style="display: flex; width: 40%;">
+                                                                <div style="width: 70%;">
+                                                                    <input type="number" class="form-control" value="<%=rank.getVote()%>" name="rankVote">
+                                                                </div>
+                                                                <div style="width: 30%; margin-left: 10px;">
+                                                                    <input class="btn btn-primary" type="submit" name="action" value="Update Rank">
+                                                                </div>
+                                                                <input type="hidden" name="rankID" value="<%=rank.getRankID()%>"/>
+                                                            </div>
+                                                        </form>
                                                     </td>
                                                 </tr>
-                                                <%    }%>
+                                                <%
+                                                    }
+                                                %>
                                             </tbody>
 
                                         </table>

@@ -83,4 +83,31 @@ public class RankDAO {
         }
         return image;
     }
+
+    public boolean UpdateRank(int rankID, int rankVote) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "update tblRank "
+                        + "set vote = ? "
+                        + "where rankID = ?";
+                stm = conn.prepareStatement(sql);
+                stm.setInt(1, rankVote);
+                stm.setInt(2, rankID);
+                check = stm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 }
