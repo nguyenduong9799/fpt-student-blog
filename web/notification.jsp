@@ -78,7 +78,7 @@
                 <section class="ftco-section ftco-no-pt ftco-no-pb bg-light">
 
                     <div class="row d-flex no-gutters">
-                        <div class="col-lg-8 px-md-5 py-5">
+                        <div class="col-lg-9 px-md-5 py-5">
                             <%
                                 PostDAO dao = new PostDAO();
                                 int total = dao.getTotalNotification();
@@ -89,7 +89,7 @@
                             %>
                             <div class="contentPage">
                                 <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(images/image_5.jpg);"></a>
+                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%= post.getImage()%>);"></a>
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
@@ -101,8 +101,6 @@
 
                                             </p>
                                         </div>
-                                        <p class="mb-4"></p>
-                                        <p><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="btn-custom">Detail <span class="ion-ios-arrow-forward"></span></a></p>
                                     </div>
                                 </div>
                             </div>
@@ -112,9 +110,9 @@
                                 }
                             %>
                             <!-- Hiên thị nút bấm -->
-                            <ul id="pagination"></ul>
+                            <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
                         </div>
-                        <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
+                        <div class="col-lg-3 sidebar ftco-animate bg-light pt-5">
                             <div class="sidebar-box pt-md-4">
                                 <form action="#" class="search-form">
                                     <div class="form-group">
