@@ -122,7 +122,7 @@
                                                         <form action="MainController">
                                                             <div style="display: flex; width: 40%;">
                                                                 <div style="width: 70%;">
-                                                                    <input type="number" class="form-control" value="<%=rank.getVote()%>" name="rankVote">
+                                                                    <input type="number" class="form-control" value="<%=rank.getVote()%>" name="rankVote" min="0">
                                                                 </div>
                                                                 <div style="width: 30%; margin-left: 10px;">
                                                                     <input class="btn btn-primary" type="submit" name="action" value="Update Rank">

@@ -831,7 +831,9 @@ public class PostDAO {
                     String postContent = rs.getString("postContent");
                     String date = rs.getString("date");
                     int vote = rs.getInt("vote");
-                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote));
+                    String approveComment = rs.getString("approveComment");
+                    String image = rs.getString("image");
+                    list.add(new PostDTO(postID, userID, status, category, title, postContent, date, vote, approveComment, image));
                 }
             }
         } catch (Exception e) {
@@ -880,7 +882,7 @@ public class PostDAO {
         }
         return total;
     }
-    
+
     public int getTotalWaitingPost() throws SQLException {
         int total = 0;
         Connection conn = null;
@@ -911,7 +913,7 @@ public class PostDAO {
         }
         return total;
     }
-    
+
     public int getTotalDeniedPost() throws SQLException {
         int total = 0;
         Connection conn = null;

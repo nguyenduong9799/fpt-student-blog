@@ -88,17 +88,16 @@
                                         for (PostDTO post : list) {
                             %>
                             <div class="contentPage">
-                                <div class="blog-entry ftco-animate d-md-flex align-items-center">
-                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%= post.getImage()%>);"></a>
+                                <div class="blog-entry ftco-animate d-md-flex" style="margin-bottom: 15px;">
+                                    <a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>" class="img" style="background-image: url(<%=post.getImage()%>);"></a>
                                     <div class="text p-4">
                                         <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=<%=post.getPostID()%>"><%=post.getTitle()%></a></h3>
                                         <div class="meta-wrap">
                                             <p class="meta">
-                                                <span><i class="icon-person mr-2"></i><%=post.getUserID()%></a></span><br>
-                                                <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></a></span><br>
+                                                <span><i class="icon-person mr-2"></i><%=post.getUserID()%></span><br>
+                                                <span><i class="icon-folder-o mr-2"></i><%=post.getCategory()%></span><br>
                                                 <span><i class="icon-comment2 mr-2"></i><%=dao.getTotalComment(post.getPostID())%></span>
                                                 <span><i class="icon-calendar mr-2"></i><%=dao.splitDate(post.getDate())%></span>
-
                                             </p>
                                         </div>
                                     </div>
