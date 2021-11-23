@@ -89,11 +89,11 @@
                                     String authorName = (String) request.getAttribute("AUTHOR_NAME");
                                     int authorRank = (int) request.getAttribute("AUTHOR_RANK");
                                 %>
-                                <h4 ><%=post.getTitle()%></h4>
-                                <p><i class="icon-person"></i><%=authorName%>  |  <i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p><br>     
-                                <p><%=post.getPostContent()%></p><br> 
+                                <h4 style="width: 100%;"><%=post.getTitle()%></h4>
+                                <div style="width: 100%;"><i class="icon-person"></i><%=authorName%>  |  <i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></div><br>     
+                                <div style="width: 100%;"><%=post.getPostContent()%></div><br> 
                                 <div style="margin:0 0 0 0;" class="tag-widget post-tag-container mb-5 mt-5">
-                                    <div class="tagcloud">
+                                    <div class="tagcloud" style="width: 100%;">
                                         <%
                                             for (TagDTO tag : listTag) {
                                         %>
@@ -103,9 +103,7 @@
                                         %>
                                     </div>
                                 </div>
-                                <div style="
-                                     height: 250px;
-                                     width: 100%;" class="about-author d-flex p-4 bg-light">
+                                <div style="height: 250px; width: 100%;" class="about-author d-flex p-4 bg-light">
                                     <div class="bio mr-5">
                                         <img width="200" height="200" src="<%=image%>" alt="Image placeholder" class="img-fluid mb-4">
                                     </div>

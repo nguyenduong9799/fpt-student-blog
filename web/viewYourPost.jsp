@@ -95,9 +95,9 @@
                                     <a style="color: white;" href="MainController?action=EditPost&postID=<%=post.getPostID()%>" >>>Go to edit this post</a>
                                 </div>
                                 <%}%>
-                                <h4><%=post.getTitle()%></h4><br>
-                                 <p><i class="icon-person"></i><%=authorName%>  |  <i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></p><br>
-                                <p><%=post.getPostContent()%></p><br>
+                                <h4 style="width: 100%;"><%=post.getTitle()%></h4><br>
+                                 <div style="width: 100%;"><i class="icon-person"></i><%=authorName%>  |  <i class="icon-folder-o"></i>  <%=post.getCategory()%> |  <i class="icon-calendar"></i> <%=dao.splitDate(post.getDate())%></div><br>
+                                <div style="width: 100%;"><%=post.getPostContent()%></div><br>
                                 <div style="margin:0 0 0 0;" class="tag-widget post-tag-container mb-5 mt-5">
                                     <div class="tagcloud">
                                         <%
