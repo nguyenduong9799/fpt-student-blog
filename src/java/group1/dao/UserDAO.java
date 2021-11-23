@@ -5,6 +5,7 @@
  */
 package group1.dao;
 
+import group1.dto.RankDTO;
 import group1.dto.UserDTO;
 import group1.util.DBUtils;
 import java.sql.Connection;
@@ -121,24 +122,26 @@ public class UserDAO {
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, userID);
                 rs = stm.executeQuery();
-                while (rs.next()) {
+                RankDAO rankDAO=new RankDAO();
+                ArrayList<RankDTO> listRank =(ArrayList<RankDTO>) rankDAO.getListRank();
+                if(rs.next()) {
                     int total = rs.getInt("totalVote");
-                    if (total == 0) {
+                    if (total == listRank.get(0).getVote()) {
                         rank = 0;
                     }
-                    if (total >= 150 && total < 250) {
+                    if (total >= listRank.get(1).getVote() && total < listRank.get(2).getVote()) {
                         rank = 1;
                     }
-                    if (total >= 250 && total < 350) {
+                    if (total >= listRank.get(2).getVote() && total < listRank.get(3).getVote()) {
                         rank = 2;
                     }
-                    if (total >= 350 && total < 500) {
+                    if (total >= listRank.get(3).getVote() && total < listRank.get(4).getVote()) {
                         rank = 3;
                     }
-                    if (total >= 500 && total < 1000) {
+                    if (total >= listRank.get(4).getVote() && total < listRank.get(5).getVote()) {
                         rank = 4;
                     }
-                    if (total >= 1000) {
+                    if (total >= listRank.get(5).getVote()) {
                         rank = 5;
                     }
                 }

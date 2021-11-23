@@ -150,7 +150,7 @@
                                                             <%
                                                             } else {
                                                             %>
-                                                            <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
+                                                            <input class="btn btn-danger" type="submit" name="action" value="Unban">
                                                             <%
                                                                 }
                                                             %>

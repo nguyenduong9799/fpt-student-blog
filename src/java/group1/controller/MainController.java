@@ -32,7 +32,7 @@ public class MainController extends HttpServlet {
     private static final String VOTE_POST = "VoteController";
     private static final String SEARCH = "SearchController";
     private static final String CREATE_NOFICATION = "CreateNoficationController";
-    private static final String UPDATE_CATEGORY = "UpdateCategory";
+    private static final String UPDATE_CATEGORY = "UpdateCategoryController";
     private static final String GET_POST_BY_TAG = "GetPostByTagController";
     private static final String PROFILE = "ProfileController";
     private static final String VIEW_YOUR_POST = "ViewYourPostController";
@@ -40,7 +40,8 @@ public class MainController extends HttpServlet {
     private static final String SUBMIT_AGAIN = "SubmitAgainController";
     private static final String EDIT_PROFILE = "EditProfileController";
     private static final String HIDE_USER = "HideUserController";
-
+    private static final String UPDATE_RANK_CONTROLLER = "UpdateRankController";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -87,10 +88,12 @@ public class MainController extends HttpServlet {
                 url = SUBMIT_AGAIN;
             } else if ("Save Changes".equals(action)) {
                 url = EDIT_PROFILE;
-            }else if ("Ban".equals(action)) {
+            } else if ("Ban".equals(action)) {
                 url = HIDE_USER;
-            }else if ("Unbanned".equals(action)) {
+            } else if ("Unban".equals(action)) {
                 url = HIDE_USER;
+            }else if ("Update Rank".equals(action)) {
+                url = UPDATE_RANK_CONTROLLER;
             }
 
         } catch (Exception e) {

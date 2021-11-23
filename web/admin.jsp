@@ -174,7 +174,7 @@
                                                 %>
                                                 <form action="MainController">
                                                     <div style="display: flex;">
-                                                        <div style="width: 80%;">
+                                                        <div style="width: 70%;">
                                                             <input class="form-control" type="text" name="banReason" value="<%=banReason%>" placeholder="Ban Reason">
                                                         </div>
                                                         <div style="width: 20%; margin-left: 5px;">
@@ -185,7 +185,7 @@
                                                             <%
                                                             } else {
                                                             %>
-                                                            <input class="btn btn-danger" type="submit" name="action" value="Unbanned">
+                                                            <input class="btn btn-danger" type="submit" name="action" value="Unban">
                                                             <%
                                                                 }
                                                             %>
