@@ -23,28 +23,38 @@ public class HideUserController extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "admin.jsp";
+    private static final String MENTOR = "listMentor.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            UserDAO dao = new UserDAO();
             String userID = request.getParameter("userID");
+            String roleID = dao.getRoleIDByID(userID);
             String statusUID = request.getParameter("statusUID");
             String banReason = request.getParameter("banReason");
             HttpSession session = request.getSession();
             if ("admin".equals(userID)) {
                 session.setAttribute("ERROR_MESSAGE", "Admin can not be hide!");
-            } else if("1".equals(statusUID)){
-                UserDAO dao = new UserDAO();
+            } else if ("1".equals(statusUID)) {
                 boolean check = dao.hideUser(userID, banReason);
                 if (check) {
-                    url = SUCCESS;
+                    if ("MT".equals(roleID)) {
+                        url = MENTOR;
+                    } else {
+                        url = SUCCESS;
+                    }
                 }
-            }else{
-                UserDAO dao = new UserDAO();
+            } else {
                 boolean check = dao.unHideUser(userID);
                 if (check) {
-                    url = SUCCESS;
+                    if ("MT".equals(roleID)) {
+                        url = MENTOR;
+                    } else {
+                        url = SUCCESS;
+                    }
                 }
             }
         } catch (Exception e) {

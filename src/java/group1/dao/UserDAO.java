@@ -251,6 +251,39 @@ public class UserDAO {
         }
         return userName;
     }
+    
+    public String getRoleIDByID(String userID) throws SQLException {
+        String roleID = null;
+        Connection conn = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "Select roleID "
+                        + "From tblUsers where userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userID);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    roleID = rs.getString("roleID");
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return roleID;
+    }
 
     public boolean checkDuplicate(String userID) throws SQLException {
         boolean check = false;
