@@ -133,7 +133,7 @@
                                 }
                             %>
                             <!-- Hiên thị nút bấm -->
-                            <ul style="margin-top: 15px;margin-left: 180px;"id="pagination"></ul>
+                            <div style=" display: flex;justify-content: center;"><ul style="margin-top: 15px;"id="pagination"></ul></div>
                         </div>
                         <div class="col-lg-4 sidebar ftco-animate bg-light pt-5">
                             <form action="MainController" method="Post" accept-charset="UTF-8">

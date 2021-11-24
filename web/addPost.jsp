@@ -116,7 +116,7 @@
                                         <input class="form-control" id="image-1" placeholder="Background Image Link" style="width: 100%;" type="text" name="imageBackgound" required="">
                                     </div><br>
                                     <!--Content-->
-                                    <h3 class="mb-5">Content of the post...</h3>
+                                    <h3 class="">Content of the post...</h3>
                                     <textarea rows="20" cols="5" id="editor" name="postContent"></textarea><br>
                                     <input type="hidden" name="userID" value="<%=loginUser.getUserID()%>">
                                     <input style="margin-bottom: 20px;" class="btn py-3 px-4 btn-primary" type="submit" name="action" value="Submit Post">
