@@ -134,19 +134,29 @@
 
                             <div class="sidebar-box ftco-animate">
                                 <h3 class="sidebar-heading">Popular Articles</h3>
+                                <%
+                                    List<PostDTO> listCommonPost = PostDAO.getListMostPost();
+                                    if (listCommonPost != null) {
+                                        if (!listCommonPost.isEmpty()) {
+                                            for (PostDTO postCommon : listCommonPost) {
+                                %>
                                 <div class="block-21 mb-4 d-flex">
-                                    <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+                                    <a class="blog-img mr-4" style="background-image: url(<%=postCommon.getImage()%>);"></a>
                                     <div class="text">
-                                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no
-                                                control</a></h3>
+                                        <h3 class="heading"><a href="MainController?action=ViewPost&postID=<%=postCommon.getPostID()%>"><%=postCommon.getTitle()%></a></h3>
                                         <div class="meta">
-                                            <div><a href="#"><span class="icon-calendar"></span> Sept. 12, 2019</a>
+                                            <div><a href="MainController?action=ViewPost&postID=<%=postCommon.getPostID()%>"><span class="icon-calendar"></span> <%=postCommon.getDate()%></a>
                                             </div>
-                                            <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-                                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                            <div><a href="MainController?action=ViewPost&postID=<%=postCommon.getPostID()%>"><span class="icon-person"></span> <%=postCommon.getUserID()%></a></div>
+                                            <!--<div><a href="#"><span class="icon-chat"></span> 19</a></div>-->
                                         </div>
                                     </div>
                                 </div>
+                                <%
+                                            }
+                                        }
+                                    }
+                                %> 
                             </div>
                             <div class="sidebar-box ftco-animate">
                                 <h3 class="sidebar-heading">Popular Tag</h3>

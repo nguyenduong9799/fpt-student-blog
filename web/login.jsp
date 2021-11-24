@@ -54,7 +54,18 @@
                             <span class="focus-input100" data-symbol="&#xf190;"></span>
 
                         </div>
-                        <span class="badge badge-danger"><%= errorMessage%></span>
+                        <%
+                            if (!errorMessage.isEmpty()) {
+                        %>
+                        <div class="alert" style=" padding: 20px;
+                             background-color: #f44336;
+                             color: white; width: 100%; margin-top: 10px;">
+                            <p style="color: white;"><%=errorMessage%></p>
+                        </div>
+                        <%
+                            }
+                        %>
+                        <!--<span style="width: 100%;"class="badge badge-danger"><%= errorMessage%></span>-->
                         <div class="text-right p-t-8 p-b-31">
                             <a href="createAccount.jsp">
                                 Do not have an account ? Sign up 
@@ -67,7 +78,7 @@
                                     Login
                                 </button>                           
                             </div>
-                           
+
                         </div>
 
                         <div class="txt1 text-center p-t-54 p-b-20">
@@ -78,7 +89,7 @@
 
                         <div class="flex-c-m">
                             <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/fpt-student-blog/login-google&response_type=code
-		&client_id=695662211660-amed2ubedam4ppvavi64t0ghhb033crb.apps.googleusercontent.com&approval_prompt=force" class="login100-social-item bg3">
+                               &client_id=695662211660-amed2ubedam4ppvavi64t0ghhb033crb.apps.googleusercontent.com&approval_prompt=force" class="login100-social-item bg3">
                                 <i class="fa fa-google"></i>
                             </a>
                         </div>
