@@ -41,6 +41,7 @@ public class MainController extends HttpServlet {
     private static final String EDIT_PROFILE = "EditProfileController";
     private static final String HIDE_USER = "HideUserController";
     private static final String UPDATE_RANK_CONTROLLER = "UpdateRankController";
+    private static final String CREATE_MENTOR = "CreateMentorController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -92,8 +93,10 @@ public class MainController extends HttpServlet {
                 url = HIDE_USER;
             } else if ("Unban".equals(action)) {
                 url = HIDE_USER;
-            }else if ("Update Rank".equals(action)) {
+            } else if ("Update Rank".equals(action)) {
                 url = UPDATE_RANK_CONTROLLER;
+            } else if ("Create Mentor".equals(action)) {
+                url = CREATE_MENTOR;
             }
 
         } catch (Exception e) {
