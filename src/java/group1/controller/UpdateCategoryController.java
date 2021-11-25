@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author buili
  */
-@WebServlet(name = "UpdateCategory", urlPatterns = {"/UpdateCategory"})
+@WebServlet(name = "UpdateCategoryController", urlPatterns = {"/UpdateCategoryController"})
 public class UpdateCategoryController extends HttpServlet {
 
     private static final String ADMIN = "listCategory.jsp";
