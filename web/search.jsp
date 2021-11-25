@@ -73,7 +73,7 @@
                             <c:forEach items="${requestScope.POST_VIEW}" var="o">       
                                 <div class="contentPage">
                                     <div class="blog-entry ftco-animate d-md-flex " style="margin-bottom:15px;" >
-                                        <a href="MainController?action=ViewPost&postID=${o.userID}" class="img" style="background-image: url(${o.image});"></a>
+                                        <a href="MainController?action=ViewPost&postID=${o.postID}" class="img" style="background-image: url(${o.image});"></a>
                                         <div class="text p-4">
                                             <h3 class="mb-2"><a href="MainController?action=ViewPost&postID=${o.postID}">${o.title}</a></h3>
                                             <div class="meta-wrap">
