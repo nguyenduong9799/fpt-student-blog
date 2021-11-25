@@ -46,7 +46,7 @@ public class HomeController extends HttpServlet {
             List<TagDTO> listTag = TagDAO.getListMostTag();
             HttpSession session = request.getSession();
             PostDAO dao = new PostDAO();
-            if (session.isNew()) {
+            if (!session.isNew()) {
                 dao.updateView();
             }
             if (listPost != null) {
